@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(#0f0f0f, #444444);
+    color: #eeeeee;
+    font-family: 'Abril Fatface', cursive;
+    letter-spacing: 0.2em;
+    text-align: center;
+}
+
+div {
+    margin-top: 2em;
+    display: inline-block;
+
+}
+
+h1 {
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 0.75em; 
+    text-decoration-line: underline;
+}
+
+input {
+    margin-bottom: 3em;
+}
+
+button {
+    width: 12em;
+    height: 6em;
+}
+
+p {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

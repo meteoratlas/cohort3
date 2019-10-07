@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <script src="basic.js"></script>
+        <!--<link rel="stylesheet" type="text/css" href="styles.css"> -->
+        <!-- <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet"> -->
+    </head>
+    <body>
+        <div>
+            <h1 id="header">Hello World from HTML</h1>
+            <input id="textfield" type="text">
+            <br/>
+            <button id="push">Push me</button>
+            <p id="result">Result: </p>
+        </div>
+
+        <script>
+            console.log("Hello World from inline JavaScript");
+
+            const textfield = document.getElementById("textfield");
+            const button = document.getElementById("push");
+            const resultText = document.getElementById("result");
+            const headline = document.getElementById("header");
+
+            headline.addEventListener("mouseover", onOverHeadline)
+            button.addEventListener("click", onButtonClick);
+
+            let currentCity = "HTML";
+            const cities = ["Calgary", "Ottawa", "New York City", "Instanbul", "Toronto", "Los Angeles", "Oslo", "Wellington", "Berlin", "Paris"];
+
+            function onOverHeadline(){
+                let city = chooseCity(currentCity);
+                headline.innerText = "Hello World from " + city + "!";
+            }
+
+            function chooseCity(last){
+                let rand = Math.floor(Math.random() * cities.length);
+                let c = cities[rand];
+                if (c === currentCity || last === currentCity) chooseCity(c);
+                currentCity = c;
+                return c;
+            }
+
+            function onButtonClick(){
+                let textFieldValue = document.getElementById("textfield").value;
+                let numSize = size(Number.parseFloat(textFieldValue));
+                resultText.innerText = "Result: " + numSize;
+            }
+
+            function size(num) {
+                let r;
+                if (num < 10) r = "small";
+                if (num >= 10 && num <= 19) r = "med";
+                if (num >= 20) r = "large";
+
+                return r;
+            }
+        </script>
+    </body>
+</html>
