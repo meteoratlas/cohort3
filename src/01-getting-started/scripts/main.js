@@ -1,5 +1,7 @@
 import functions from './functions.js';
 import arrayFunctions from './workingWithArrays.js';
+import dictionaryFunctions from './workingWithDictionaries.js';
+import provinces from './provinces.js';
 
 // **********
 //
@@ -52,4 +54,24 @@ arraysTotalButton.addEventListener("click", () => {
 arraysClearButton.addEventListener("click", () => {
     array = arrayFunctions.clear();
     arraysResultText.innerText = "The array has been cleared."
+});
+
+// Working with dictionaries
+
+let dictionaryTextField = document.getElementById("dictionaryTextfield");
+let dictionaryLookupButton = document.getElementById("dictionariesButton");
+let dictionaryResultText = document.getElementById("dictionariesResultText");
+
+dictionaryLookupButton.addEventListener("click", () => {
+    let n = dictionaryTextField.value.toUpperCase();
+    if (n.length == 0) {
+        dictionaryResultText.innerText = "Please enter a provincial abbreviation.";
+        return;
+    }
+    if (provinces.hasOwnProperty(n)) {
+        dictionaryResultText.innerText = dictionaryFunctions.lookup(n);
+    }
+    else {
+        dictionaryResultText.innerText = "Please enter a valid two-letter provincial abbreviation.";
+    }
 });
