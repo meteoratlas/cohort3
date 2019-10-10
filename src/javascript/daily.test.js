@@ -11,3 +11,13 @@ test('Test the equality', () => {
     expect(daily.assertEquals("This value","This value")).toBe(true);
     expect(daily.assertEquals({}, null)).toBe(false);
 });
+
+test('email builder from an array', () => {
+    const name = ["first", "last"];
+    expect(daily.makeEmailArr(name))
+        .toEqual("first.last@evolveu.ca");
+    expect(daily.makeEmailArr(["First", "Last"]))
+        .toEqual("first.last@evolveu.ca");
+    expect(daily.makeEmailArr(["Bill", "Smith"]))
+        .toEqual("bill.smith@evolveu.ca");
+});
