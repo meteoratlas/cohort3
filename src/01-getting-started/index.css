@@ -5,74 +5,118 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Lato", sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 body,
 html {
-    height: 100%;
-    color: #777;
-    line-height: 1.8;
+  height: 100%;
+  color: #777;
+  line-height: 1.8;
 }
-
 
 /* Create a Parallax Effect */
 
 .bgimg-1,
 .bgimg-2 {
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .info-box {
-    width: 80%
+  width: 80%;
 }
-
 
 /* First image (Logo. Full height) */
 
 .bgimg-1 {
-    /* background-image: url('https://www.w3schools.com/w3images/parallax1.jpg'); */
-    background-image: url('./images/background.jpg');
-    /* background-image: url('https://claudescafedavao.com/wp-content/uploads/2018/08/Right-Software-Development-Methodology.png'); */
-    min-height: 100%;
-    border-radius: 50%;
-    opacity: 0.3;
+  /* background-image: url('https://www.w3schools.com/w3images/parallax1.jpg'); */
+  background-image: url("./images/background.jpg");
+  /* background-image: url('https://claudescafedavao.com/wp-content/uploads/2018/08/Right-Software-Development-Methodology.png'); */
+  min-height: 100%;
+  border-radius: 50%;
+  opacity: 0.3;
 }
-
 
 /* Second image (Size) */
 
 .bgimg-2 {
-    /* background-image: url("https://www.w3schools.com/w3images/parallax2.jpg"); */
-    background-image: url("https://cdn.pixabay.com/photo/2016/11/19/15/32/code-1839877_960_720.jpg");
-    min-height: 400px;
-    opacity: 0.5;
+  /* background-image: url("https://www.w3schools.com/w3images/parallax2.jpg"); */
+  background-image: url("https://cdn.pixabay.com/photo/2016/11/19/15/32/code-1839877_960_720.jpg");
+  min-height: 400px;
+  opacity: 0.5;
 }
 
 .w3-wide {
-    letter-spacing: 10px;
+  letter-spacing: 10px;
 }
 
 .w3-hover-opacity {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #idNumber {
-    border: 0;
-    width: 50px;
+  border: 0;
+  width: 50px;
 }
-
 
 /* Turn off parallax scrolling for tablets and phones */
 
 @media only screen and (max-device-width: 1600px) {
-    .bgimg-1,
-    .bgimg-2,
-    .bgimg-3 {
-        background-attachment: scroll;
-        min-height: 400px;
-    }
+  .bgimg-1,
+  .bgimg-2,
+  .bgimg-3 {
+    background-attachment: scroll;
+    min-height: 400px;
+  }
 }
+
+#calc {
+  margin: 0 auto;
+  width: 40%;
+  /*background-color: lightslategray;*/
+  box-shadow: 5px 5px 5px 0px rgba(59, 66, 73, 0.5);
+  border: 1px solid slategray;
+  box-sizing: border-box;
+  padding: 1em;
+  background: url(http://api.thumbr.it/whitenoise-361x370.png?background=ffffffff&noise=73b0d9&density=35&opacity=15);
+}
+
+#calc input {
+    width: 48%;
+    display: inline-block;
+  }
+
+#calcContainer {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 0.4em;
+}
+
+#calcContainer p {
+    margin:0 auto;
+    font-size: 1.2em;
+    font-weight: 500;
+    padding-top: 0.4em;
+}
+
+#calcContainer button {
+  border: 2px solid white;
+  box-sizing: border-box;
+  background-color: rgb(67, 67, 233);
+  color: whitesmoke;
+  min-height: 50px;
+  width: 50%;
+  transition: ease-out 0.3s;
+}
+
+#calcContainer button:hover {
+    background-color: rgb(30, 30, 206);
+  }
+
+  #calcContainer button:active {
+    background-color: rgb(14, 14, 87);
+  }

@@ -2,6 +2,8 @@ import functions from './functions.js';
 import arrayFunctions from './workingWithArrays.js';
 import dictionaryFunctions from './workingWithDictionaries.js';
 import provinces from './provinces.js';
+import {determineTaxesOwed, taxBrackets} from './canadiantaxes.js';
+import {add, sub, multiply, divide} from "./calculator.js";
 
 // **********
 //
@@ -11,6 +13,80 @@ import provinces from './provinces.js';
 idNumber.addEventListener('change', (() => {
     idNumberSize.textContent = functions.size(idNumber.value);
 }));
+
+// Calculator
+let calcNumField1 = document.getElementById("calcNumField1");
+let calcNumField2 = document.getElementById("calcNumField2");
+
+let calcAddButton = document.getElementById("calcAddButton");
+let calcSubButton = document.getElementById("calcSubButton");
+let calcMultButton = document.getElementById("calcMultButton");
+let calcDivideButton = document.getElementById("calcDivideButton");
+//let calcEqualsButton = document.getElementById("calcEqualsButton");
+let calcResultText = document.getElementById("calcResultText");
+
+calcAddButton.addEventListener("click", ()=>{
+    let a = parseFloat(calcNumField1.value);
+    let b = parseFloat(calcNumField2.value);
+
+    if (isNaN(a) || isNaN(b)) {
+        calcResultText.innerText = `Please input two valid numbers.`;
+        return;
+    }
+
+    calcResultText.innerText = `${a} plus ${b} equals ${add(a, b)}.`;
+});
+
+calcSubButton.addEventListener("click", ()=>{
+    let a = parseFloat(calcNumField1.value);
+    let b = parseFloat(calcNumField2.value);
+
+    if (isNaN(a) || isNaN(b)) {
+        calcResultText.innerText = `Please input two valid numbers.`;
+        return;
+    }
+
+    calcResultText.innerText = `${a} minus ${b} equals ${sub(a, b)}.`;
+});
+
+calcMultButton.addEventListener("click", ()=>{
+    let a = parseFloat(calcNumField1.value);
+    let b = parseFloat(calcNumField2.value);
+
+    if (isNaN(a) || isNaN(b)) {
+        calcResultText.innerText = `Please input two valid numbers.`;
+        return;
+    }
+
+    calcResultText.innerText = `${a} multiplied by ${b} equals ${multiply(a, b)}.`;
+});
+
+calcDivideButton.addEventListener("click", ()=>{
+    let a = parseFloat(calcNumField1.value);
+    let b = parseFloat(calcNumField2.value);
+
+    if (isNaN(a) || isNaN(b)) {
+        calcResultText.innerText = `Please input two valid numbers.`;
+        return;
+    }
+
+    calcResultText.innerText = `${a} divided by ${b} equals ${divide(a, b)}.`;
+});
+
+
+// Canadian Taxes
+let taxesTextfield = document.getElementById("taxesTextfield");
+let taxesButton = document.getElementById("taxesButton");
+let taxesResultText = document.getElementById("taxesResultText");
+
+taxesButton.addEventListener("click", ()=>{
+    let income = taxesTextfield.value;
+    if (isNaN(income)){
+        taxesResultText.innerText = "Please enter a valid number."
+        return;
+    }
+    taxesResultText.innerText = "With a net income of $" + income + ", you would owe $" + determineTaxesOwed(income, taxBrackets) + ".";
+});
 
 // Working with arrays
 
