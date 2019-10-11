@@ -26,6 +26,10 @@ const daily = {
 
     makeEmailArr:(array) => {
         return array[0].toLowerCase() + "." + array[1].toLowerCase() + "@evolveu.ca";
+    },
+
+    makeEmailObj:(obj) => {
+        return `${obj['fname'].toLowerCase()}.${obj['lname'].toLowerCase()}@evolveu.ca`;
     }
 
 }

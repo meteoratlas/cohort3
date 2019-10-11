@@ -21,3 +21,13 @@ test('email builder from an array', () => {
     expect(daily.makeEmailArr(["Bill", "Smith"]))
         .toEqual("bill.smith@evolveu.ca");
 });
+
+test('email builder from an object / map', () => {
+    const name = { fname: 'first', lname: 'last' };
+    expect(daily.makeEmailObj(name))
+        .toEqual("first.last@evolveu.ca");
+    expect(daily.makeEmailObj({ fname: 'First', lname: 'Last' }))
+        .toEqual("first.last@evolveu.ca");
+    expect(daily.makeEmailObj({ fname: "Bill", lname: "Smith" }))
+        .toEqual("bill.smith@evolveu.ca");
+});
