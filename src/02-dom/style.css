@@ -1,0 +1,13 @@
+body { background-color: rgb(182, 182, 182); }
+
+#content {
+    width: 25%;
+    background-color: honeydew;
+    margin: 0 auto;
+    border: 2px solid #000;
+}
+
+#middle {
+    margin: 0 auto;
+    padding: 0 3em 3em 3em;
+}

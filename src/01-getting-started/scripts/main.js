@@ -22,7 +22,6 @@ let calcAddButton = document.getElementById("calcAddButton");
 let calcSubButton = document.getElementById("calcSubButton");
 let calcMultButton = document.getElementById("calcMultButton");
 let calcDivideButton = document.getElementById("calcDivideButton");
-//let calcEqualsButton = document.getElementById("calcEqualsButton");
 let calcResultText = document.getElementById("calcResultText");
 
 calcAddButton.addEventListener("click", ()=>{
