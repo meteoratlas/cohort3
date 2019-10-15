@@ -33,7 +33,7 @@ const taxBrackets = {
     rate: 0.29
   },
   fifth: {
-    taxable: 9999999999999999, // any remaining income
+    taxable: Number.MAX_VALUE, // any remaining income
     rate: 0.33
   }
 };
