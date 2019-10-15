@@ -31,3 +31,38 @@ test('email builder from an object / map', () => {
     expect(daily.makeEmailObj({ fname: "Bill", lname: "Smith" }))
         .toEqual("bill.smith@evolveu.ca");
 });
+
+test('array for loop', () => {
+    const arr = [0,1,2,4,8,16];
+    expect(daily.arrayForLoop(arr)).toEqual(31);
+    expect(daily.arrayForLoop([0,-4,7])).toEqual(3);
+    expect(daily.arrayForLoop([-2, 4, "egg"])).toEqual("2egg");
+});
+
+test('array while loop', () => {
+    const arr = [0,1,2,4,8,16];
+    expect(daily.arrayWhileLoop(arr)).toEqual(31);
+    expect(daily.arrayWhileLoop([0,-15,8])).toEqual(-7);
+    expect(daily.arrayWhileLoop([1, 1, "string"])).toEqual("2string");
+});
+
+test('array do while loop', () => {
+    const arr = [0,1,2,3];
+    expect(daily.arrayDoWhileLoop(arr)).toEqual(6);
+    expect(daily.arrayDoWhileLoop([0])).toEqual(0);
+    expect(daily.arrayDoWhileLoop([4,44,102])).toEqual(150);
+});
+
+test('array for in loop', () => {
+    const arr = [0,0,5,5,0,0];
+    expect(daily.arrayForInLoop(arr)).toEqual(10);
+    expect(daily.arrayForInLoop([-2,-4,-8,-1,0])).toEqual(-15);
+    expect(daily.arrayForInLoop([])).toEqual(0);
+});
+
+test('array for of loop', () => {
+    const arr = [16];
+    expect(daily.arrayForOfLoop(arr)).toEqual(16);
+    expect(daily.arrayForOfLoop([15,0,1, -4, 4])).toEqual(16);
+    expect(daily.arrayForOfLoop([2, 2, 2, 2])).toEqual(8);
+});
