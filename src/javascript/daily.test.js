@@ -66,3 +66,57 @@ test('array for of loop', () => {
     expect(daily.arrayForOfLoop([15,0,1, -4, 4])).toEqual(16);
     expect(daily.arrayForOfLoop([2, 2, 2, 2])).toEqual(8);
 });
+
+test('array for of loop', () => {
+    const arr = [16];
+    expect(daily.arrayForOfLoop(arr)).toEqual(16);
+});
+
+test('array slice', () => {
+    const arr = [16, 22, 3, 17, 65, 2];
+    expect(daily.arraySlice(arr, 2)).toStrictEqual([3, 17, 65, 2]);
+    expect(daily.arraySlice(arr, 3)).toStrictEqual([17, 65, 2]);
+    expect(daily.arraySlice(arr, 1, 4)).toStrictEqual([22, 3, 17]);
+    expect(daily.arraySlice(arr, 0,arr.length)).toStrictEqual(arr);
+});
+
+test('array splice', () => {
+    expect(daily.arraySplice([16, 22, 3, 17], 0, 0, "test")).toStrictEqual(["test", 16, 22, 3, 17]);
+    expect(daily.arraySplice([16, 22, 3, 17], 1, 3, "end")).toStrictEqual([16, "end"]);
+    expect(daily.arraySplice([16, 22, 3, 17], 0, 4, {})).toStrictEqual([{}]);
+});
+
+test('array foreach', () => {
+    let arr1 = [6, 2, 3, 11];
+    let arr2 = [5, 10, -7, 12];
+    expect(daily.arrayForEach(arr1)).toBe(22);
+    expect(daily.arrayForEach(arr2)).toBe(20);
+});
+
+test('array map', () => {
+    const arr = [7, 4, 0, 1];
+    expect(daily.arrayMap(arr, n => n * 2)).toStrictEqual([14, 8, 0,2]);
+    expect(daily.arrayMap(arr, n => n + 3)).toStrictEqual([10, 7, 3, 4]);
+    expect(daily.arrayMap(arr, n => String(n * 3 - 1))).toStrictEqual(["20", "11", "-1", "2"]);
+});
+
+
+test('array reduce', () => {
+    let arr = [6, 2, 3, 11];
+    expect(daily.arrayReduce(arr, (acc, n) => acc + n)).toBe(22);
+    expect(daily.arrayReduce(arr, (acc, n) => acc + (n * 2))).toBe(38); // should skip first element and use it as acc init value
+});
+
+test('array filter', () => {
+    let arr = [6, 2, 3, 11];
+    expect(daily.arrayFilter(arr, n=> n > 5)).toStrictEqual([6,11]);
+    expect(daily.arrayFilter(arr, n=> n < 3)).toStrictEqual([2]);
+    expect(daily.arrayFilter(arr, n=> n % 2 === 0)).toStrictEqual([6,2]);
+});
+
+
+test('array sort', () => {
+    let arr = [6, 2, 3, 11];
+    expect(daily.arraySort(arr, (a,b)=>a-b)).toStrictEqual([2,3,6,11]);
+    expect(daily.arraySort(arr, (a,b)=>b-a)).toStrictEqual([11, 6, 3, 2]);
+});

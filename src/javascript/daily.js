@@ -74,6 +74,33 @@ const daily = {
         }
         return n;
     },
+    // More Array Work - October 16-17
+    arraySlice:(array, begin, end)=>{
+        return array.slice(begin, end);
+    },
+    arraySplice:(array, begin, end, content)=>{
+        array.splice(begin, end, content);
+        return array;
+    },
+    arrayForEach:(array) => {
+        var count = 0;
+        array.forEach(function(i){
+            count += i;
+        });  
+        return count;
+    },
+    arrayMap:(array, func) => {
+        return array.map(func);
+    },
+    arrayReduce:(array, func) => {
+        return array.reduce(func);
+    },
+    arrayFilter:(array, filter) => {
+        return array.filter(filter);
+    },
+    arraySort:(array, sort) => {
+        return array.sort(sort);
+    },
 }
 
 // and before this comment ---
