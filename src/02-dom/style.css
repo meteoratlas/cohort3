@@ -1,4 +1,6 @@
-body { background-color: rgb(182, 182, 182); }
+body { 
+    background-color: rgb(182, 182, 182); 
+}
 
 #content {
     width: 25%;
@@ -10,4 +12,22 @@ body { background-color: rgb(182, 182, 182); }
 #middle {
     margin: 0 auto;
     padding: 0 3em 3em 3em;
+}
+
+#left {
+    overflow: scroll;
+    width: 40%;
+    background-color: grey;
+    height: 500px;
+    float: left;
+}
+
+#right {
+    width: 60%;
+}
+
+.card {
+    background-color: white;
+    min-height: 200px;
+    text-align: center;
 }
