@@ -16,23 +16,39 @@
 
 const daily = {
 
-    assertEquals: ((a,b) => {
-        if (a === b) {
-            return true;
-        }
-        console.log("*** the two values are not the same:\n" + "p1--> " + a + "\np2--> " + b);
-        return false;
-    }),
-
-    makeEmailArr:(array) => {
-        return array[0].toLowerCase() + "." + array[1].toLowerCase() + "@evolveu.ca";
+    // ***
+    // More Array Work - October 16-17
+    // ***
+    arraySlice:(array, begin, end)=>{
+        return array.slice(begin, end);
+    },
+    arraySplice:(array, begin, end, content)=>{
+        array.splice(begin, end, content);
+        return array;
+    },
+    arrayForEach:(array) => {
+        var count = 0;
+        array.forEach(function(i){
+            count += i;
+        });  
+        return count;
+    },
+    arrayMap:(array, func) => {
+        return array.map(func);
+    },
+    arrayReduce:(array, func) => {
+        return array.reduce(func);
+    },
+    arrayFilter:(array, filter) => {
+        return array.filter(filter);
+    },
+    arraySort:(array, sort) => {
+        return array.sort(sort);
     },
 
-    makeEmailObj:(obj) => {
-        return `${obj['fname'].toLowerCase()}.${obj['lname'].toLowerCase()}@evolveu.ca`;
-    },
-
-    // Prepare for Array Work - October 15, 2019
+    // ***
+    // Prepare for Array Work - October 15, 2019 
+    // ***
     arrayForLoop:(array) => {
         // sum all the numbers in an array and return it.
         let n = 0;
@@ -74,33 +90,33 @@ const daily = {
         }
         return n;
     },
-    // More Array Work - October 16-17
-    arraySlice:(array, begin, end)=>{
-        return array.slice(begin, end);
+
+    // ***
+    // makeEmailObj - Oct 11, 2019
+    // ***
+
+    makeEmailObj:(obj) => {
+        return `${obj['fname'].toLowerCase()}.${obj['lname'].toLowerCase()}@evolveu.ca`;
     },
-    arraySplice:(array, begin, end, content)=>{
-        array.splice(begin, end, content);
-        return array;
+
+    // ***
+    // makeEmailArr - October 9, 2019
+    // ***
+    makeEmailArr:(array) => {
+        return array[0].toLowerCase() + "." + array[1].toLowerCase() + "@evolveu.ca";
     },
-    arrayForEach:(array) => {
-        var count = 0;
-        array.forEach(function(i){
-            count += i;
-        });  
-        return count;
-    },
-    arrayMap:(array, func) => {
-        return array.map(func);
-    },
-    arrayReduce:(array, func) => {
-        return array.reduce(func);
-    },
-    arrayFilter:(array, filter) => {
-        return array.filter(filter);
-    },
-    arraySort:(array, sort) => {
-        return array.sort(sort);
-    },
+
+    // ***
+    // AssertEquals - October 7, 2019
+    // ***
+    assertEquals: ((a,b) => {
+        if (a === b) {
+            return true;
+        }
+        console.log("*** the two values are not the same:\n" + "p1--> " + a + "\np2--> " + b);
+        return false;
+    }),
+    
 }
 
 // and before this comment ---
