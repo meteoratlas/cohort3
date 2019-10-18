@@ -1,17 +1,26 @@
 import cards from "./cards.js"
 
-test("Testing card adder",()=>{
-    expect(cards.addCard()).toBe("card");
-});
+test("Testing card add and remove",()=>{
+    document.body.innerHTML =
+    '<div id="left">' +
+    '<button id="addButton">Add</button>' +
+    `<div class="card" data-index="0"><p>Card 0</p>
+    <button class="cardAddBeforeButton">Add Before</button>
+    <button class="cardAddAfterButton">Add After</button><br />
+    <button class="cardDeleteButton">Delete</button></div>` +
+    '</div>';
 
-test("Testing card before adder",()=>{
-    expect(cards.addCardBefore()).toBe("card");
-});
+    let cardExample = document.querySelector(".card");
+    let container = document.querySelector("#left");
 
-test("Testing card after adder",()=>{
-    expect(cards.addCardAfter()).toBe("card");
-});
+    expect(cards.constructCard(0)).toStrictEqual(cardExample);
 
-test("Testing card deleter",()=>{
-    expect(cards.deleteCard()).toBe("card");
+    cards.addCardBefore(cardExample);
+    expect(Array.from(container.children)[1].dataset.index).toBe("1");
+
+    cards.addCardAfter(cardExample);
+    expect(Array.from(container.children)[3].dataset.index).toBe("2");
+
+    cards.deleteCard(cardExample);
+    expect(Array.from(container.children).length).toBe(3); 
 });

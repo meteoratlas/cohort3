@@ -9,66 +9,24 @@
 </head>
 <body>
     <h1>Working With Cards</h1>
+    <div id="wrapper">
     <div id="left">
-
-    <button id="addButton">Add</button>
-    <div class="card" data-index="1">
-        <p>Card ${1}</p>
-        <button class="cardAddBeforeButton">Add Before</button>
-        <button class="cardAddAfterButton">Add After</button>
-        <br />
-        <button class="cardDeleteButton">Delete</button>
-    </div>
-    <div class="card" data-index="2">
-            <p>Card ${1}</p>
-            <button class="cardAddBeforeButton">Add Before</button>
-            <button class="cardAddAfterButton">Add After</button>
-            <br />
-            <button class="cardDeleteButton">Delete</button>
-    </div>
-    <div class="card" data-index="3">
-            <p>Card ${1}</p>
-            <button class="cardAddBeforeButton">Add Before</button>
-            <button class="cardAddAfterButton">Add After</button>
-            <br />
-            <button class="cardDeleteButton">Delete</button>
-    </div>
-    <div class="card" data-index="4">
-            <p>Card ${1}</p>
-            <button class="cardAddBeforeButton">Add Before</button>
-            <button class="cardAddAfterButton">Add After</button>
-            <br />
-            <button class="cardDeleteButton">Delete</button>
-    </div>
-
-    <template id="test">
-        <p>Card ${1}</p>
-        <button class=${1}>Add Before</button>
-        <button class=${1}>Add After</button>
-        <button class=${1}>Delete</button>
-    </template>
-    <!-- 
-    <div id="content">
-        <div id="middle">
-            <h1>Basic DOM</h1>
-            <ol>This is a list of stuff
-                <li>Item 1</li>
-                <li>Item 2</li>
-                <li>Item 3</li>
-            </ol>
-            <button id="showButton">Show</button>
-            <button id="addButton">Add</button>
+        <button id="addButton">Add Card</button>
+        <div class="card" data-index="0">
+                <p>Card 0</p>
+                <button class="cardAddBeforeButton">Add Before</button>
+                <button class="cardAddAfterButton">Add After</button><br />
+                <button class="cardDeleteButton">Delete</button>
         </div>
     </div>
--->
-</div>
-<div id="right">
-    <div class="rightcard">
-        <h1>Right Side</h1>
-    </div>
-    <div class="rightcard">
+    <div id="right">
+        <div class="right-card">
             <h1>Right Side</h1>
         </div>
+        <div class="right-card">
+                <h1>Right Side</h1>
+            </div>
+    </div>
 </div>
     <script type="module" src="./cards.js"></script>
 </body>
