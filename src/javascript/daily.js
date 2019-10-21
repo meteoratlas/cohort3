@@ -17,6 +17,18 @@
 const daily = {
 
     // ***
+    // loopStaff - October 21, 2019
+    // ***
+
+    loopStaff:(data)=>{
+        let emails = [];
+        for (let i of data){
+            emails.push(daily.makeEmailObj(i));
+        }
+        return emails;
+    },
+
+    // ***
     // More Array Work - October 16-17
     // ***
     arraySlice:(array, begin, end)=>{
