@@ -1,0 +1,27 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    background-color: rgb(31, 27, 27);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#wrapper {
+}
+
+#bank-account {
+    background-color: blanchedalmond;
+    width: 500px;
+    padding: 16px 8px;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 2%;
+    text-align: center;
+}
+
+#bank-account button { 
+   padding: 4px;
+   margin: 8px 2px 0 2px;
+}
