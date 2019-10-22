@@ -23,7 +23,7 @@ class Account {
         this.funds -= this.roundToFixed2(toWithdraw);
     }
     balance() {
-        return this.funds;
+        return this.roundToFixed2(this.funds);
     }
     roundToFixed2(num) {
         return Math.round(num * 100) / 100;
