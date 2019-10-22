@@ -5,6 +5,11 @@ test("Test that the account object was initialized correctly.", () => {
     expect(acc).toBeInstanceOf(Account);
     expect(acc.funds).toBe(25);
     expect(acc.name).toBe("checkingAccount");
+
+    let acc2 = new Account(4676234, -34);
+    expect(acc2).toBeInstanceOf(Account);
+    expect(acc2.funds).toBe(0);
+    expect(acc2.name).toBe("4676234");
 });
 
 test("Test rounding function", () => {

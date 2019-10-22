@@ -2,7 +2,7 @@ class Account {
     constructor(accountName, initBalance) {
         this.name = String(accountName);
         if (initBalance < 0) {
-            initBalance = 0;
+            this.funds = 0;
         } else {
             this.funds = this.roundToFixed2(initBalance);
         }
