@@ -1,11 +1,12 @@
 import syntax from './syntax';
 
-test('Test basic vairables', () => {
+test('Test basic variables', () => {
     expect(syntax.returnVariable("NUMBER")).toBe(17);
     expect(syntax.returnVariable("STRING")).toBe("This is a string!");
     expect(syntax.returnVariable("BOOLEAN")).toBe(true);
     expect(syntax.returnVariable("ARRAY")).toStrictEqual(["a", "b", 12]);
     expect(syntax.returnVariable("OBJECT")).toStrictEqual({age:10, isObject:true, name: "Josh"});
+    expect(syntax.returnVariable("DICTIONARY")).toStrictEqual({age:10, isObject:true, name: "Josh"});
 });
 
 test('Test if else', () => {
@@ -31,6 +32,7 @@ test('Test updating array values', () => {
 });
 
 test('Test for loop', () => {
+    expect(syntax.forLoopExample(null)).toBe("Must enter a number.");
     expect(syntax.forLoopExample(3)).toBe(6);
     expect(syntax.forLoopExample(1223)).toBe((1223 * 1224) / 2);
 });
@@ -58,4 +60,5 @@ test('Test dictionary', () => {
     expect(syntax.getDictionaryValue("name")).toBe("Sarah");
     expect(syntax.getDictionaryValue("job")).toBe("designer");
     expect(syntax.getDictionaryValue("isMale")).toBe(false);
+    expect(syntax.getDictionaryValue("sandwich")).toBe("Key was not valid in this dictionary.");
 });

@@ -16,6 +16,7 @@ test('Testing total function', () => {
     expect(arrayFunctions.total([11,20,300])).toBe(331);
     expect(arrayFunctions.total([10])).toBe(10);
     expect(arrayFunctions.total([1,1,3,1,1,1,2])).toBe(10);
+    expect(arrayFunctions.total([])).toBe(0);
 });
 
 test('Testing clear function', () => {

@@ -35,7 +35,6 @@ const syntax = {
         if (requested == "BOOLEAN") { return true; }
         if (requested == "ARRAY") { return ["a", "b", 12]; }
         if (requested == "DICTIONARY" || requested == "OBJECT") { return {age:10, isObject:true, name: "Josh"}; }
-        else return undefined;
     },
 
     // If / else
@@ -63,7 +62,8 @@ const syntax = {
     // Loops
     // Sum the total of the numbers making up the user's input.
     forLoopExample:(max)=>{
-        if (max === NaN) { return "Must enter a number." };
+        if (max == null) { 
+            return "Must enter a number."; }
         let sum = 0;
         for (let i = 0; i <= max; i++){
             sum += i;

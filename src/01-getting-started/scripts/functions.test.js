@@ -11,7 +11,12 @@ test('Check the sizes', () => {
     expect(functions.size(2000000)).toBe("extra large");
 });
 
-test('Does that add function work?', () => {
+test('Does the add function work?', () => {
     expect(functions.add(1,2)).toBe(3);
     expect(functions.add(101,202)).toBe(303);
+});
+
+test('Does the sub function work?', () => {
+    expect(functions.subtract(1,2)).toBe(-1);
+    expect(functions.subtract(70,12)).toBe(58);
 });

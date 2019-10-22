@@ -23,4 +23,6 @@ test("Testing card add and remove",()=>{
 
     cards.deleteCard(cardExample);
     expect(Array.from(container.children).length).toBe(3); 
+    cards.addCardAfter(cardExample);
+    expect(Array.from(container.children)[container.children.length - 1].dataset.index).toBe("3");
 });
