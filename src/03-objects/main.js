@@ -1,4 +1,4 @@
-import Account from "./account.js";
+import { Account } from "./account.js";
 
 
 const bankNumInput = document.querySelector("#bankNumInput");
@@ -7,7 +7,7 @@ const bankWithdrawButton = document.querySelector("#withdrawButton");
 const bankBalanceButton = document.querySelector("#balanceButton");
 const bankResponse = document.querySelector("#bankReport");
 
-let account = new Account("chequing", 20);
+let acco = new Account("chequing", 20);
 
 // Setup event listeners
 
@@ -18,7 +18,7 @@ bankDepositButton.addEventListener("click", (e)=>{
         bankResponse.innerText = "Please enter a valid number."
         return; 
     }
-    let response = account.deposit(input);
+    let response = acco.deposit(input);
     if (typeof response === 'undefined') {
         bankNumInput.value = "";
         bankResponse.innerText = `Successfully deposited $${input} into your account.`;
@@ -35,7 +35,7 @@ bankWithdrawButton.addEventListener("click", (e)=>{
         bankResponse.innerText = "Please enter a valid number."
         return; 
     }
-    let response = account.withdraw(input);
+    let response = acco.withdraw(input);
     if (typeof response === 'undefined') {
         bankNumInput.value = "";
         bankResponse.innerText = `Successfully withdrew $${input} from your account.`;
@@ -47,7 +47,7 @@ bankWithdrawButton.addEventListener("click", (e)=>{
 
 bankBalanceButton.addEventListener("click", (e)=>{
     e.preventDefault();
-    bankResponse.innerText = `The balance of your account "${account.name}" is currently $${account.balance().toFixed(2)}.`;
+    bankResponse.innerText = `The balance of your account "${acco.name}" is currently $${acco.balance().toFixed(2)}.`;
 });
 
 // helper function

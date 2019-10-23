@@ -1,5 +1,6 @@
-import Account from '../account';
+import { Account, AccountController } from '../account';
 
+// Account class
 test("Test that the account object was initialized correctly.", () => {
     let acc = new Account("checkingAccount", 25)
     expect(acc).toBeInstanceOf(Account);
@@ -45,4 +46,24 @@ test("Test balance function", () => {
     expect(acc.balance()).toBe(23.14);
     acc.deposit(100.00);
     expect(acc.balance()).toBe(123.14);
+});
+
+// Controller 
+let controller = new AccountController();
+controller.addAccount("savings", 4000);
+
+test("Test controller account add", () => {
+    let newAccount = new Account("chequing", 1000);
+    let len = controller.accounts.length;
+    expect(controller.addAccount("chequing", 1000)).toStrictEqual(newAccount)
+    expect(controller.accounts.length).toBe(len + 1);
+});
+
+test("Test controller account remove", () => {
+    let s = new Account("remove-me", 500);
+    controller.addAccount("remove-me", 500);
+    expect(controller.accounts.length).toBe(3);
+    expect(controller.removeAccount("remove-me")).toStrictEqual(s);
+    expect(controller.accounts.length).toBe(2);
+    expect(controller.removeAccount("not-in-array")).toBe("There is no account with that name.");
 });

@@ -1,4 +1,4 @@
-class Account {
+export class Account {
     constructor(accountName, initBalance) {
         this.name = String(accountName);
         initBalance < 0 ? this.funds = 0 : this.funds = this.roundToFixed2(initBalance);
@@ -26,4 +26,37 @@ class Account {
     }
 }
 
-export default Account;
+export class AccountController {
+    constructor(){
+        this.userName = "Josh";
+        this.accounts = [];
+    }
+    addAccount(name, funds){
+        const toAdd = new Account(name, funds);
+        this.accounts.push(toAdd);
+        return toAdd;
+    }
+    removeAccount(name){
+        if (this.accounts.length === 0) return "You have no accounts.";
+        // Removes the first instance (multiple accounts could share the same name).
+        let index = this.accounts.findIndex(n=>n.name === name);
+        if (index > 0) {
+            let [removed] = this.accounts.splice(index, 1);
+            return removed;
+        } else{
+            return "There is no account with that name.";
+        }
+    }
+    nameAccount(account, newName){
+
+    }
+    totalAllAccountFunds(){
+        return 0;
+    }
+    findHighestValueAccount(){
+        return "";
+    }
+    findLowestValueAccount(){
+        return "";
+    }
+}
