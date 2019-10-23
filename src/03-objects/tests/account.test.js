@@ -51,6 +51,7 @@ test("Test balance function", () => {
 // Controller 
 let controller = new AccountController();
 controller.addAccount("savings", 4000);
+let emptyController = new AccountController();
 
 test("Test controller account add", () => {
     let newAccount = new Account("chequing", 1000);
@@ -66,4 +67,21 @@ test("Test controller account remove", () => {
     expect(controller.removeAccount("remove-me")).toStrictEqual(s);
     expect(controller.accounts.length).toBe(2);
     expect(controller.removeAccount("not-in-array")).toBe("There is no account with that name.");
+
+    expect(emptyController.removeAccount("savings")).toBe("You have no accounts.");
+});
+
+test("Test renaming command", () => {
+    controller.addAccount("name1", 22.45)
+    let me = controller.nameAccount("name1", "renamedAccount");
+    expect(me.name).toBe("renamedAccount");
+    expect(controller.nameAccount("test", null)).toBe("Please enter an account name and a new name.");
+    expect(controller.nameAccount("nonexistantAccount", "newName")).toBe("No account by that name is present.");
+});
+
+test("Total of funds in all accounts", () => {
+    controller.addAccount("dummy", 40000);
+    expect(controller.totalAllAccountFunds()).toBe(45022.45);
+    controller.addAccount("dummy2", 200);
+    expect(controller.totalAllAccountFunds()).toBe(45222.45);
 });

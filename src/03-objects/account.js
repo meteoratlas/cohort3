@@ -27,8 +27,8 @@ export class Account {
 }
 
 export class AccountController {
-    constructor(){
-        this.userName = "Josh";
+    constructor(user){
+        this.userName = user;
         this.accounts = [];
     }
     addAccount(name, funds){
@@ -47,16 +47,31 @@ export class AccountController {
             return "There is no account with that name.";
         }
     }
-    nameAccount(account, newName){
-
+    nameAccount(origName, newName){
+        if ((typeof origName !== "string") || (typeof newName !== "string")){
+            return "Please enter an account name and a new name."; 
+        }
+        let acc = this.accounts.find(({name}) => name === origName);
+        if (acc !== undefined) { 
+            acc.name = newName;
+            return acc;
+        }
+        return "No account by that name is present."; 
     }
     totalAllAccountFunds(){
-        return 0;
+        if (this.accounts.length === 0) { return "You have no accounts."}
+        if (this.accounts.length === 1) { return this.accounts[0].funds; }
+        return this.accounts.map(n => n.funds).reduce((a, n) => a + n);
     }
+    
     findHighestValueAccount(){
+        if (this.accounts.length === 0) { return "You have no accounts."}
+        if (this.accounts.length === 1) { return this.accounts[0].name; }
         return "";
     }
     findLowestValueAccount(){
+        if (this.accounts.length === 0) { return "You have no accounts."}
+        if (this.accounts.length === 1) { return this.accounts[0].name; }
         return "";
     }
 }
