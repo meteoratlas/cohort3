@@ -52,6 +52,8 @@ test("Test balance function", () => {
 let controller = new AccountController();
 controller.addAccount("savings", 4000);
 let emptyController = new AccountController();
+let oneAccController = new AccountController();
+oneAccController.addAccount("acc", 54.44);
 
 test("Test controller account add", () => {
     let newAccount = new Account("chequing", 1000);
@@ -84,4 +86,22 @@ test("Total of funds in all accounts", () => {
     expect(controller.totalAllAccountFunds()).toBe(45022.45);
     controller.addAccount("dummy2", 200);
     expect(controller.totalAllAccountFunds()).toBe(45222.45);
+    expect(emptyController.totalAllAccountFunds()).toBe("You have no accounts.")
+    expect(oneAccController.totalAllAccountFunds()).toBe(54.44);
+});
+
+test("Return the account with the highest funds", () =>{
+    expect(emptyController.findHighestValueAccount()).toBe("You have no accounts.");
+    expect(oneAccController.findHighestValueAccount()).toBe("acc");
+    expect(controller.findHighestValueAccount()).toBe("dummy");
+    controller.addAccount("rich", 4353934.34);
+    expect(controller.findHighestValueAccount()).toBe("rich");
+});
+
+test("Return the account with the lowest funds", () =>{
+    expect(emptyController.findLowestValueAccount()).toBe("You have no accounts.");
+    expect(oneAccController.findLowestValueAccount()).toBe("acc");
+    expect(controller.findLowestValueAccount()).toBe("renamedAccount");
+    controller.addAccount("poor", 0.32);
+    expect(controller.findLowestValueAccount()).toBe("poor");
 });

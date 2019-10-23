@@ -38,7 +38,7 @@ export class AccountController {
     }
     removeAccount(name){
         if (this.accounts.length === 0) return "You have no accounts.";
-        // Removes the first instance (multiple accounts could share the same name).
+        // Removes only the first instance (multiple accounts could share the same name).
         let index = this.accounts.findIndex(n=>n.name === name);
         if (index > 0) {
             let [removed] = this.accounts.splice(index, 1);
@@ -67,11 +67,24 @@ export class AccountController {
     findHighestValueAccount(){
         if (this.accounts.length === 0) { return "You have no accounts."}
         if (this.accounts.length === 1) { return this.accounts[0].name; }
-        return "";
+        let highest = this.accounts[0];
+        this.accounts.forEach((n)=>{
+            if (n.funds > highest.funds){
+                highest = n;
+            }
+        })
+        return highest.name;
+        //let highest = Math.max(...this.accounts.map(n => n.funds));
     }
     findLowestValueAccount(){
         if (this.accounts.length === 0) { return "You have no accounts."}
         if (this.accounts.length === 1) { return this.accounts[0].name; }
-        return "";
+        let lowest = this.accounts[0];
+        this.accounts.forEach((n)=>{
+            if (n.funds < lowest.funds){
+                lowest = n;
+            }
+        })
+        return lowest.name;
     }
 }
