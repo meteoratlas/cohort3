@@ -1,20 +1,19 @@
-/*	
-	Write the function that will create this output:
-
-*** the two values are not the same:
-    p1--> a
-    p2--> b
-*** the two values are not the same:
-    p1--> 1
-    p2--> 2
-*** the two values are not the same:
-    p1--> 2
-    p2--> 2
-*/
-
-// Write the function after this comment ---
-
 const daily = {
+
+    // ***
+    // loopStaff: in / of - October 24, 2019
+    // ***
+
+    loopStaffIn(staff){
+        let result = [];
+        for (let i in staff){
+            result.push(daily.makeEmailObj(staff[i]));
+        } 
+        return result;
+    },
+    loopStaffOf(staff){
+        return this.loopStaff(staff);
+    },
 
     // ***
     // loopStaff - October 21, 2019

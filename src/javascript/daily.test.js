@@ -1,6 +1,30 @@
 import daily from './daily';
 
 // ***
+// loopStaff: in / of - October 24, 2019
+// ***
+
+test("Email builder with forOf", () => {
+    const staffEmail = daily.loopStaffOf(data.staff);
+    expect(staffEmail[0])
+        .toEqual("jane.smith@evolveu.ca");
+    expect(staffEmail[3])
+        .toEqual("olivia.notly@evolveu.ca");
+    expect(staffEmail[6])
+        .toEqual("benjamin.amis@evolveu.ca");
+});
+
+test("Email builder with forIn",() => {
+    const staffEmail = daily.loopStaffIn(data.staff);
+    expect(staffEmail[0])
+        .toEqual("jane.smith@evolveu.ca");
+    expect(staffEmail[3])
+        .toEqual("olivia.notly@evolveu.ca");
+    expect(staffEmail[6])
+        .toEqual("benjamin.amis@evolveu.ca");
+});
+
+// ***
 // loopStaff - October 21, 2019
 // ***
 
