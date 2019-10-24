@@ -1,4 +1,4 @@
-import { Account } from "./account.js";
+import { Account, AccountController } from "./account.js";
 
 
 const bankNumInput = document.querySelector("#bankNumInput");
@@ -57,3 +57,27 @@ function isValidInput(input){
     }
     return parseFloat(input);
 }
+
+// Account manager view 
+
+let accountManager = new AccountController();
+
+document.querySelector("#acc-create-submit").addEventListener("click", (e) =>{
+    e.preventDefault();
+    let inputEl = document.querySelector("#acc-create-input")
+    let input = String(inputEl.value);
+    let response = document.querySelector("#acc-create-response");
+    let select = document.querySelector("#acc-select");
+    inputEl.value = "";
+    if (input === "") { 
+        response.innerText = "Please enter a valid account name.";
+    }
+    else {
+        accountManager.addAccount(input, 0);
+        response.innerText = `Created your new account '${input}'.`;
+        let node = document.createElement("option");
+        node.text = input;
+        node.value = input;
+        select.add(node);
+    }
+});

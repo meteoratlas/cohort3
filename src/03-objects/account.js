@@ -30,6 +30,7 @@ export class AccountController {
     constructor(user){
         this.userName = user;
         this.accounts = [];
+        this.currentAccount;
     }
     addAccount(name, funds){
         const toAdd = new Account(name, funds);

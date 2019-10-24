@@ -11,7 +11,7 @@ body {
 #wrapper {
 }
 
-#bank-account {
+#bank-account, #account-manager {
     background-color: blanchedalmond;
     width: 500px;
     padding: 16px 8px;

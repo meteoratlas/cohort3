@@ -9,6 +9,23 @@
 </head>
 <body>
     <div id="wrapper">
+        <div id="account-manager">
+            <h1>Account Manager</h1>
+            <form>
+                <label for="acc-select">Select an account:</label>
+                <select name="account-select" id="acc-select">
+                    <option value="">-- Please choose an account --</option>
+                </select>
+            </form>
+            <br />
+            <form>
+                <label for="acc-create-input">Enter a name for your new account:</label>
+                <input id="acc-create-input" type="text">
+                <button id="acc-create-submit">Create Account</button>
+                <p id="acc-create-response"></p>
+            </form>
+        </div>
+
         <div id="bank-account">
             <h2>Bank Account</h2>
             <form>
