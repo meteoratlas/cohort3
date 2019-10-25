@@ -18,14 +18,40 @@
                 </select>
             </form>
             <br />
-            <form>
-                <label for="acc-create-input">Enter a name for your new account:</label>
-                <input id="acc-create-input" type="text">
-                <button id="acc-create-submit">Create Account</button>
-                <p id="acc-create-response"></p>
-            </form>
-        </div>
+            <div>
+                <h2>Create a New Account</h2>
+                <form>
+                    <label for="acc-create-input">Enter a name for your new account:</label>
+                    <input id="acc-create-input" type="text">
+                    <button id="acc-create-submit">Create Account</button>
+                    <p id="acc-create-response"></p>
+                </form>
+            </div>
+            <div>
+                <h2>Total Funds</h2>
+                <label for="acc-total-button">Click to report the total funds of all accounts.</label>
+                <button id="acc-total-button">Get Total</button>
+                <p id="acc-total-response"></p>
+            </div>
 
+            <div>
+                <h2>Withdraw or Deposit Funds</h2>
+                <input id="funds-modify-input" type="number">
+                <button id="funds-withdraw-button">Withdraw</button>
+                <button id="funds-deposit-button">Deposit</button>
+                <p id="funds-modify-response"></p>
+            </div>
+
+            <div>
+                <h2>Find Highest or Lowest</h2>
+                <label for="highest-funds-button">Retrieve the account with the highest or lowest funds.</label>
+                <br />
+                <button id="highest-funds-button">Highest Funds</button>
+                <button id="lowest-funds-button">Lowest Funds</button>
+                <p id="hi-low-response"></p>
+            </div>
+        </div>
+        
         <div id="bank-account">
             <h2>Bank Account</h2>
             <form>
@@ -37,6 +63,7 @@
             </form>
             <p id="bankReport"></p>
         </div>
+        
     </div>
 
     <script type="module" src="./main.js"></script>

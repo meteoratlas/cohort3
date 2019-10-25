@@ -1,6 +1,5 @@
 import { Account, AccountController } from "./account.js";
 
-
 const bankNumInput = document.querySelector("#bankNumInput");
 const bankDepositButton = document.querySelector("#depositButton");
 const bankWithdrawButton = document.querySelector("#withdrawButton");
@@ -62,22 +61,92 @@ function isValidInput(input){
 
 let accountManager = new AccountController();
 
+const select = document.querySelector("#acc-select")
+
 document.querySelector("#acc-create-submit").addEventListener("click", (e) =>{
     e.preventDefault();
     let inputEl = document.querySelector("#acc-create-input")
     let input = String(inputEl.value);
     let response = document.querySelector("#acc-create-response");
-    let select = document.querySelector("#acc-select");
     inputEl.value = "";
     if (input === "") { 
         response.innerText = "Please enter a valid account name.";
     }
     else {
         accountManager.addAccount(input, 0);
-        response.innerText = `Created your new account '${input}'.`;
+        response.innerText = `Created a new account called '${input}'.`;
         let node = document.createElement("option");
         node.text = input;
         node.value = input;
         select.add(node);
     }
+});
+
+select.addEventListener("change", (e) => {
+    accountManager.setCurrentAccount(select.value);
+});
+
+document.querySelector("#acc-total-button").addEventListener("click", (e) => {
+    let total = accountManager.totalAllAccountFunds();
+    let response = document.querySelector("#acc-total-response");
+    if (typeof total !== "string") {
+        response.innerText = `Your total funds amount to $${total}.`;
+    } else {
+        response.innerText = total;
+    }
+});
+
+document.querySelector("#funds-deposit-button").addEventListener("click", (e) =>{
+    let report = document.querySelector("#funds-modify-response");
+    let dwInput = Number(document.querySelector("#funds-modify-input").value);
+    if (dwInput === 0){
+        report.innerText = "Please enter a value.";
+        return;
+    }
+    let cur = accountManager.getAccount();
+    if (cur === undefined){
+        report.innerText = "Please create or select an account first."
+    } else {
+        let res = cur.deposit(dwInput);
+        let success = `Successfully deposited $${dwInput} into your account '${cur.name}'`;
+        report.innerText = typeof res === "string" ? res : success;
+    }
+    document.querySelector("#funds-modify-input").value = "";
+});
+
+document.querySelector("#funds-withdraw-button").addEventListener("click", (e) =>{
+    let report = document.querySelector("#funds-modify-response");
+    let dwInput = Number(document.querySelector("#funds-modify-input").value);
+    if (dwInput === 0){
+        report.innerText = "Please enter a value.";
+        return;
+    }
+    let cur = accountManager.getAccount();
+    if (cur === undefined){
+        report.innerText = "Please create or select an account first."
+    } else {
+        let res = cur.withdraw(dwInput);
+        let success = `Successfully withdrew $${dwInput} from your account '${cur.name}'`;
+        report.innerText = typeof res === "string" ? res : success;
+    }
+    document.querySelector("#funds-modify-input").value = "";
+});
+
+const hiLowResponse = document.querySelector("#hi-low-response");
+document.querySelector("#highest-funds-button").addEventListener("click", (e)=>{
+    let res = accountManager.findHighestValueAccount();
+    if (accountManager.accounts.length === 0) {
+        hiLowResponse.innerText = "You have no accounts.";
+        return;
+    }
+    hiLowResponse.innerText = `Your highest value account is ${res}.`;  
+});
+
+document.querySelector("#lowest-funds-button").addEventListener("click", (e)=>{
+    let res = accountManager.findLowestValueAccount();
+    if (accountManager.accounts.length === 0) {
+        hiLowResponse.innerText = "You have no accounts.";
+        return;
+    }
+    hiLowResponse.innerText = `Your lowest value account is ${res}.`;  
 });

@@ -32,6 +32,21 @@ export class AccountController {
         this.accounts = [];
         this.currentAccount;
     }
+    getAccount(/*name*/){
+        /*this.accounts.forEach((a)=>{
+            if (a.name === name){
+                return a;
+            }
+        })*/
+        return this.currentAccount;
+    }
+    setCurrentAccount(acc){
+        this.accounts.forEach((a)=>{
+            if (a.name === acc){
+                this.currentAccount = a;
+            }
+        })
+    }
     addAccount(name, funds){
         const toAdd = new Account(name, funds);
         this.accounts.push(toAdd);
