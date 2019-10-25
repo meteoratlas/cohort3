@@ -1,11 +1,35 @@
 import daily from './daily';
 
 // ***
+// loopStaff each / map - October 25, 2019
+// ***
+
+test("Email builder with forEach", () => {
+    const staffEmail = daily.loopStaffForEach(data.staff);
+    expect(staffEmail[0])
+        .toEqual("jane.smith@evolveu.ca");
+    expect(staffEmail[3])
+        .toEqual("olivia.notly@evolveu.ca");
+    expect(staffEmail[6])
+        .toEqual("benjamin.amis@evolveu.ca");
+});
+
+test("Email builder with map", () => {
+    const staffEmail = daily.loopStaffMap(data.staff);
+    expect(staffEmail[0])
+        .toEqual("jane.smith@evolveu.ca");
+    expect(staffEmail[3])
+        .toEqual("olivia.notly@evolveu.ca");
+    expect(staffEmail[6])
+        .toEqual("benjamin.amis@evolveu.ca");
+});
+
+// ***
 // loopStaff: in / of - October 24, 2019
 // ***
 
 test("Email builder with forOf", () => {
-    const staffEmail = daily.loopStaffOf(data.staff);
+    const staffEmail = daily.loopStaffMap(data.staff);
     expect(staffEmail[0])
         .toEqual("jane.smith@evolveu.ca");
     expect(staffEmail[3])

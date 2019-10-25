@@ -1,6 +1,22 @@
 const daily = {
 
     // ***
+    // loopStaff each / map - October 25, 2019
+    // ***
+
+    loopStaffForEach(staff){
+        let result = [];
+        staff.forEach((n)=>{
+            result.push(daily.makeEmailObj(n));
+        });
+        return result;
+    },
+
+    loopStaffMap(staff){
+        return staff.map((n) => daily.makeEmailObj(n));
+    },
+
+    // ***
     // loopStaff: in / of - October 24, 2019
     // ***
 
