@@ -32,12 +32,7 @@ export class AccountController {
         this.accounts = [];
         this.currentAccount;
     }
-    getAccount(/*name*/){
-        /*this.accounts.forEach((a)=>{
-            if (a.name === name){
-                return a;
-            }
-        })*/
+    getAccount(){
         return this.currentAccount;
     }
     setCurrentAccount(acc){

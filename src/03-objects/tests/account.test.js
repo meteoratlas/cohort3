@@ -105,3 +105,14 @@ test("Return the account with the lowest funds", () =>{
     controller.addAccount("poor", 0.32);
     expect(controller.findLowestValueAccount()).toBe("poor");
 });
+
+test("Test getter", () =>{
+    controller.currentAccount = "savings";
+    expect(controller.getAccount()).toBe("savings");
+});
+
+test("Test setter", () =>{
+    controller.addAccount("testy", 43);
+    controller.setCurrentAccount("testy");
+    expect(controller.getAccount().name).toBe("testy");
+});
