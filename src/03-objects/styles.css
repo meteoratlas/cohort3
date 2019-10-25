@@ -6,6 +6,7 @@ body {
     justify-content: center;
     align-content: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url("./marble.jpg");
 }
 
 #wrapper {
