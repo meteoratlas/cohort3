@@ -29,7 +29,7 @@ test("Email builder with map", () => {
 // ***
 
 test("Email builder with forOf", () => {
-    const staffEmail = daily.loopStaffMap(data.staff);
+    const staffEmail = daily.loopStaffOf(data.staff);
     expect(staffEmail[0])
         .toEqual("jane.smith@evolveu.ca");
     expect(staffEmail[3])
