@@ -12,6 +12,10 @@ test("show city info", ()=>{
     expect(myCity.show()).toBe("Calgary's vital statistics:\nPopulation:1000000\nLatitude:53\nLongitude:72");
 })
 
+test("which hemisphere is this city in", ()=>{
+    expect(myCity.whichSphere("Calgary")).toBe("northern hemisphere");
+});
+
 test("citizens move in", ()=>{
     expect(myCity.movedIn(400)).toBe(1000400);
 });

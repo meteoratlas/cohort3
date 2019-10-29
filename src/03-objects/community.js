@@ -1,21 +1,44 @@
-class Community {
+import { City } from "./city";
+
+export class Community {
     constructor(){
         this.cities = [];
     }
     getMostNorthern(){
-        return "";
+        if (this.cities.length === 0) {return "No cities are in this community."}
+        if (this.cities.length === 1) {return this.cities[0];}
+        let northmost = this.cities[0];
+        for (let city of this.cities){
+            if (city.latitude > northmost.latitude) { 
+                northmost = city; 
+            }
+        }
+        return northmost.name;
     }
     getMostSouthern(){
-        return "";
+        if (this.cities.length === 0) {return "No cities are in this community."}
+        if (this.cities.length === 1) {return this.cities[0];}
+        let southmost = this.cities[0];
+        for (let city of this.cities){
+            if (city.latitude < southmost.latitude) { 
+                southmost = city; 
+            }
+        }
+        return southmost.name;
     }
     getPopulation(){
-        // total for all cities
-        return 0;
+        return this.cities.reduce((a, n) => a + n.population, 0);
     }
     createCity(name, lat, long, pop){
-        return "";
+        let exists = this.cities.map(n => n.name).indexOf(name);
+        if (exists > 0) { return "Please enter a unique city name."; }
+        this.cities.push(new City(name, lat, long, pop));
     }
     deleteCity(name){
-        return "";
+        let exists = this.cities.map(n => n.name).indexOf(name)
+        if (exists > 0) { 
+            this.cities.splice(exists, 1); 
+        }
+        else { return `The city ${name} is not part of this community.`; }
     }
 }
