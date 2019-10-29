@@ -2,9 +2,6 @@ class Community {
     constructor(){
         this.cities = [];
     }
-    whichSphere(name){
-        return "";
-    }
     getMostNorthern(){
         return "";
     }
