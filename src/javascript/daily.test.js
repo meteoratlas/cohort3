@@ -1,6 +1,18 @@
 import daily from './daily';
 
 // ***
+// More Array Exercises - October 29, 2019
+// ***
+
+test("Get staff balances", ()=>{
+    expect(daily.getTotalBalances(data.staff)).toBe(3823);
+});
+
+test("Get average balances", ()=>{
+    expect(daily.getAverageBalances(data.staff)).toBeCloseTo(546.142);
+});
+
+// ***
 // loopStaff each / map - October 25, 2019
 // ***
 

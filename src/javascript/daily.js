@@ -1,6 +1,16 @@
 const daily = {
 
     // ***
+    // More Array Exercises - October 29, 2019
+    // ***
+    getTotalBalances(staff){
+        return staff.map(n => n["balance"]).reduce((a,n) => a + n);
+    },
+    getAverageBalances(staff){
+        return this.getTotalBalances(staff) / staff.length;
+    },
+
+    // ***
     // loopStaff each / map - October 25, 2019
     // ***
 
