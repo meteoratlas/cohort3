@@ -1,4 +1,3 @@
-
 const functions = {
 
     url: 'https://uinames.com/api/?amount=10',

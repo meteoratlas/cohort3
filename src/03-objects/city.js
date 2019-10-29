@@ -5,10 +5,10 @@ export class City {
         this.longitude = long;
         this.population = pop;
     }
-    show(){ // return all city info in a string
+    show(){ 
         return `${this.name}'s vital statistics:\nPopulation:${this.population}\nLatitude:${this.latitude}\nLongitude:${this.longitude}`;
     }
-    movedIn(citizens){ // return total pop probably
+    movedIn(citizens){ 
         if (citizens < 0) return;
         this.population += citizens;
         return this.population;

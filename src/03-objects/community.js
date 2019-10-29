@@ -6,7 +6,7 @@ export class Community {
     }
     getMostNorthern(){
         if (this.cities.length === 0) {return "No cities are in this community."}
-        if (this.cities.length === 1) {return this.cities[0];}
+        if (this.cities.length === 1) {return this.cities[0].name;}
         let northmost = this.cities[0];
         for (let city of this.cities){
             if (city.latitude > northmost.latitude) { 
@@ -17,7 +17,7 @@ export class Community {
     }
     getMostSouthern(){
         if (this.cities.length === 0) {return "No cities are in this community."}
-        if (this.cities.length === 1) {return this.cities[0];}
+        if (this.cities.length === 1) {return this.cities[0].name;}
         let southmost = this.cities[0];
         for (let city of this.cities){
             if (city.latitude < southmost.latitude) { 

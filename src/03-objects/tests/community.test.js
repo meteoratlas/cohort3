@@ -6,12 +6,24 @@ commune.cities.push(new City("Esterville", 64, 32, 32430));
 commune.cities.push(new City("Norrland", 87, 43, 104));
 commune.cities.push(new City("Grennick", -45, -31, 4504));
 
+let empty = new Community();
+let one = new Community();
+one.createCity("Eldswidth", 23, 54, 435);
+
 test("which city is the furthest north?", ()=>{
     expect(commune.getMostNorthern()).toBe("Norrland");
+    expect(one.getMostNorthern()).toBe("Eldswidth");
+    expect(empty.getMostNorthern()).toBe("No cities are in this community.");
 });
 
 test("which city is the furthest south?", ()=>{
     expect(commune.getMostSouthern()).toBe("Grennick");
+    expect(one.getMostSouthern()).toBe("Eldswidth");
+    expect(empty.getMostSouthern()).toBe("No cities are in this community.");
+});
+
+test("what is the total population of all cities?", ()=>{
+    expect(commune.getPopulation()).toBe(37038);
 });
 
 test("create city", ()=>{
