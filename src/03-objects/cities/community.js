@@ -1,7 +1,8 @@
-import { City } from "./city";
+import { City } from "./city.js";
 
 export class Community {
     constructor(){
+        this.key = 0;
         this.cities = [];
     }
     getMostNorthern(){
