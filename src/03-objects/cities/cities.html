@@ -4,15 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./city.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <title>Cities</title>
 </head>
 <body>
-    <button id="test-button">Push info to server</button>
-
-    <template>
-        <div id="city-card">
-            <h2></h2>
-            <p></p>
+    <div id="wrapper">
+        <h1>Cities and Community</h1>
+        <div id="city-creator">
+            <div id="city-maker">
+                <h3>Create a City</h3>
+                <input type="text" id="new-city-name">
+                <input type="number" id="new-city-lat">
+                <input type="number" id="new-city-long">
+                <input type="number" id="new-city-pop">
+                <button id="new-city-submit">Create City</button>
+                <p id="new-city-response"></p>
+            </div>
+            <div id="cc-buttons">
+                <button id="northernMost">Get Northernmost City</button>
+                <button id="southernMost">Get Southernmost City</button>
+                <button id="population">Get Total Population</button>
+                <p id="cc-response"></p>
+            </div>
+        </div>
+        <div id="card-holder">
+            <div class="city-card">
+                <img src="./icon.png">
+                <h2>City Name</h2>
+                <p>City name is pretty good! How a good place! Northern hemisphere! Gotta love it folks! Latitude or whatever!</p>
+                <button class="card-del-but">Delete city</button>
+                <button class="card-add-but">Add citizens</button>
+                <button class="card-remove-but">Remove citizens</button>
+                <input type="number">
+            </div>
+            <div class="city-card">
+                <h2>City Name</h2>
+                <p>wordswordswords</p>
+            </div>
+            <div class="city-card">
+                <h2>City Name</h2>
+                <p>wordswordswords</p>
+            </div>
+            <div class="city-card">
+                <h2>City Name</h2>
+                <p>wordswordswords</p>
+            </div>
+            <div class="city-card">
+                <h2>City Name</h2>
+                <p>wordswordswords</p>
+            </div>
+        </div>
+        <button id="test-button">Push info to server</button>
+    </div>
+    <template id="card-template">
+        <div class="city-card" data-city="dummy">
+            <h2>City Name</h2>
+                <p>City name is pretty good! How a good place! Northern hemisphere! Gotta love it folks! Latitude or whatever!</p>
+                <button class="card-del-but">Delete this city</button>
+                <button class="card-add-but">Add citizens to this city</button>
+                <button class="card-remove-but">Remove citizens to this city</button>
+                <input type="number">
         </div>
     </template>
     <script type="module" src="./citymain.js"></script>

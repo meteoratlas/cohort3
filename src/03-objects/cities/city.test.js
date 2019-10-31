@@ -1,4 +1,4 @@
-import {City} from "../city";
+import {City} from "./city";
 
 let myCity = new City("Calgary", 53, 72, 1000000);
 let southCity = new City("Pelaskiwin", -20, -23, 123024);

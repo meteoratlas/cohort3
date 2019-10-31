@@ -1,3 +1,5 @@
+//global.fetch = require('node-fetch');
+
 const functions = {
 
     url: 'https://uinames.com/api/?amount=10',

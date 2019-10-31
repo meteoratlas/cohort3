@@ -1,5 +1,5 @@
-import {Community} from "../community";
-import {City} from "../city";
+import {Community} from "./community";
+import {City} from "./city";
 
 let commune = new Community();
 commune.cities.push(new City("Esterville", 64, 32, 32430));

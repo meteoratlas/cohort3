@@ -1,4 +1,11 @@
-//global.fetch = require('node-fetch');
+global.fetch = require('node-fetch');
+
+import { Fetcher, HTMLGenerator } from './citymain'
+
+test("Fetcher: test GetUrl", ()=>{
+    expect(Fetcher.getUrl("all").toBe("http://127.0.0.1:5000/all"));
+});
+
 /*
 test("Test connection to server", async ()=>{
     const clients = [

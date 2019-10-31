@@ -1,0 +1,65 @@
+body {
+    background-image: url('./citybg.jpg');
+    background-size: cover;
+    font-family: "Lato", sans-serif;
+    box-sizing: border-box;
+    color: #010;
+}
+
+#wrapper {
+    margin: 2% auto;
+    background-color: rgba(54, 54, 54, 0.20);
+    width: 100%;
+    height: 100%;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    text-decoration: underline;
+}
+h2 {
+    text-decoration: underline;
+}
+#card-holder {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.city-card {
+    position: relative;
+    background-color: whitesmoke;
+    width: 28%;
+    margin: 1%;
+    padding: 16px;
+    /*height: 350px;*/
+    animation: onIn 0.5s;
+    transform-origin: bottom center;
+    border-top: 2px inset rgb(148, 148, 148);
+}
+.city-card img {
+    float: right;
+}
+
+.city-card button {
+    background-color: #337733;
+    margin: 2% 2% 2% 0;
+    padding: 3%;
+    color: #fff;
+    border: 0;
+}
+
+.city-card button:hover {
+    background-color: #24744f;
+}
+
+@keyframes onIn {
+    from {
+        transform: scaleY(0.0);
+    }
+  
+    to {
+        transform: scaleY(1);
+    }
+  }
