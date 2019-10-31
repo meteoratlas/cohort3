@@ -34,7 +34,7 @@ h2 {
     margin: 1%;
     padding: 16px;
     /*height: 350px;*/
-    animation: onIn 0.5s;
+    /*animation: onIn 0.5s;*/
     transform-origin: bottom center;
     border-top: 2px inset rgb(148, 148, 148);
 }

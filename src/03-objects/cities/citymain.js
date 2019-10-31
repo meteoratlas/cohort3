@@ -14,8 +14,9 @@ class HTMLGenerator {
         image.src = "./icon.png";
         div.appendChild(image);
 
-        div.appendChild(this.makeNodeWithText("h2", city["name"]))
-        div.appendChild(this.makeNodeWithText("p", `Test string, should be somewhat long`));
+        div.appendChild(this.makeNodeWithText("h2", city["name"]));
+        let desc = com.getCity(city["name"]).show();
+        div.appendChild(this.makeNodeWithText("p", desc));
 
         let popUpButton = this.makeNodeWithText("button", "Add citizens");
         popUpButton.className = "card-add-but";
@@ -30,12 +31,19 @@ class HTMLGenerator {
         div.appendChild(delButton);
 
         let input = document.createElement("input")
+        input.type = "number";
         div.appendChild(input);
 
         holder.appendChild(div);
     }
     static createCardsFromObj(obj){
         const arr = obj[0].cities;
+        for (let i of arr){
+            this.makeCard(i);
+        }
+    }
+    static createCardsFromCommunity(){
+        const arr = com.cities;
         for (let i of arr){
             this.makeCard(i);
         }
@@ -51,10 +59,6 @@ class HTMLGenerator {
         let txt = document.createTextNode(text);
         el.appendChild(txt);
         return el;
-    }
-    static buildDesc(city){
-        return `${city["name"]} is a beautiful ${city.howBig()} in this region. It is located at
-        ${city.latitude}, ${city.longitude}, in the ${city.whichSphere()}.`;
     }
 }
 
@@ -106,61 +110,58 @@ class Fetcher{
 let com = new Community();
 com.createCity("Grotznei", 23,65, 23948);
 async function initPage(){
-    let fktf = await Fetcher.postData("http://127.0.0.1:5000/" + 'add', com);
+    let first = await Fetcher.postData("http://127.0.0.1:5000/" + 'add', com);
 }
 initPage();
-
-// Set up some example data for testing
-let firstPush = false;
-
-//Fetcher.sendData(com);
-//com.createCity("Grotznei", 23,65, 23948);
-
-// com.createCity("Almandy", 50.34, -75.34, 3240);
-// com.createCity("Polinia", 34.213, 5.234, 134843);
-//let data = await Fetcher.postData(Fetcher.getURL('all'));
 
 document.querySelector("#test-button").addEventListener("click", async ()=>{
     com.createCity("Lomney", 43,35, 1097);
     Fetcher.sendData(com);
-    /*
-    if (!firstPush) {
-        firstPush = true;
-        data = await Fetcher.postData(Fetcher.getURL('all'));
-        console.log(data);
-        let f = await Fetcher.requestFromServer();
-        //f = f[0].cities;
-        //let dat = 
-        
-        //HTMLGenerator.makeCard(1)
-    }
-    else {
-        com.createCity("Lomney", 43,35, 1097);
-        Fetcher.sendData(com);
-        com.createCity("Grotznei", 23,65, 23948);
-        Fetcher.sendData(com);
-        let f = await Fetcher.requestFromServer();
-        HTMLGenerator.createCardsFromObj(f);
-    }*/
+    
     let f = await Fetcher.requestFromServer();
     Fetcher.populateCollection(f[0].cities);
     HTMLGenerator.createCardsFromObj(f);
-    console.table(com.cities);
 });
 
 const cardHolder = document.querySelector("#card-holder");
 cardHolder.addEventListener("click", e=>{
     if (e.target.className === "card-del-but"){
-        //console.table(com.cities);
         com.deleteCity(e.target.parentElement.dataset.city);
+        Fetcher.sendData(com);
         cardHolder.removeChild(e.target.parentElement);
-        //console.table(com.cities);
     }
     if (e.target.className === "card-add-but"){
-        console.log("on add")
+        let modify = e.target.parentElement.querySelector("input").value;
+        if (modify === ""){
+            // TODO number needed notice
+            console.log("Please enter a number");
+            return;
+        }
+        com.getCity(e.target.parentElement.dataset.city).population += Number(modify);
+        Fetcher.sendData(com);
     }
     if (e.target.className === "card-remove-but"){
         console.log("on remove")
     }
 });
 
+document.querySelector("#new-city-submit").addEventListener("click", ()=>{
+    const response = document.querySelector("#new-city-response");
+
+    let name = document.querySelector("#new-city-name").value; 
+    let lat = document.querySelector("#new-city-lat").value; 
+    let long = document.querySelector("#new-city-long").value; 
+    let pop = document.querySelector("#new-city-pop").value; 
+    if (name === "" || lat === "" || long === "" || pop === ""){
+        response.innerText = "Please enter all necessary data.";
+        return;
+    }
+    let attempt = com.createCity(name, Number(lat), Number(long), Number(pop));
+    if (typeof attempt === "string") {
+        response.innerText = attempt;
+    }
+    // otherwise, success. Update the server
+    Fetcher.sendData(com); // try/catch
+    response.innerText = `Successfully created your city '${name}'.`
+    HTMLGenerator.createCardsFromCommunity();
+});

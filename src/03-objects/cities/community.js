@@ -30,6 +30,10 @@ export class Community {
     getPopulation(){
         return this.cities.reduce((a, n) => a + n.population, 0);
     }
+    getCity(name){
+        let city = this.cities.map(n => n.name).indexOf(name);
+        return this.cities[city];
+    }
     createCity(name, lat, long, pop){
         let exists = this.cities.map(n => n.name).indexOf(name);
         if (exists > 0) { return "Please enter a unique city name."; }

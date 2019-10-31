@@ -6,7 +6,8 @@ export class City {
         this.population = pop;
     }
     show(){ 
-        return `${this.name}'s vital statistics:\nPopulation:${this.population}\nLatitude:${this.latitude}\nLongitude:${this.longitude}`;
+        return `${this.name} is a ${this.howBig()} in this region. It is located at
+        ${this.latitude}°, ${this.longitude}°, in the ${this.whichSphere()}. Its current population is ${this.population}.`;
     }
     movedIn(citizens){ 
         if (citizens < 0) return;
@@ -28,4 +29,5 @@ export class City {
         if (this.population >= 100) return "village";
         return "hamlet";
     }
+    
 }
