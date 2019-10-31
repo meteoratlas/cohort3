@@ -1,50 +1,6 @@
 import {Community} from "./community.js";
 import { City } from "./city.js";
 
-// Set up some example data for testing
-let firstPush = false;
-let com = new Community();
-com.createCity("Almandy", 50.34, -75.34, 3240);
-com.createCity("Polinia", 34.213, 5.234, 134843);
-document.querySelector("#test-button").addEventListener("click", async ()=>{
-    if (!firstPush) {
-        firstPush = true;
-        let data = await Fetcher.postData(Fetcher.getURL('add'), com /*{key:0, name:"push from js?"}*/);
-        data = await Fetcher.postData(Fetcher.getURL('all'));
-        console.log(data);
-        let f = await Fetcher.requestFromServer();
-        //f = f[0].cities;
-        //let dat = 
-        
-        //HTMLGenerator.makeCard(1)
-    }
-    else {
-        com.createCity("Lomney", 43,35, 1097);
-        Fetcher.sendData(com);
-        com.createCity("Grotznei", 23,65, 23948);
-        Fetcher.sendData(com);
-        let f = await Fetcher.requestFromServer();
-        HTMLGenerator.createCardsFromObj(f);
-    }
-    console.table(com.cities);
-});
-
-const cardHolder = document.querySelector("#card-holder");
-cardHolder.addEventListener("click", e=>{
-    if (e.target.className === "card-del-but"){
-        console.table(com.cities);
-        com.deleteCity(e.target.parentElement.dataset.city);
-        cardHolder.removeChild(e.target.parentElement);
-        console.table(com.cities);
-    }
-    if (e.target.className === "card-add-but"){
-        console.log("on add")
-    }
-    if (e.target.className === "card-remove-but"){
-        console.log("on remove")
-    }
-});
-
 class HTMLGenerator {
     // displays a city's name, properties, and associated data
     static makeCard(city){
@@ -122,6 +78,7 @@ class Fetcher{
             let cty = new City(c["name"], c["latitude"], c["longitude"], c["population"]);
             com.cities.push(cty);
         }
+        console.table(com.cities)
     }
     // See api.test.js in reference/src/api repo for detailed documentation
     static async postData(url = '', data = {}) {
@@ -145,3 +102,65 @@ class Fetcher{
         return json;
     }
 }
+
+let com = new Community();
+com.createCity("Grotznei", 23,65, 23948);
+async function initPage(){
+    let fktf = await Fetcher.postData("http://127.0.0.1:5000/" + 'add', com);
+}
+initPage();
+
+// Set up some example data for testing
+let firstPush = false;
+
+//Fetcher.sendData(com);
+//com.createCity("Grotznei", 23,65, 23948);
+
+// com.createCity("Almandy", 50.34, -75.34, 3240);
+// com.createCity("Polinia", 34.213, 5.234, 134843);
+//let data = await Fetcher.postData(Fetcher.getURL('all'));
+
+document.querySelector("#test-button").addEventListener("click", async ()=>{
+    com.createCity("Lomney", 43,35, 1097);
+    Fetcher.sendData(com);
+    /*
+    if (!firstPush) {
+        firstPush = true;
+        data = await Fetcher.postData(Fetcher.getURL('all'));
+        console.log(data);
+        let f = await Fetcher.requestFromServer();
+        //f = f[0].cities;
+        //let dat = 
+        
+        //HTMLGenerator.makeCard(1)
+    }
+    else {
+        com.createCity("Lomney", 43,35, 1097);
+        Fetcher.sendData(com);
+        com.createCity("Grotznei", 23,65, 23948);
+        Fetcher.sendData(com);
+        let f = await Fetcher.requestFromServer();
+        HTMLGenerator.createCardsFromObj(f);
+    }*/
+    let f = await Fetcher.requestFromServer();
+    Fetcher.populateCollection(f[0].cities);
+    HTMLGenerator.createCardsFromObj(f);
+    console.table(com.cities);
+});
+
+const cardHolder = document.querySelector("#card-holder");
+cardHolder.addEventListener("click", e=>{
+    if (e.target.className === "card-del-but"){
+        //console.table(com.cities);
+        com.deleteCity(e.target.parentElement.dataset.city);
+        cardHolder.removeChild(e.target.parentElement);
+        //console.table(com.cities);
+    }
+    if (e.target.className === "card-add-but"){
+        console.log("on add")
+    }
+    if (e.target.className === "card-remove-but"){
+        console.log("on remove")
+    }
+});
+

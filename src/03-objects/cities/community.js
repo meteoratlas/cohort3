@@ -37,10 +37,10 @@ export class Community {
     }
     deleteCity(name){
         let exists = this.cities.map(n => n.name).indexOf(name)
-        if (exists > 0) { 
+        if (exists >= 0) { 
             this.cities.splice(exists, 1);
-            console.log("success") 
         }
+        
         else { return `The city ${name} is not part of this community.`; }
     }
 }

@@ -14,9 +14,13 @@
         <div id="city-creator">
             <div id="city-maker">
                 <h3>Create a City</h3>
+                <label for="new-city-name">New City Name</label>
                 <input type="text" id="new-city-name">
-                <input type="number" id="new-city-lat">
-                <input type="number" id="new-city-long">
+                <label for="new-city-lat">New City Latitude</label>
+                <input type="number" min="-90" max="90" id="new-city-lat">
+                <label for="new-city-long">New City Longitude</label>
+                <input type="number" min="-180" max="180" id="new-city-long">
+                <label for="new-city-pop">New City Population</label>
                 <input type="number" id="new-city-pop">
                 <button id="new-city-submit">Create City</button>
                 <p id="new-city-response"></p>
@@ -29,6 +33,7 @@
             </div>
         </div>
         <div id="card-holder">
+            <!--
             <div class="city-card">
                 <img src="./icon.png">
                 <h2>City Name</h2>
@@ -38,22 +43,7 @@
                 <button class="card-remove-but">Remove citizens</button>
                 <input type="number">
             </div>
-            <div class="city-card">
-                <h2>City Name</h2>
-                <p>wordswordswords</p>
-            </div>
-            <div class="city-card">
-                <h2>City Name</h2>
-                <p>wordswordswords</p>
-            </div>
-            <div class="city-card">
-                <h2>City Name</h2>
-                <p>wordswordswords</p>
-            </div>
-            <div class="city-card">
-                <h2>City Name</h2>
-                <p>wordswordswords</p>
-            </div>
+            -->
         </div>
         <button id="test-button">Push info to server</button>
     </div>
