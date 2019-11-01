@@ -1,6 +1,8 @@
 import {Community} from "./community.js";
 import { City } from "./city.js";
 
+// TODO: cards get added over and over again
+
 class HTMLGenerator {
     // displays a city's name, properties, and associated data
     static makeCard(city){
@@ -32,6 +34,7 @@ class HTMLGenerator {
 
         let input = document.createElement("input")
         input.type = "number";
+        input.min = "0";
         div.appendChild(input);
 
         holder.appendChild(div);
@@ -60,6 +63,11 @@ class HTMLGenerator {
         el.appendChild(txt);
         return el;
     }
+    static updateCard(cityName){
+        let info = com.getCity(cityName);
+        let card = [...cardHolder.children].filter(n => n.dataset.city === cityName)[0];
+        card.querySelector("p").innerText = info.show(); 
+    }
 }
 
 class Fetcher{
@@ -82,7 +90,7 @@ class Fetcher{
             let cty = new City(c["name"], c["latitude"], c["longitude"], c["population"]);
             com.cities.push(cty);
         }
-        console.table(com.cities)
+        //console.table(com.cities)
     }
     // See api.test.js in reference/src/api repo for detailed documentation
     static async postData(url = '', data = {}) {
@@ -108,20 +116,18 @@ class Fetcher{
 }
 
 let com = new Community();
-com.createCity("Grotznei", 23,65, 23948);
 async function initPage(){
+    // TODO: make sure there's something in the server before we do anything.
+    // this does a dummy add to ensure the server has an empty community object
+    // This will be changed.
+    com.createCity("Grotznei", 23,65, 23948);
+    com.createCity("Soward", -56, -154, 45);
     let first = await Fetcher.postData("http://127.0.0.1:5000/" + 'add', com);
-}
-initPage();
-
-document.querySelector("#test-button").addEventListener("click", async ()=>{
-    com.createCity("Lomney", 43,35, 1097);
-    Fetcher.sendData(com);
-    
     let f = await Fetcher.requestFromServer();
     Fetcher.populateCollection(f[0].cities);
     HTMLGenerator.createCardsFromObj(f);
-});
+}
+initPage();
 
 const cardHolder = document.querySelector("#card-holder");
 cardHolder.addEventListener("click", e=>{
@@ -131,19 +137,28 @@ cardHolder.addEventListener("click", e=>{
         cardHolder.removeChild(e.target.parentElement);
     }
     if (e.target.className === "card-add-but"){
-        let modify = e.target.parentElement.querySelector("input").value;
-        if (modify === ""){
-            // TODO number needed notice
-            console.log("Please enter a number");
-            return;
-        }
-        com.getCity(e.target.parentElement.dataset.city).population += Number(modify);
-        Fetcher.sendData(com);
+        updatePopulation(e);
     }
     if (e.target.className === "card-remove-but"){
-        console.log("on remove")
+        updatePopulation(e, false);
     }
 });
+
+function updatePopulation(e, movedIn=true) {
+    let card = e.target.parentElement;
+    let modify = card.querySelector("input").value;
+    card.querySelector("input").value = "";
+    if (modify === "" || Number(modify) <= 0){
+        // number needed notice
+        console.log("Please enter a positive number");
+        return;
+    }
+    if (movedIn){ com.getCity(card.dataset.city).movedIn(Number(modify)); }
+    else {com.getCity(card.dataset.city).movedOut(Number(modify));}
+    //com.getCity(card.dataset.city).population += Number(modify) * addOrRemove;
+    Fetcher.sendData(com);
+    HTMLGenerator.updateCard(card.dataset.city);
+}
 
 document.querySelector("#new-city-submit").addEventListener("click", ()=>{
     const response = document.querySelector("#new-city-response");
@@ -164,4 +179,16 @@ document.querySelector("#new-city-submit").addEventListener("click", ()=>{
     Fetcher.sendData(com); // try/catch
     response.innerText = `Successfully created your city '${name}'.`
     HTMLGenerator.createCardsFromCommunity();
+});
+
+let communeResponse = document.querySelector("#cc-response");
+document.querySelector("#northernMost").addEventListener("click", ()=>{
+    communeResponse.innerText = `The northernmost city in this community is ${com.getMostNorthern()}.`
+});
+
+document.querySelector("#southernMost").addEventListener("click", ()=>{
+    communeResponse.innerText = `The southernmost city in this community is ${com.getMostSouthern()}.`
+});
+document.querySelector("#population").addEventListener("click", ()=>{
+    communeResponse.innerText = `The total population of all the cities combined is ${com.getPopulation()} citizens.`
 });

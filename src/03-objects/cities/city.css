@@ -17,6 +17,8 @@ h1 {
     text-align: center;
     font-size: 3rem;
     text-decoration: underline;
+    color: #fff;
+    font-weight: 600;
 }
 h2 {
     text-decoration: underline;
@@ -52,6 +54,19 @@ h2 {
 
 .city-card button:hover {
     background-color: #24744f;
+}
+
+#cc-buttons,#city-maker  {
+    text-align: center;
+    background-color: #fff;
+    width: 50%;
+    margin: 0 auto;
+    padding: 12px 0;
+    margin-top:12px;
+}
+
+#city-maker label {
+    display: block;
 }
 
 @keyframes onIn {

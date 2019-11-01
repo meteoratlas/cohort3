@@ -10,7 +10,7 @@ test("City constructor", ()=>{
 });
 
 test("show city info", ()=>{
-    expect(myCity.show()).toBe("Calgary's vital statistics:\nPopulation:1000000\nLatitude:53\nLongitude:72");
+    expect(myCity.show()).toBe("Calgary is a city in this region. It is located at"+"        53°, 72°, in the northern hemisphere. Its current population is 1000000.");
 })
 
 test("which hemisphere is this city in", ()=>{
