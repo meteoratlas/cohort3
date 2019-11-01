@@ -56,6 +56,10 @@ h2 {
     background-color: #24744f;
 }
 
+.city-card input {
+    display: block;
+}
+
 #cc-buttons,#city-maker  {
     text-align: center;
     background-color: #fff;

@@ -6,8 +6,7 @@ export class City {
         this.population = pop;
     }
     show(){ 
-        return `${this.name} is a ${this.howBig()} in this region. It is located at
-        ${this.latitude}°, ${this.longitude}°, in the ${this.whichSphere()}. Its current population is ${this.population}.`;
+        return `${this.name} is a ${this.howBig()} in this region. It is located at ${this.latitude}°, ${this.longitude}°, in the ${this.whichSphere()}. Its current population is ${this.population}.`;
     }
     movedIn(citizens){ 
         if (citizens < 0) return;

@@ -10,7 +10,7 @@ test("City constructor", ()=>{
 });
 
 test("show city info", ()=>{
-    expect(myCity.show()).toBe("Calgary is a city in this region. It is located at"+"        53°, 72°, in the northern hemisphere. Its current population is 1000000.");
+    expect(myCity.show()).toEqual("Calgary is a city in this region. It is located at 53°, 72°, in the northern hemisphere. Its current population is 1000000.");
 })
 
 test("which hemisphere is this city in", ()=>{
@@ -28,7 +28,7 @@ test("citizens move out", ()=>{
     expect(myCity.movedOut(-2)).toBe(undefined);
 });
 
-test("how big is the city in english?", ()=>{
+test("how big is the city in words?", ()=>{
     expect(myCity.howBig()).toBe("city");
     myCity.population = 22340;
     expect(myCity.howBig()).toBe("large town");
