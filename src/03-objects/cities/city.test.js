@@ -39,3 +39,14 @@ test("how big is the city in words?", ()=>{
     myCity.population = 43;
     expect(myCity.howBig()).toBe("hamlet");
 })
+
+test("Section E: value vs. reference", ()=>{
+    let myCity = new City("Ref", 11, 22, 33);
+    let myFav = myCity;
+    expect(myCity.population).toBe(33);
+    expect(myFav.population).toBe(33);
+    myCity.movedIn(5);
+    myFav.movedIn(1);
+    expect(myCity.population).toBe(39);
+    expect(myFav.population).toBe(39);
+})
