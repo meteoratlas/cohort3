@@ -12,14 +12,10 @@ class App extends Component {
     }
     reportIconClicked = n => {
       console.log("click")
-        /*this.setState({
-            lastIcon: n
-        });*/
     };
     render() {
         return (
             <div className="App">
-                <Icon pic="search.png" callback={this.reportIconClicked}/>
                 <header className="App-header">
                   <p>The last icon clicked was {this.state.lastIcon}.</p>
                     <img src={logo} className="App-logo" alt="logo" />
