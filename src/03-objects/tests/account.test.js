@@ -1,4 +1,4 @@
-import { Account, AccountController } from '../account';
+import { Account, AccountController } from '../scripts/account';
 
 // Account class
 test("Test that the account object was initialized correctly.", () => {

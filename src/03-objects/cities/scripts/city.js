@@ -1,9 +1,10 @@
 export class City {
-    constructor(name, lat, long, pop){
+    constructor(name, lat, long, pop, key = 0){
         this.name = name;
         this.latitude = lat;
         this.longitude = long;
         this.population = pop;
+        this.key = key;
     }
     show(){ 
         return `${this.name} is a ${this.howBig()} in this region. It is located at ${this.latitude}°, ${this.longitude}°, in the ${this.whichSphere()}. Its current population is ${this.population}.`;

@@ -64,7 +64,7 @@ class HTMLGenerator {
     }
 }
 
-class Fetcher {
+export class Fetcher {
     static getURL(operation) {
         return "http://127.0.0.1:5000/" + operation;
     }
