@@ -27,7 +27,8 @@ test("what is the total population of all cities?", ()=>{
 });
 
 test("create city", ()=>{
-    expect(commune.createCity("Pokiski", 78, 9, 989)).toBe();
+    let testCity = commune.createCity("Pokiski", 78, 9, 989);
+    expect(testCity.population).toBe(989);
     expect(commune.createCity("Pokiski", 22, 1, 2)).toBe("Please enter a unique city name.");
 });
 

@@ -38,7 +38,7 @@ class HTMLGenerator {
         holder.appendChild(div);
     }
     static createCardsFromObj(obj) {
-        const arr = obj[0].cities;
+        const arr = obj;
         for (let i of arr) {
             this.makeCard(i);
         }
@@ -70,14 +70,28 @@ export class Fetcher {
     }
     static async requestFromServer() {
         // use try/catch
-        let data = await this.postData(this.getURL("all")); // maybe use read instead?
+        let data = await this.postData(this.getURL("all")); 
         return data;
     }
-    static async sendData(dataObj) {
+    static async updatePop(city){
+        let request = await this.postData(
+            this.getURL("update"),
+            {key: city.key, population:city.population, name:city.name, latitude:city.latitude, longitude:city.longitude}
+        );
+        return request;
+    }
+    static async delete(city){
+        let request = await this.postData(
+            this.getURL("delete"),
+            {key: city.key}
+        );
+        return request;
+    }
+    static async addData(dataObj) {
         // object with a key
         // use try/catch
         let request = await this.postData(
-            this.getURL("update"),
+            this.getURL("add"),
             dataObj
         );
         return request;
@@ -89,7 +103,8 @@ export class Fetcher {
                 c["name"],
                 c["latitude"],
                 c["longitude"],
-                c["population"]
+                c["population"],
+                c["key"]
             );
             com.cities.push(cty);
         }
@@ -112,7 +127,6 @@ export class Fetcher {
         const json = await response.json(); // parses JSON response into native JavaScript objects
         json.status = response.status;
         json.statusText = response.statusText;
-        // console.log(json, typeof(json));
         return json;
     }
 }
@@ -120,23 +134,29 @@ export class Fetcher {
 let com = new Community();
 
 async function initPage() {
-    // TODO: make sure there's something in the server before we do anything.
-    // this does a dummy add to ensure the server has an empty community object
-    // This will be changed.
-    com.createCity("Grotznei", 23, 65, 23948);
-    com.createCity("Soward", -56, -154, 45);
-    let first = await Fetcher.postData("http://127.0.0.1:5000/" + "add", com);
-    let f = await Fetcher.requestFromServer();
-    Fetcher.populateCollection(f[0].cities);
-    HTMLGenerator.createCardsFromObj(f);
+    let serverInit = await Fetcher.requestFromServer();
+    if (serverInit.length == 0){
+        // server is empty
+    }
+    else {
+        // server contains data, populate the page
+        Fetcher.populateCollection(serverInit);
+        // loop over data, set com.currentkey to highest key+1
+        let highest = 0;
+        for (let c of serverInit){
+            if (c.key > highest) highest = c.key;
+        }
+        com.currentKey = highest + 1;
+        HTMLGenerator.createCardsFromObj(serverInit);
+    }
 }
 initPage();
 
 const cardHolder = document.querySelector("#card-holder");
 cardHolder.addEventListener("click", e => {
     if (e.target.className === "card-del-but") {
-        com.deleteCity(e.target.parentElement.dataset.city);
-        Fetcher.sendData(com);
+        let city = com.deleteCity(e.target.parentElement.dataset.city);
+        Fetcher.delete(city);
         cardHolder.removeChild(e.target.parentElement);
     }
     if (e.target.className === "card-add-but") {
@@ -156,12 +176,13 @@ function updatePopulation(e, movedIn = true) {
         console.log("Please enter a positive number");
         return;
     }
+    let city = com.getCity(card.dataset.city);
     if (movedIn) {
-        com.getCity(card.dataset.city).movedIn(Number(modify));
+        city.movedIn(Number(modify));
     } else {
-        com.getCity(card.dataset.city).movedOut(Number(modify));
+        city.movedOut(Number(modify));
     }
-    Fetcher.sendData(com);
+    Fetcher.updatePop(city);
     HTMLGenerator.updateCard(card.dataset.city);
 }
 
@@ -181,10 +202,15 @@ document.querySelector("#new-city-submit").addEventListener("click", () => {
         response.innerText = attempt;
     }
     // otherwise, success. Update the server
-    Fetcher.sendData(com); // try/catch
+    Fetcher.addData(attempt)
     response.innerText = `Successfully created your city '${name}'.`;
     [...cardHolder.childNodes].forEach(n => n.remove()); // reset card holder
     HTMLGenerator.createCardsFromCommunity();
+    // reset boxes, cache these somewhere
+    document.querySelector("#new-city-name").value = "";
+    document.querySelector("#new-city-lat").value = "";
+    document.querySelector("#new-city-long").value = "";
+    document.querySelector("#new-city-pop").value = "";
 });
 
 let communeResponse = document.querySelector("#cc-response");

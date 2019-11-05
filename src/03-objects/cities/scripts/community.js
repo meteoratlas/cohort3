@@ -2,7 +2,7 @@ import { City } from "./city.js";
 
 export class Community {
     constructor(){
-        this.key = 0;
+        this.currentKey = 0;
         this.cities = [];
     }
     getMostNorthern(){
@@ -37,12 +37,15 @@ export class Community {
     createCity(name, lat, long, pop){
         let exists = this.cities.map(n => n.name).indexOf(name);
         if (exists > 0) { return "Please enter a unique city name."; }
-        this.cities.push(new City(name, lat, long, pop));
+        let newCity = new City(name, lat, long, pop, this.currentKey);
+        this.cities.push(newCity);
+        this.currentKey++;
+        return newCity;
     }
     deleteCity(name){
         let exists = this.cities.map(n => n.name).indexOf(name)
         if (exists >= 0) { 
-            this.cities.splice(exists, 1);
+            return this.cities.splice(exists, 1)[0];
         }
         
         else { return `The city ${name} is not part of this community.`; }
