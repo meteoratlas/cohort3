@@ -1,6 +1,14 @@
 const daily = {
 
     // ***
+    // More Array Exercises (Really) - November 6, 2019
+    // ***
+
+    totalOver1000(staff) {
+        return staff.filter(n => n.balance >= 1000).map(n => n.balance);
+    },
+
+    // ***
     // More Array Exercises - October 29, 2019
     // ***
     getTotalBalances(staff){

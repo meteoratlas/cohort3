@@ -1,6 +1,18 @@
 import daily from './daily';
 
 // ***
+// More Array Exercises (Really) - November 6, 2019
+// ***
+
+test("get staff balances over 1000", ()=>{
+   expect(daily.totalOver1000(data.staff)).toStrictEqual([1000, 1330]); 
+});
+
+test("Get staff balances", ()=>{
+    expect(daily.getTotalBalances(data.staff)).toBe(3823);
+});
+
+// ***
 // More Array Exercises - October 29, 2019
 // ***
 
