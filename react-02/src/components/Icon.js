@@ -6,7 +6,7 @@ class Icon extends Component {
         this.state = {};
     }
     onClickFunc = () =>{
-        this.props.callback(this.props.name)
+        this.props.callback(this.props.name, this.props.tab)
     }
     render() {
         return (
