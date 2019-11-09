@@ -1,4 +1,19 @@
 const daily = {
+    // ***
+    // Callback Exercise (Part 1) - November 8, 2019
+    // ***
+
+    filterAlbertaAndBCResidents(arr, callback){
+        let BCABResidents = [];
+        for (let o of arr) {
+            if (o.province == "BC" || o.province == "AB") BCABResidents.push(callback(o));
+        }
+        return BCABResidents;
+    },
+
+    getFirstLastNames(obj) {
+        return `${obj.fname} ${obj.lname}`;
+    },
 
     // ***
     // More Array Exercises (Really) - November 6, 2019
