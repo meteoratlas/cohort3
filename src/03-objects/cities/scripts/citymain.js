@@ -1,9 +1,16 @@
 import { Community } from "./community.js";
 import { City } from "./city.js";
 
-class HTMLGenerator {
+const cardHolder = document.querySelector("#card-holder");
+
+export let com = new Community();
+
+export class HTMLGenerator {
+    constructor(commune){
+        this.com = commune;
+    }
     // displays a city's name, properties, and associated data
-    static makeCard(city) {
+    makeCard(city) {
         const holder = document.querySelector("#card-holder");
 
         let div = document.createElement("div");
@@ -15,7 +22,7 @@ class HTMLGenerator {
         div.appendChild(image);
 
         div.appendChild(this.makeNodeWithText("h2", city["name"]));
-        let desc = com.getCity(city["name"]).show();
+        let desc = this.com.getCity(city["name"]).show();
         div.appendChild(this.makeNodeWithText("p", desc));
 
         let input = document.createElement("input");
@@ -37,26 +44,26 @@ class HTMLGenerator {
 
         holder.appendChild(div);
     }
-    static createCardsFromObj(obj) {
+    createCardsFromObj(obj) {
         const arr = obj;
         for (let i of arr) {
             this.makeCard(i);
         }
     }
-    static createCardsFromCommunity() {
-        const arr = com.cities;
+   createCardsFromCommunity() {
+        const arr = this.com.cities;
         for (let i of arr) {
             this.makeCard(i);
         }
     }
-    static makeNodeWithText(node, text) {
+    makeNodeWithText(node, text) {
         let el = document.createElement(node);
         let txt = document.createTextNode(text);
         el.appendChild(txt);
         return el;
     }
-    static updateCard(cityName) {
-        let info = com.getCity(cityName);
+    updateCard(cityName) {
+        let info = this.com.getCity(cityName);
         let card = [...cardHolder.children].filter(
             n => n.dataset.city === cityName
         )[0];
@@ -110,7 +117,7 @@ export class Fetcher {
         }
     }
     // See api.test.js in reference/src/api repo for detailed documentation
-    static async postData(url = "", data = {}) {
+    static async postData(url, data = {}) {
         const response = await fetch(url, {
             method: "POST",
             mode: "cors",
@@ -131,7 +138,6 @@ export class Fetcher {
     }
 }
 
-let com = new Community();
 
 async function initPage() {
     let serverInit = await Fetcher.requestFromServer();
@@ -147,80 +153,8 @@ async function initPage() {
             if (c.key > highest) highest = c.key;
         }
         com.currentKey = highest + 1;
-        HTMLGenerator.createCardsFromObj(serverInit);
+        HTMLGen.createCardsFromObj(serverInit);
     }
 }
+export const HTMLGen = new HTMLGenerator(com);
 initPage();
-
-const cardHolder = document.querySelector("#card-holder");
-cardHolder.addEventListener("click", e => {
-    if (e.target.className === "card-del-but") {
-        let city = com.deleteCity(e.target.parentElement.dataset.city);
-        Fetcher.delete(city);
-        cardHolder.removeChild(e.target.parentElement);
-    }
-    if (e.target.className === "card-add-but") {
-        updatePopulation(e);
-    }
-    if (e.target.className === "card-remove-but") {
-        updatePopulation(e, false);
-    }
-});
-
-function updatePopulation(e, movedIn = true) {
-    let card = e.target.parentElement;
-    let modify = card.querySelector("input").value;
-    card.querySelector("input").value = "";
-    if (modify === "" || Number(modify) <= 0) {
-        // number needed notice
-        console.log("Please enter a positive number");
-        return;
-    }
-    let city = com.getCity(card.dataset.city);
-    if (movedIn) {
-        city.movedIn(Number(modify));
-    } else {
-        city.movedOut(Number(modify));
-    }
-    Fetcher.updatePop(city);
-    HTMLGenerator.updateCard(card.dataset.city);
-}
-
-document.querySelector("#new-city-submit").addEventListener("click", () => {
-    const response = document.querySelector("#new-city-response");
-
-    let name = document.querySelector("#new-city-name").value;
-    let lat = document.querySelector("#new-city-lat").value;
-    let long = document.querySelector("#new-city-long").value;
-    let pop = document.querySelector("#new-city-pop").value;
-    if (name === "" || lat === "" || long === "" || pop === "") {
-        response.innerText = "Please enter all necessary data.";
-        return;
-    }
-    let attempt = com.createCity(name, Number(lat), Number(long), Number(pop));
-    if (typeof attempt === "string") {
-        response.innerText = attempt;
-    }
-    // otherwise, success. Update the server
-    Fetcher.addData(attempt)
-    response.innerText = `Successfully created your city '${name}'.`;
-    [...cardHolder.childNodes].forEach(n => n.remove()); // reset card holder
-    HTMLGenerator.createCardsFromCommunity();
-    // reset boxes, cache these somewhere
-    document.querySelector("#new-city-name").value = "";
-    document.querySelector("#new-city-lat").value = "";
-    document.querySelector("#new-city-long").value = "";
-    document.querySelector("#new-city-pop").value = "";
-});
-
-let communeResponse = document.querySelector("#cc-response");
-document.querySelector("#northernMost").addEventListener("click", () => {
-    communeResponse.innerText = `The northernmost city in this community is ${com.getMostNorthern()}.`;
-});
-
-document.querySelector("#southernMost").addEventListener("click", () => {
-    communeResponse.innerText = `The southernmost city in this community is ${com.getMostSouthern()}.`;
-});
-document.querySelector("#population").addEventListener("click", () => {
-    communeResponse.innerText = `The total population of all the cities combined is ${com.getPopulation()} citizens.`;
-});
