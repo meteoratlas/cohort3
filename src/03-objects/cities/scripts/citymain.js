@@ -63,6 +63,7 @@ export class HTMLGenerator {
         return el;
     }
     updateCard(cityName) {
+        const cardHolder = document.querySelector("#card-holder");
         let info = this.com.getCity(cityName);
         let card = [...cardHolder.children].filter(
             n => n.dataset.city === cityName
@@ -141,6 +142,7 @@ export class Fetcher {
 
 async function initPage() {
     let serverInit = await Fetcher.requestFromServer();
+    console.log(serverInit)
     if (serverInit.length == 0){
         // server is empty
     }
