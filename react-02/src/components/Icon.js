@@ -5,12 +5,14 @@ class Icon extends Component {
         super(props);
         this.state = {};
     }
-    onClickFunc = () =>{
-        this.props.callback(this.props.name, this.props.tab)
-    }
+    onClickFunc = () => {
+        this.props.callback(this.props.name, this.props.tab);
+    };
     render() {
         return (
-            <img width={"80px"} 
+            <img
+                className="icon"
+                width={"80px"}
                 alt={this.props.name}
                 src={this.props.pic}
                 onClick={this.onClickFunc}

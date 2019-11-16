@@ -16,7 +16,9 @@ class TicTacToeApp extends Component {
             computerPlayer: true,
             computerMark: "O", // or X
             playerMark: "X",
+            curPlayer: "X",
             xIsNext: true,
+            compIsNext: false,
             stepNumber: 0,
             gameStarted: true
         };
@@ -120,9 +122,11 @@ class TicTacToeApp extends Component {
             possibleMoves
         );
         let bestMove;
+
         // If computer, choose the highest possible score
-        if ("O" === this.state.computerMark) {
-            let max = Number.NEGATIVE_INFINITY;
+        if (this.state.curPlayer === this.state.computerMark) {
+            console.log("max me");
+            let max = Number.MIN_SAFE_INTEGER;
             for (let i = 0; i < possibleMoves.length; i++) {
                 if (possibleMoves[i].score > max) {
                     max = possibleMoves[i].score;
@@ -131,7 +135,8 @@ class TicTacToeApp extends Component {
             }
         } else {
             // If human, get lowest possible score
-            let min = Number.POSITIVE_INFINITY;
+            console.log("min me");
+            let min = Number.MAX_SAFE_INTEGER;
             for (let i = 0; i < possibleMoves.length; i++) {
                 if (possibleMoves[i].score < min) {
                     min = possibleMoves[i].score;
@@ -140,14 +145,16 @@ class TicTacToeApp extends Component {
             }
         }
         console.log(possibleMoves);
-        /*console.log(
+        console.log(
             "Play at: " +
                 possibleMoves[bestMove].index +
                 " Score:" +
                 possibleMoves[bestMove].score
-        );*/
-        return possibleMoves[bestMove];
+        );
+        let next = this.state.curPlayer === "X" ? "O" : "X";
+        this.setState({ curPlayer: next });
         console.log("--------------");
+        return possibleMoves[bestMove];
     }
     getEmptySquares(squares) {
         let result = [];
@@ -161,23 +168,28 @@ class TicTacToeApp extends Component {
         let board = curBoard.slice();
         let remainingMoves = this.getEmptySquares(board);
         let winner = calculateWinner(board);
-        if (winner === this.state.computerMark) {
-            return 10;
-        } else if (winner === this.state.playerMark) {
-            return -10;
-        } else if (winner === null && remainingMoves.length === 0) {
-            // tie game
-            return 0;
+        //console.log("winner: " + winner);
+        if (remainingMoves.length === 0) {
+            if (winner === this.state.computerMark) {
+                return 10;
+            } else if (winner === this.state.playerMark) {
+                return -10;
+            } else {
+                //if (winner === null && remainingMoves.length === 0) {
+                // tie game
+                return 0;
+            }
         }
 
         for (let i = 0; i < remainingMoves.length; i++) {
             let move = {};
             move.index = remainingMoves[i];
             board[remainingMoves[i]] = player;
+            //console.log(board);
 
             // we alternate players and simulate the next turn
             if (player === this.state.computerMark) {
-                let best = Number.NEGATIVE_INFINITY;
+                let best = Number.MIN_SAFE_INTEGER;
                 let result = Math.max(
                     this.minimax(
                         board,
@@ -190,9 +202,9 @@ class TicTacToeApp extends Component {
                 move.score = result - depth;
                 remainingMoves[i] = move.index;
                 passible.push(move);
-                return best;
+                return result; //best;
             } else {
-                let best = Number.POSITIVE_INFINITY;
+                let best = Number.MAX_SAFE_INTEGER;
                 let result = Math.min(
                     this.minimax(
                         board,
@@ -205,7 +217,7 @@ class TicTacToeApp extends Component {
                 move.score = result + depth;
                 remainingMoves[i] = move.index;
                 passible.push(move);
-                return best;
+                return result;
             }
         }
     }
