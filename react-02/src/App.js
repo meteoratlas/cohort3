@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Icon from "./components/Icon";
 import TicTacToeApp from "./components/tictactoe/TicTacToeApp";
+import DefaultApp from "./components/DefaultApp";
+import AccountsApp from "./components/accounts/AccountsApp";
 
 class App extends Component {
     constructor() {
@@ -10,7 +11,7 @@ class App extends Component {
         this.tabs = {
             DEFAULT: this.renderDefault,
             TICTACTOE: this.renderTicTacToe,
-            PLACEHOLDER1: this.renderDefault,
+            ACCOUNTS: this.renderAccounts,
             PLACEHOLDER2: this.renderDefault,
             PLACEHOLDER3: this.renderDefault
         };
@@ -26,26 +27,13 @@ class App extends Component {
         });
     };
     renderDefault = () => {
-        return (
-            <React.Fragment>
-                <p>The last icon clicked was {this.state.lastIcon}.</p>
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </React.Fragment>
-        );
+        return <DefaultApp lastIcon={this.state.lastIcon} />;
     };
     renderTicTacToe = () => {
         return <TicTacToeApp />;
+    };
+    renderAccounts = () => {
+        return <AccountsApp />;
     };
     render() {
         return (
@@ -65,7 +53,7 @@ class App extends Component {
                 <Icon
                     pic="coins.svg"
                     name="accounts"
-                    tab="PLACEHOLDER1"
+                    tab="ACCOUNTS"
                     callback={this.reportIconClicked}
                 />
                 <Icon
