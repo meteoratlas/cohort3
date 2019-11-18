@@ -37,7 +37,7 @@ class App extends Component {
     };
     render() {
         return (
-            <div className="App">
+            <div className="App .wobble-hor-bottom">
                 <Icon
                     pic="house.svg"
                     name="home"
