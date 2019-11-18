@@ -9,15 +9,13 @@ class AccountManager extends Component {
             newAccountBalance: ""
         };
     }
-    updateAccount = (acc, amt) => {
-        // Update the balance state of the selected account here
-    };
     handleInputChange = e => {
         this.setState({
             [e.target.name]: e.target.value
         });
     };
     createAccount = () => {
+        // reset form fields
         this.setState({
             newAccountName: "",
             newAccountBalance: ""

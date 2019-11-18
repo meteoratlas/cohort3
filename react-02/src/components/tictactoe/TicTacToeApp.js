@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./index.css";
 import Board from "./Board";
 import NewGame from "./NewGame";
+import minimax from "./minimax";
 
 class TicTacToeApp extends Component {
     constructor(props) {
@@ -35,7 +36,6 @@ class TicTacToeApp extends Component {
         }
     }
     handleClick(i) {
-        console.clear();
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
         let current = history[history.length - 1];
         const squares = current.squares.slice();
@@ -58,48 +58,16 @@ class TicTacToeApp extends Component {
             this.AIChooseMove
         );
     }
-    AILookForWinOrBlock(squares) {
-        const history = this.state.history;
-        const current = history[this.state.stepNumber];
-        const lines = [
-            [0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8],
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-            [0, 4, 8],
-            [2, 4, 6]
-        ];
-
-        for (let i = 0; i < lines.length; i++) {
-            // check for win or block
-            let markedSpaces = [];
-            let lastNull;
-            let yourMark = "X";
-            for (let j = 0; j < lines[i].length; j++) {
-                let pos = lines[i][j];
-                if (squares[pos] !== null) {
-                    markedSpaces.push(squares[pos]);
-                } else {
-                    lastNull = pos;
-                }
-            }
-
-            if (markedSpaces.length !== 2) {
-                // there was more than 1 empty, or the whole line is full
-                continue;
-            } else {
-                if (markedSpaces[0] === markedSpaces[1]) {
-                    // Whether this is a mandatory block or a win,
-                    // we have to mark the last spot in this direction.
-                    squares[lastNull] = "O"; //this.state.xIsNext ? "X" : "O";
-                    return;
-                }
-            }
-        }
-        /*
-        squares[rand] = "O";
+    AIChooseMove() {
+        const history = this.state.history.slice(0, this.state.stepNumber + 1);
+        let current = history[history.length - 1];
+        let squares = current.squares.slice();
+        if (minimax.noMovesLeft(squares)) return;
+        let choice = minimax.findBestMove(
+            current.squares,
+            this.state.xIsNext === this.state.compIsX
+        );
+        squares[choice] = this.state.xIsNext === this.state.compIsX ? "X" : "O";
         this.setState({
             history: history.concat([
                 {
@@ -108,120 +76,8 @@ class TicTacToeApp extends Component {
             ]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext
-        });*/
+        });
     }
-    AIChooseMove() {
-        const history = this.state.history.slice(0, this.state.stepNumber + 1);
-        let current = history[history.length - 1];
-        let possibleMoves = [];
-
-        this.minimax(
-            current.squares,
-            this.state.computerMark,
-            0,
-            possibleMoves
-        );
-        let bestMove;
-
-        // If computer, choose the highest possible score
-        if (this.state.curPlayer === this.state.computerMark) {
-            console.log("max me");
-            let max = Number.MIN_SAFE_INTEGER;
-            for (let i = 0; i < possibleMoves.length; i++) {
-                if (possibleMoves[i].score > max) {
-                    max = possibleMoves[i].score;
-                    bestMove = i;
-                }
-            }
-        } else {
-            // If human, get lowest possible score
-            console.log("min me");
-            let min = Number.MAX_SAFE_INTEGER;
-            for (let i = 0; i < possibleMoves.length; i++) {
-                if (possibleMoves[i].score < min) {
-                    min = possibleMoves[i].score;
-                    bestMove = i;
-                }
-            }
-        }
-        console.log(possibleMoves);
-        console.log(
-            "Play at: " +
-                possibleMoves[bestMove].index +
-                " Score:" +
-                possibleMoves[bestMove].score
-        );
-        let next = this.state.curPlayer === "X" ? "O" : "X";
-        this.setState({ curPlayer: next });
-        console.log("--------------");
-        return possibleMoves[bestMove];
-    }
-    getEmptySquares(squares) {
-        let result = [];
-        for (let s = 0; s < squares.length; s++) {
-            if (squares[s] === null) result.push(s);
-        }
-        return result;
-    }
-    // pass current.squares as board
-    minimax(curBoard, player, depth, passible) {
-        let board = curBoard.slice();
-        let remainingMoves = this.getEmptySquares(board);
-        let winner = calculateWinner(board);
-        //console.log("winner: " + winner);
-        if (remainingMoves.length === 0) {
-            if (winner === this.state.computerMark) {
-                return 10;
-            } else if (winner === this.state.playerMark) {
-                return -10;
-            } else {
-                //if (winner === null && remainingMoves.length === 0) {
-                // tie game
-                return 0;
-            }
-        }
-
-        for (let i = 0; i < remainingMoves.length; i++) {
-            let move = {};
-            move.index = remainingMoves[i];
-            board[remainingMoves[i]] = player;
-            //console.log(board);
-
-            // we alternate players and simulate the next turn
-            if (player === this.state.computerMark) {
-                let best = Number.MIN_SAFE_INTEGER;
-                let result = Math.max(
-                    this.minimax(
-                        board,
-                        this.state.playerMark,
-                        depth + 1,
-                        passible
-                    ),
-                    best
-                );
-                move.score = result - depth;
-                remainingMoves[i] = move.index;
-                passible.push(move);
-                return result; //best;
-            } else {
-                let best = Number.MAX_SAFE_INTEGER;
-                let result = Math.min(
-                    this.minimax(
-                        board,
-                        this.state.computerMark,
-                        depth + 1,
-                        passible
-                    ),
-                    best
-                );
-                move.score = result + depth;
-                remainingMoves[i] = move.index;
-                passible.push(move);
-                return result;
-            }
-        }
-    }
-
     render() {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
@@ -239,6 +95,8 @@ class TicTacToeApp extends Component {
         let status;
         if (winner) {
             status = "Winner: " + winner;
+        } else if (this.state.stepNumber === 9) {
+            status = "It's a tie.";
         } else {
             status = "Next player: " + (this.state.xIsNext ? "X" : "O");
         }
@@ -287,22 +145,4 @@ function calculateWinner(squares) {
         }
     }
     return null;
-}
-
-function AIFirstMove(squares) {
-    let yourMark = "X";
-    const perfectPlayer = true;
-    if (perfectPlayer) {
-        // place mark in centre
-        //squares[4] = yourMark;
-        console.log("Move at 4");
-    } else {
-        const corners = [0, 2, 4, 6, 8];
-        //squares[choose(corners)] = yourMark;
-        console.log("Move at: " + squares[choose(corners)]);
-    }
-}
-
-function choose(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
 }
