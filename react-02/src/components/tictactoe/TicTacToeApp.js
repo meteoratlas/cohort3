@@ -27,8 +27,9 @@ class TicTacToeApp extends Component {
             {
                 gameStarted: true,
                 computerPlayer: mode === "true" ? true : false,
-                compIsNext: playerFirst === "false" ? true : false,
-                xIsNext: false
+                compIsNext: playerFirst === "false" ? true : false
+                // this next line causes trouble
+                //xIsNext: this.state.compIsNext ? true : false // !this.state.xIsNext
             },
             () => {
                 if (this.state.computerPlayer && this.state.compIsNext) {

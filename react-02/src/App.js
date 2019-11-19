@@ -12,8 +12,9 @@ class App extends Component {
             DEFAULT: this.renderDefault,
             TICTACTOE: this.renderTicTacToe,
             ACCOUNTS: this.renderAccounts,
-            PLACEHOLDER2: this.renderDefault,
-            PLACEHOLDER3: this.renderDefault
+            CITY: this.renderDefault,
+            LINKEDLIST: this.renderDefault,
+            STACKQUEUE: this.renderDefault
         };
         this.state = {
             lastIcon: "nothing",
@@ -59,13 +60,19 @@ class App extends Component {
                 <Icon
                     pic="city.svg"
                     name="city"
-                    tab="PLACEHOLDER2"
+                    tab="CITY"
                     callback={this.reportIconClicked}
                 />
                 <Icon
-                    pic="book.png"
-                    name="book"
-                    tab="PLACEHOLDER3"
+                    pic="chain.svg"
+                    name="linkedlist"
+                    tab="LINKEDLIST"
+                    callback={this.reportIconClicked}
+                />
+                <Icon
+                    pic="stack.svg"
+                    name="stackqueue"
+                    tab="STACKQUEUE"
                     callback={this.reportIconClicked}
                 />
                 <header className="App-header">
