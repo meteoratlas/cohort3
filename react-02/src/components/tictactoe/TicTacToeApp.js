@@ -29,7 +29,7 @@ class TicTacToeApp extends Component {
                 computerPlayer: mode === "true" ? true : false,
                 compIsNext: playerFirst === "false" ? true : false
                 // this next line causes trouble
-                //xIsNext: this.state.compIsNext ? true : false // !this.state.xIsNext
+                //xIsNext: !this.state.xIsNext
             },
             () => {
                 if (this.state.computerPlayer && this.state.compIsNext) {
@@ -63,7 +63,6 @@ class TicTacToeApp extends Component {
                     }
                 ]),
                 stepNumber: history.length,
-                // AI Test
                 xIsNext: !this.state.xIsNext
             },
             () => {
@@ -82,7 +81,8 @@ class TicTacToeApp extends Component {
             current.squares,
             this.state.xIsNext === this.state.compIsX
         );
-        squares[choice] = this.state.xIsNext === this.state.compIsX ? "X" : "O";
+        squares[choice] = this.state.xIsNext ? "X" : "O";
+        //this.state.xIsNext === this.state.compIsNext ? "X" : "O";
         this.setState({
             history: history.concat([
                 {
@@ -91,6 +91,7 @@ class TicTacToeApp extends Component {
             ]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext
+            //compIsNext: !this.state.compIsNext
         });
     }
     render() {
