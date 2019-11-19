@@ -7,33 +7,44 @@ import minimax from "./minimax";
 class TicTacToeApp extends Component {
     constructor(props) {
         super(props);
+        this.defaultState = {};
         this.state = {
             history: [
                 {
                     squares: Array(9).fill(null)
                 }
             ],
-            computersTurn: false,
             computerPlayer: true,
-            computerMark: "O", // or X
-            playerMark: "X",
-            curPlayer: "X",
             xIsNext: true,
             compIsNext: false,
             stepNumber: 0,
-            gameStarted: true
+            gameStarted: false
         };
+        this.defaultState = this.state;
     }
+    startGame = (mode, playerFirst) => {
+        this.setState(
+            {
+                gameStarted: true,
+                computerPlayer: mode === "true" ? true : false,
+                compIsNext: playerFirst === "false" ? true : false,
+                xIsNext: false
+            },
+            () => {
+                if (this.state.computerPlayer && this.state.compIsNext) {
+                    this.AIChooseMove();
+                }
+            }
+        );
+    };
+    resetGame = () => {
+        this.setState(this.defaultState);
+    };
     jumpTo(step) {
         this.setState({
             stepNumber: step,
             xIsNext: step % 2 === 0
         });
-    }
-    componentDidMount() {
-        if (this.state.computersTurn && this.state.stepNumber === 0) {
-            // AI takes first turn
-        }
     }
     handleClick(i) {
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
@@ -42,7 +53,6 @@ class TicTacToeApp extends Component {
         if (calculateWinner(squares) || squares[i]) {
             return;
         }
-        // AI Test
         squares[i] = this.state.xIsNext ? "X" : "O";
         this.setState(
             {
@@ -55,7 +65,11 @@ class TicTacToeApp extends Component {
                 // AI Test
                 xIsNext: !this.state.xIsNext
             },
-            this.AIChooseMove
+            () => {
+                if (this.state.computerPlayer) {
+                    this.AIChooseMove();
+                }
+            }
         );
     }
     AIChooseMove() {
@@ -100,10 +114,11 @@ class TicTacToeApp extends Component {
         } else {
             status = "Next player: " + (this.state.xIsNext ? "X" : "O");
         }
-        let newGame = this.state.gameStarted ? null : <NewGame />;
-        return (
+        let newGame = this.state.gameStarted ? null : (
+            <NewGame startGame={this.startGame} />
+        );
+        let gameBoard = (
             <React.Fragment>
-                {newGame}
                 <div className="game">
                     <div className="game-board">
                         <Board
@@ -116,6 +131,15 @@ class TicTacToeApp extends Component {
                         <ol>{moves}</ol>
                     </div>
                 </div>
+                <br />
+                <br />
+                <button onClick={this.resetGame}>Reset Game</button>
+            </React.Fragment>
+        );
+        return (
+            <React.Fragment>
+                {newGame}
+                {this.state.gameStarted ? gameBoard : null}
             </React.Fragment>
         );
     }

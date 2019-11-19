@@ -1,5 +1,7 @@
 const minimax = {
     COUNT: 0,
+    MAX_INT: Number.MAX_SAFE_INTEGER,
+    MIN_INT: Number.MIN_SAFE_INTEGER,
     // borrowed a lot of this from SC, then simplified some functions & added alpha-beta pruning
     findBestMove(board, compIsNextX) {
         this.COUNT = 0;
@@ -7,9 +9,7 @@ const minimax = {
             return;
         }
         let bestMove = null;
-        let bestVal = compIsNextX
-            ? Number.MIN_SAFE_INTEGER
-            : Number.MAX_SAFE_INTEGER;
+        let bestVal = compIsNextX ? this.MIN_INT : this.MAX_INT;
         for (let i = 0; i < board.length; i += 1) {
             if (board[i] === null) {
                 board[i] = compIsNextX ? "X" : "O";
@@ -28,7 +28,11 @@ const minimax = {
                 }
             }
         }
-        // uncomment the following to lazily measure recursive performance; AB pruning saves a large amount of minimax calls, particularly when the board is largely empty (decreasing gains as board is filled).
+        // uncomment the following to lazily measure recursive performance;
+        //AB pruning saves a large amount of minimax calls,
+        //particularly when the board is largely empty
+        //(decreasing gains as board is filled).
+
         //console.log(this.COUNT);
         return bestMove;
     },
@@ -36,8 +40,8 @@ const minimax = {
         board,
         depth,
         compIsNext,
-        alpha = Number.MIN_SAFE_INTEGER,
-        beta = Number.MAX_SAFE_INTEGER
+        alpha = this.MIN_INT,
+        beta = this.MAX_INT
     ) {
         this.COUNT++;
         // check the current score
@@ -48,7 +52,7 @@ const minimax = {
         if (minimax.noMovesLeft(board)) return 0;
         // X is maximazer and X is computer
         if (compIsNext) {
-            let best = Number.MIN_SAFE_INTEGER;
+            let best = this.MIN_INT;
             for (let i = 0; i < board.length; i += 1) {
                 // loop through board, find empty spots
                 if (board[i] === null) {
@@ -72,7 +76,7 @@ const minimax = {
             }
             return best;
         } else {
-            let best = Number.MAX_SAFE_INTEGER;
+            let best = this.MAX_INT;
             for (let i = 0; i < board.length; i += 1) {
                 // loop through board, find empty spots
                 if (board[i] === null) {
