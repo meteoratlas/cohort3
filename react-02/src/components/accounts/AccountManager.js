@@ -17,23 +17,23 @@ class AccountManager extends Component {
     };
     handleInputChange = e => {
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            response: ""
         });
     };
     findHighestOrLowest = hiOrLo => {
-        console.log("call");
         if (this.props.accounts.length === 0) {
             this.respond("You have no accounts.");
             return;
         }
         if (this.props.accounts.length === 1) {
-            let acc = this.state.accounts[0].name;
+            let acc = this.props.accounts[0].name;
             this.respond(
                 `Your ${hiOrLo} value account is ${acc.name}, containing $${acc.funds}.`
             );
         }
-        let baseline = this.state.accounts[0];
-        this.state.accounts.forEach(n => {
+        let baseline = this.props.accounts[0];
+        this.props.accounts.forEach(n => {
             if (hiOrLo === "highest") {
                 if (n.funds > baseline.funds) {
                     baseline = n;
@@ -51,10 +51,11 @@ class AccountManager extends Component {
     sumAccounts = () => {
         if (this.props.accounts.length === 0) {
             this.respond("You have no accounts.");
+            return;
         }
         if (this.props.accounts.length === 1) {
             this.respond(
-                `The total sum of all your accounts is $${this.accounts[0].funds}.`
+                `The total sum of all your accounts is $${this.props.accounts[0].funds}.`
             );
             return;
         }
@@ -66,25 +67,30 @@ class AccountManager extends Component {
             this.respond("Please enter a name for your new account.");
             return;
         }
-        if (this.state.newAccountBalance <= 0) {
+        let n = parseFloat(this.state.newAccountBalance);
+        if (n <= 0 || isNaN(n)) {
             this.respond("Your account must have more than $0.00.");
             return;
         }
-        if (
-            this.state.accounts.forEach(a => {
+        if (this.props.accounts.length > 0) {
+            this.props.accounts.forEach(a => {
                 if (a.name === this.state.newAccountName) {
                     this.respond(
                         `An account with the name ${a.name} already exists.`
                     );
                     return;
                 }
-            })
-        )
-            // Check to ensure the input is good, then call the passed callback
-            this.props.callback(
-                this.state.newAccountName,
-                this.state.newAccountBalance
-            );
+            });
+        }
+
+        // Check to ensure the input is good, then call the passed callback
+        this.props.callback(
+            this.state.newAccountName,
+            this.state.newAccountBalance
+        );
+        this.respond(
+            `Your new account (${this.state.newAccountName}) was created successfully.`
+        );
         // reset form fields
         this.setState({
             newAccountName: "",
@@ -117,6 +123,9 @@ class AccountManager extends Component {
                 </button>
                 <button onClick={() => this.findHighestOrLowest("lowest")}>
                     Find Lowest Value Account
+                </button>
+                <button onClick={this.sumAccounts}>
+                    Find Value of All Accounts
                 </button>
                 <br />
                 <br />
