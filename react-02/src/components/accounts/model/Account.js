@@ -47,7 +47,10 @@ export class AccountController {
     }
     addAccount(name, funds) {
         const toAdd = new Account(name, funds);
+        /* In react, state is immutable, so we create a new array instead
         this.accounts.push(toAdd);
+        */
+        this.accounts = [...this.accounts, toAdd];
         return toAdd;
     }
     removeAccount(name) {

@@ -45,6 +45,8 @@ class AccountCard extends Component {
     render() {
         return (
             <div className="account-card">
+                <h2>ACCOUNT NAME</h2>
+                <h3>ACCOUNT BALANCE</h3>
                 <input
                     type="number"
                     value={this.state.inputFieldValue}
@@ -53,6 +55,7 @@ class AccountCard extends Component {
                 <button onClick={this.onWithdrawClicked}>Withdraw</button>
                 <button>Deposit</button>
                 <p>{this.state.resultText}</p>
+                <button>Delete Account</button>
             </div>
         );
     }
