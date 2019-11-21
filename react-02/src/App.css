@@ -46,15 +46,21 @@
 /*
 Accounts
 */
-.card-holder {
+#card-holder {
     display: flex;
+    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
 .account-card {
+    box-sizing: border-box;
+    margin: 2% 1% 1% 0;
     background: whitesmoke;
     color: #223;
-    width: 50%;
+    min-width: 240px;
+    max-width: 340px;
+    padding: 2%;
+    box-shadow: 5px 5px;
 }
 
 /**

@@ -72,17 +72,18 @@ class AccountManager extends Component {
             this.respond("Your account must have more than $0.00.");
             return;
         }
+        let reserved = false;
         if (this.props.accounts.length > 0) {
             this.props.accounts.forEach(a => {
                 if (a.name === this.state.newAccountName) {
-                    this.respond(
-                        `An account with the name ${a.name} already exists.`
-                    );
-                    return;
+                    reserved = true;
                 }
             });
         }
-
+        if (reserved) {
+            this.respond(`An account with that name already exists.`);
+            return;
+        }
         // Check to ensure the input is good, then call the passed callback
         this.props.callback(
             this.state.newAccountName,
