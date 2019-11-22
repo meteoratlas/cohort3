@@ -1,12 +1,25 @@
 const daily = {
     // ***
+    // Callback Exercise (Part 2) - November 21, 2019
+    // ***
+    getABBCDemographics(arr) {
+        const totalAges = arr.reduce((acc, i) => acc + i.age, 0);
+        let obj = {
+            totalAges: totalAges,
+            averageAge: totalAges / arr.length,
+            totalPopulation: arr.length
+        };
+        return obj;
+    },
+    // ***
     // Callback Exercise (Part 1) - November 8, 2019
     // ***
 
-    filterAlbertaAndBCResidents(arr, callback){
+    filterAlbertaAndBCResidents(arr, callback) {
         let BCABResidents = [];
         for (let o of arr) {
-            if (o.province == "BC" || o.province == "AB") BCABResidents.push(callback(o));
+            if (o.province == "BC" || o.province == "AB")
+                BCABResidents.push(callback(o));
         }
         return BCABResidents;
     },
@@ -26,10 +39,10 @@ const daily = {
     // ***
     // More Array Exercises - October 29, 2019
     // ***
-    getTotalBalances(staff){
-        return staff.map(n => n["balance"]).reduce((a,n) => a + n);
+    getTotalBalances(staff) {
+        return staff.map(n => n["balance"]).reduce((a, n) => a + n);
     },
-    getAverageBalances(staff){
+    getAverageBalances(staff) {
         return this.getTotalBalances(staff) / staff.length;
     },
 
@@ -37,30 +50,30 @@ const daily = {
     // loopStaff each / map - October 25, 2019
     // ***
 
-    loopStaffForEach(staff){
+    loopStaffForEach(staff) {
         let result = [];
-        staff.forEach((n)=>{
+        staff.forEach(n => {
             result.push(daily.makeEmailObj(n));
         });
         return result;
     },
 
-    loopStaffMap(staff){
-        return staff.map((n) => daily.makeEmailObj(n));
+    loopStaffMap(staff) {
+        return staff.map(n => daily.makeEmailObj(n));
     },
 
     // ***
     // loopStaff: in / of - October 24, 2019
     // ***
 
-    loopStaffIn(staff){
+    loopStaffIn(staff) {
         let result = [];
-        for (let i in staff){
+        for (let i in staff) {
             result.push(daily.makeEmailObj(staff[i]));
-        } 
+        }
         return result;
     },
-    loopStaffOf(staff){
+    loopStaffOf(staff) {
         return this.loopStaff(staff);
     },
 
@@ -68,9 +81,9 @@ const daily = {
     // loopStaff - October 21, 2019
     // ***
 
-    loopStaff:(data)=>{
+    loopStaff: data => {
         let emails = [];
-        for (let i of data){
+        for (let i of data) {
             emails.push(daily.makeEmailObj(i));
         }
         return emails;
@@ -79,71 +92,71 @@ const daily = {
     // ***
     // More Array Work - October 16-17
     // ***
-    arraySlice:(array, begin, end)=>{
+    arraySlice: (array, begin, end) => {
         return array.slice(begin, end);
     },
-    arraySplice:(array, begin, end, content)=>{
+    arraySplice: (array, begin, end, content) => {
         array.splice(begin, end, content);
         return array;
     },
-    arrayForEach:(array) => {
+    arrayForEach: array => {
         var count = 0;
-        array.forEach(function(i){
+        array.forEach(function(i) {
             count += i;
-        });  
+        });
         return count;
     },
-    arrayMap:(array, func) => {
+    arrayMap: (array, func) => {
         return array.map(func);
     },
-    arrayReduce:(array, func) => {
+    arrayReduce: (array, func) => {
         return array.reduce(func);
     },
-    arrayFilter:(array, filter) => {
+    arrayFilter: (array, filter) => {
         return array.filter(filter);
     },
-    arraySort:(array, sort) => {
+    arraySort: (array, sort) => {
         return array.sort(sort);
     },
 
     // ***
-    // Prepare for Array Work - October 15, 2019 
+    // Prepare for Array Work - October 15, 2019
     // ***
-    arrayForLoop:(array) => {
+    arrayForLoop: array => {
         // sum all the numbers in an array and return it.
         let n = 0;
-        for (let i = 0; i < array.length; i++){
+        for (let i = 0; i < array.length; i++) {
             n += array[i];
         }
         return n;
     },
-    arrayWhileLoop:(array) => {
+    arrayWhileLoop: array => {
         // sum all the numbers in an array and return it.
         let n = 0;
         let i = 0;
-        while (i < array.length){
+        while (i < array.length) {
             n += array[i];
             i++;
         }
         return n;
     },
-    arrayDoWhileLoop:(array) => {
+    arrayDoWhileLoop: array => {
         let n = 0;
         let i = 0;
         do {
-            n += array[i]; 
+            n += array[i];
             i++;
         } while (i < array.length);
         return n;
     },
-    arrayForInLoop:(array) => {
+    arrayForInLoop: array => {
         let n = 0;
         for (let i in array) {
             n += array[i];
         }
         return n;
     },
-    arrayForOfLoop:(array) => {
+    arrayForOfLoop: array => {
         let n = 0;
         for (let i of array) {
             n += i;
@@ -155,29 +168,42 @@ const daily = {
     // makeEmailObj - Oct 11, 2019
     // ***
 
-    makeEmailObj:(obj) => {
-        return `${obj['fname'].toLowerCase()}.${obj['lname'].toLowerCase()}@evolveu.ca`;
+    makeEmailObj: obj => {
+        return `${obj["fname"].toLowerCase()}.${obj[
+            "lname"
+        ].toLowerCase()}@evolveu.ca`;
     },
 
     // ***
     // makeEmailArr - October 9, 2019
     // ***
-    makeEmailArr:(array) => {
-        return array[0].toLowerCase() + "." + array[1].toLowerCase() + "@evolveu.ca";
+    makeEmailArr: array => {
+        return (
+            array[0].toLowerCase() +
+            "." +
+            array[1].toLowerCase() +
+            "@evolveu.ca"
+        );
     },
 
     // ***
     // AssertEquals - October 7, 2019
     // ***
-    assertEquals: ((a,b) => {
+    assertEquals: (a, b) => {
         if (a === b) {
             return true;
         }
-        console.log("*** the two values are not the same:\n" + "p1--> " + a + "\np2--> " + b);
+        /*
+        console.log(
+            "*** the two values are not the same:\n" +
+                "p1--> " +
+                a +
+                "\np2--> " +
+                b
+        );*/
         return false;
-    }),
-    
-}
+    }
+};
 
 // and before this comment ---
 /*
