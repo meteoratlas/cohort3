@@ -1,5 +1,14 @@
 const daily = {
     // ***
+    // Three functions - November 22, 2019
+    // ***
+    sortFruitAlphabetical(a, b) {
+        if (a.str > b.str) return 1;
+        else if (b.str > a.str) return -1;
+        return 0;
+    },
+
+    // ***
     // Callback Exercise (Part 2) - November 21, 2019
     // ***
     getABBCDemographics(arr) {

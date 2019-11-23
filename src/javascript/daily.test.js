@@ -1,6 +1,40 @@
 import daily from "./daily";
 
 // ***
+// Three functions - November 22, 2019
+// ***
+
+test("Three functions to sort", () => {
+    let myArray = [
+        { num: 5, str: "apples", origin: "BC" },
+        { num: 7, str: "oranges", origin: "Florida" },
+        { num: 2, str: "lemons", origin: "Mexico" },
+        { num: 8, str: "bananas", origin: "Ecuador" },
+        { num: 6, str: "avocados", origin: "Mexico" },
+        { num: 4, str: "pineapple", origin: "Brazil" },
+        { num: 3, str: "blueberries", origin: "Chile" },
+        { num: 9, str: "pears", origin: "Oregon" },
+        { num: 1, str: "cantaloupe", origin: "California" }
+    ];
+
+    // anonymous function
+    myArray.sort(function(a, b) {
+        return a.num - b.num;
+    });
+    //console.log("myArray = ", myArray);
+
+    // named function
+    myArray.sort(daily.sortFruitAlphabetical);
+    //console.log("myArray = ", myArray);
+
+    // arrow function
+    myArray.sort((a, b) =>
+        a.origin > b.origin ? 1 : b.origin > a.origin ? -1 : 0
+    );
+    //console.log("myArray = ", myArray);
+});
+
+// ***
 // Callback Exercise (Part 2) - November 21, 2019
 // ***
 
@@ -23,7 +57,7 @@ test("same filter, function to map to object", () => {
     daily.filterAlbertaAndBCResidents(people, cb);
     expect(daily.getABBCDemographics(newArr)).toStrictEqual({
         totalAges: 838,
-        averageAge: 838 / 22, //38.09090909090909,
+        averageAge: 838 / 22,
         totalPopulation: 22
     });
 });
