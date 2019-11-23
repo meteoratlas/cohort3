@@ -21,16 +21,39 @@ test("Three functions to sort", () => {
     myArray.sort(function(a, b) {
         return a.num - b.num;
     });
+    expect(myArray.map(i => i.num)).toStrictEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     //console.log("myArray = ", myArray);
 
     // named function
     myArray.sort(daily.sortFruitAlphabetical);
+    expect(myArray.map(i => i.str)).toStrictEqual([
+        "apples",
+        "avocados",
+        "bananas",
+        "blueberries",
+        "cantaloupe",
+        "lemons",
+        "oranges",
+        "pears",
+        "pineapple"
+    ]);
     //console.log("myArray = ", myArray);
 
     // arrow function
     myArray.sort((a, b) =>
-        a.origin > b.origin ? 1 : b.origin > a.origin ? -1 : 0
+        a.origin > b.origin ? -1 : b.origin > a.origin ? 1 : 0
     );
+    expect(myArray.map(i => i.origin)).toStrictEqual([
+        "Oregon",
+        "Mexico",
+        "Mexico",
+        "Florida",
+        "Ecuador",
+        "Chile",
+        "California",
+        "Brazil",
+        "BC"
+    ]);
     //console.log("myArray = ", myArray);
 });
 
