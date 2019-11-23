@@ -11,6 +11,20 @@ class AccountCard extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
     componentDidMount() {}
+    onDepositClicked = () => {
+        let value = this.isValidInput(this.state.inputFieldValue);
+        if (!value || value <= 0) {
+            this.setState({
+                resultText: "Please enter a valid amount to withdraw."
+            });
+            return;
+        }
+        this.props.depositCallback(this.props.account.UID, value);
+        this.setState({
+            inputFieldValue: "",
+            resultText: `Successfully deposited $${value} into this account.`
+        });
+    };
     onWithdrawClicked = () => {
         let value = this.isValidInput(this.state.inputFieldValue);
         if (!value || value <= 0) {
@@ -31,6 +45,9 @@ class AccountCard extends Component {
             inputFieldValue: "",
             resultText: `Successfully withdrew $${value} from this account.`
         });
+    };
+    onDeleteClicked = () => {
+        this.props.deleteCallback(this.state.account.UID);
     };
     isValidInput(input) {
         if (isNaN(input) || typeof input === "undefined" || input === "") {
@@ -53,9 +70,9 @@ class AccountCard extends Component {
                 ></input>
                 <br />
                 <button onClick={this.onWithdrawClicked}>Withdraw</button>
-                <button>Deposit</button>
+                <button onClick={this.onDepositClicked}>Deposit</button>
                 <p>{this.state.resultText}</p>
-                <button>Delete Account</button>
+                <button onClick={this.onDeleteClicked}>Delete Account</button>
             </div>
         );
     }

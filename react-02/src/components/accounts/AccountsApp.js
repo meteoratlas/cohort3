@@ -29,6 +29,8 @@ class AccountsApp extends Component {
                     key={a.UID}
                     account={a}
                     withdrawCallback={this.withdrawFunds}
+                    depositCallback={this.depositFunds}
+                    deleteCallback={this.deleteAccount}
                 ></AccountCard>
             );
         });
@@ -52,9 +54,20 @@ class AccountsApp extends Component {
             )
         }));
     };
-    depositFunds(acc, toDeposit) {
-        acc.deposit(toDeposit);
-    }
+    depositFunds = (accID, toDeposit) => {
+        this.setState(prevState => ({
+            accounts: prevState.accounts.map(a =>
+                a.UID === accID ? { ...a, funds: a.funds + toDeposit } : a
+            )
+        }));
+    };
+    deleteAccount = index => {
+        let newArr = this.state.accounts.concat();
+        // use id to get the relevant account
+        //let i = newArr.reduce(uid )
+        newArr.splice(index, 1);
+        this.setState(prevState => ({ accounts: newArr }));
+    };
     render() {
         const cards =
             this.state.accounts.length > 0
