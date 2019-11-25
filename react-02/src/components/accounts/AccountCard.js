@@ -47,7 +47,7 @@ class AccountCard extends Component {
         });
     };
     onDeleteClicked = () => {
-        this.props.deleteCallback(this.state.account.UID);
+        this.props.deleteCallback(this.props.account.UID);
     };
     isValidInput(input) {
         if (isNaN(input) || typeof input === "undefined" || input === "") {

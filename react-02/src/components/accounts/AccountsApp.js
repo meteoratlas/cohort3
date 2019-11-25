@@ -62,9 +62,8 @@ class AccountsApp extends Component {
     };
     deleteAccount = index => {
         let newArr = this.state.accounts.concat();
-        // use id to get the relevant account
-        //let i = newArr.reduce(uid )
-        newArr.splice(index, 1);
+        let acc = newArr.filter(a => a["UID"] === index)[0];
+        newArr.splice(newArr.indexOf(acc), 1);
         this.setState(prevState => ({ accounts: newArr }));
     };
     render() {
