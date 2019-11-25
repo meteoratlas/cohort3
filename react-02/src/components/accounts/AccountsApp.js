@@ -47,7 +47,6 @@ class AccountsApp extends Component {
         return null;
     }
     withdrawFunds = (accID, toWithdraw) => {
-        //https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react/43639228
         this.setState(prevState => ({
             accounts: prevState.accounts.map(a =>
                 a.UID === accID ? { ...a, funds: a.funds - toWithdraw } : a

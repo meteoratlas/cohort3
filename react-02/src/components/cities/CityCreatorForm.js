@@ -24,29 +24,22 @@ class CityCreatorForm extends Component {
         });
     };
     createCity = () => {
-        // TODO: condense this
-        if (!this.state.newCityName) {
-            this.setState({ response: "Please enter a name for your city." });
-            return;
+        // Evaluate form input
+        const ref = {
+            newCityName: "name",
+            newCityLat: "latitude",
+            newCityLong: "longitude",
+            newCityPop: "population"
+        };
+        for (let key of Object.keys(ref)) {
+            if (!this.state[key]) {
+                this.setState({
+                    response: `Please enter a ${ref[key]} for your city.`
+                });
+                return;
+            }
         }
-        if (!this.state.newCityLat) {
-            this.setState({
-                response: "Please enter a latitude for your city."
-            });
-            return;
-        }
-        if (!this.state.newCityLong) {
-            this.setState({
-                response: "Please enter a longitude for your city."
-            });
-            return;
-        }
-        if (!this.state.newCityPop) {
-            this.setState({
-                response: "Please enter a population for your city."
-            });
-            return;
-        }
+
         // Check for name dup, key, write to server here
 
         // creation successful, reset form
