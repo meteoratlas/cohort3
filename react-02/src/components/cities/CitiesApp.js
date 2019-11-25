@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import CityCreatorForm from "./CityCreatorForm";
+import { City } from "./model/city";
 
 class CitiesApp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            serverOkay: true
+            serverOkay: true,
+            maxKey: 0,
+            cities: []
         };
     }
     serverStatus() {
@@ -19,6 +22,29 @@ class CitiesApp extends Component {
             </p>
         );
     }
+    componentDidMount() {
+        fetch(this.getURL("all"))
+            .then(response => response.json())
+            .then(data => this.setState({ cities: data }, this.findHighestKey));
+
+        // test
+        /*
+        this.addNewCity(new City("TEST", 23, 32, 213, 0));
+        this.addNewCity(new City("TEST2", 2, -6, 22334, 1));
+        this.addNewCity(new City("Calgary", 42, 23, 231234, 2));
+        */
+    }
+    findHighestKey = () => {
+        let highest = 0;
+        for (let c of this.state.cities) {
+            if (c.key > highest) highest = c.key;
+        }
+        this.setState({ maxKey: highest + 1 });
+    };
+    addNewCity = async newCity => {
+        let request = await this.postData(this.getURL("add"), newCity);
+        return request;
+    };
     render() {
         //let cards = this.state.community.map(...);
         return (
