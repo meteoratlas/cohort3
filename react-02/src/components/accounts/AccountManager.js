@@ -21,33 +21,7 @@ class AccountManager extends Component {
             response: ""
         });
     };
-    findHighestOrLowest = hiOrLo => {
-        if (this.props.accounts.length === 0) {
-            this.respond("You have no accounts.");
-            return;
-        }
-        if (this.props.accounts.length === 1) {
-            let acc = this.props.accounts[0].name;
-            this.respond(
-                `Your ${hiOrLo} value account is ${acc.name}, containing $${acc.funds}.`
-            );
-        }
-        let baseline = this.props.accounts[0];
-        this.props.accounts.forEach(n => {
-            if (hiOrLo === "highest") {
-                if (n.funds > baseline.funds) {
-                    baseline = n;
-                }
-            } else {
-                if (n.funds < baseline.funds) {
-                    baseline = n;
-                }
-            }
-        });
-        this.respond(
-            `Your ${hiOrLo} value account is ${baseline.name}, containing $${baseline.funds}.`
-        );
-    };
+    findHighestOrLowest = hiOrLo => {};
     sumAccounts = () => {
         if (this.props.accounts.length === 0) {
             this.respond("You have no accounts.");
@@ -119,6 +93,7 @@ class AccountManager extends Component {
                 <br />
                 <button onClick={this.createAccount}>Create Account</button>
                 <br />
+                {/* TODO: automatically update a textfield using state (no buttons) */}
                 <button onClick={() => this.findHighestOrLowest("highest")}>
                     Find Highest Value Account
                 </button>

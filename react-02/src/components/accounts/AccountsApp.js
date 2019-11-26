@@ -1,26 +1,24 @@
 import React, { Component } from "react";
 import AccountManager from "./AccountManager";
 import AccountCard from "./AccountCard";
-import { Account } from "./model/Account";
+import { Account, AccountController } from "./model/Account";
 import { AnimateOnChange } from "react-animation";
 
 class AccountsApp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            accounts: [],
+            cntrl: new AccountController(),
             maxID: 0
         };
         this.cards = [];
-        this.withdrawFunds = this.withdrawFunds.bind(this);
+    }
+    componentDidMount() {
+        //this.setState({ cntrl: new AccountController() });
     }
     addNewAccount = (name, balance) => {
-        // The AccountManager handles the error checking
-        let newAccount = new Account(name, balance, this.state.maxID);
-        this.setState(prev => ({
-            accounts: [...prev.accounts, newAccount],
-            maxID: this.state.maxID + 1
-        }));
+        // The AccountManager will handle the error checking
+        // add account callback
     };
     populateCards = arr => {
         return arr.map(a => {
@@ -47,28 +45,17 @@ class AccountsApp extends Component {
         return null;
     }
     withdrawFunds = (accID, toWithdraw) => {
-        this.setState(prevState => ({
-            accounts: prevState.accounts.map(a =>
-                a.UID === accID ? { ...a, funds: a.funds - toWithdraw } : a
-            )
-        }));
+        // on withdraw callback
     };
     depositFunds = (accID, toDeposit) => {
-        this.setState(prevState => ({
-            accounts: prevState.accounts.map(a =>
-                a.UID === accID ? { ...a, funds: a.funds + toDeposit } : a
-            )
-        }));
+        // on deposit callback
     };
     deleteAccount = index => {
-        let newArr = this.state.accounts.concat();
-        let acc = newArr.filter(a => a["UID"] === index)[0];
-        newArr.splice(newArr.indexOf(acc), 1);
-        this.setState(prevState => ({ accounts: newArr }));
+        // on delete callback
     };
     render() {
         const cards =
-            this.state.accounts.length > 0
+            this.state.cntrl.accounts.length > 0
                 ? this.populateCards(this.state.accounts)
                 : null;
         return (
