@@ -1,6 +1,17 @@
 import daily from "./daily";
 
 // ***
+// Destructuring
+// ***
+
+test("destructuring array", () => {
+    let [a, b, c] = [2, 4, 8, 16];
+    expect(a).toBe(2);
+    expect(b).toBe(4);
+    expect(c).toBe(8);
+});
+
+// ***
 // Three functions - November 22, 2019
 // ***
 

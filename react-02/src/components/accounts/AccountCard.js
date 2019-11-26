@@ -59,10 +59,15 @@ class AccountCard extends Component {
         this.setState({ inputFieldValue: e.target.value });
     }
     render() {
+        // Use destructuring to get the relevant values
+        // from the card's prop (an account object)
+        let { name, funds } = this.props.account;
         return (
             <div className="account-card">
-                <h2>{this.props.account.name}</h2>
-                <p>Funds: ${this.props.account.funds}</p>
+                {/* Use the destructed variables to populate the associated
+                fields in the card's elements*/}
+                <h2>{name}</h2>
+                <p>Funds: ${funds}</p>
                 <input
                     type="number"
                     value={this.state.inputFieldValue}
