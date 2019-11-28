@@ -30,8 +30,7 @@ export class Account {
 }
 
 export class AccountController {
-    constructor(user) {
-        this.userName = user;
+    constructor() {
         this.accounts = [];
         this.currentAccount = null;
     }

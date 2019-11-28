@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import update from "immutability-helper";
 import AccountManager from "./AccountManager";
 import AccountCard from "./AccountCard";
 import { Account, AccountController } from "./model/Account";
@@ -17,9 +18,13 @@ class AccountsApp extends Component {
         //this.setState({ cntrl: new AccountController() });
     }
     addNewAccount = (name, balance) => {
-        // The AccountManager will handle the error checking
-        // add account callback
+        let newAcc = new Account(name, balance, this.state.maxID);
+        let newAccounts = [...this.state.cntrl.accounts, newAcc];
+        let newObj = new AccountController();
+        newObj.accounts = newAccounts;
+        this.setState({ cntrl: newObj, maxID: this.state.maxID + 1 });
     };
+    findHighestValueAccount = () => {};
     populateCards = arr => {
         return arr.map(a => {
             return (
@@ -56,13 +61,13 @@ class AccountsApp extends Component {
     render() {
         const cards =
             this.state.cntrl.accounts.length > 0
-                ? this.populateCards(this.state.accounts)
+                ? this.populateCards(this.state.cntrl.accounts)
                 : null;
         return (
             <div id="account-app">
                 <h2>Accounts</h2>
                 <AccountManager
-                    accounts={this.state.accounts}
+                    controller={this.state.cntrl}
                     callback={this.addNewAccount}
                 />
                 <AnimateOnChange>

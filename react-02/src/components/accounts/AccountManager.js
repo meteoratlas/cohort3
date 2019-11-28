@@ -47,8 +47,8 @@ class AccountManager extends Component {
             return;
         }
         let reserved = false;
-        if (this.props.accounts.length > 0) {
-            this.props.accounts.forEach(a => {
+        if (this.props.controller.accounts.length > 0) {
+            this.props.controller.accounts.forEach(a => {
                 if (a.name === this.state.newAccountName) {
                     reserved = true;
                 }
@@ -93,7 +93,12 @@ class AccountManager extends Component {
                 <br />
                 <button onClick={this.createAccount}>Create Account</button>
                 <br />
+                <AnimateOnChange>
+                    <p>{this.state.response}</p>
+                </AnimateOnChange>
+                <br />
                 {/* TODO: automatically update a textfield using state (no buttons) */}
+                {/*
                 <button onClick={() => this.findHighestOrLowest("highest")}>
                     Find Highest Value Account
                 </button>
@@ -102,12 +107,16 @@ class AccountManager extends Component {
                 </button>
                 <button onClick={this.sumAccounts}>
                     Find Value of All Accounts
-                </button>
+                </button> */}
+                <h4>Highest Value Account:</h4>
+                <p>{this.props.highestAccount}</p>
+                <h4>Lowest Value Account:</h4>
+                <p>{this.props.lowestAccount}</p>
+                <h4>Sum of All Account Funds:</h4>
+                <p>{this.props.allFunds}</p>
+
                 <br />
                 <br />
-                <AnimateOnChange>
-                    <p>{this.state.response}</p>
-                </AnimateOnChange>
             </div>
         );
     }

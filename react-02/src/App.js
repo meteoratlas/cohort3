@@ -19,7 +19,7 @@ class App extends Component {
         };
         this.state = {
             lastIcon: "nothing",
-            currentTab: "CITY"
+            currentTab: "ACCOUNTS"
         };
     }
     reportIconClicked = (name, tab) => {
