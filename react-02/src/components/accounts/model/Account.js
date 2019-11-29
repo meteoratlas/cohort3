@@ -34,8 +34,13 @@ export class AccountController {
         this.accounts = [];
         this.currentAccount = null;
     }
-    getAccount() {
-        return this.currentAccount;
+    getAccount(ID) {
+        for (let i = 0; i < this.accounts.length; i++) {
+            if (this.accounts[i].UID === ID) {
+                return this.accounts[i];
+            }
+        }
+        return null;
     }
     setCurrentAccount(acc) {
         this.accounts.forEach(a => {
@@ -46,22 +51,15 @@ export class AccountController {
     }
     addAccount(name, funds) {
         const toAdd = new Account(name, funds);
-        /* In react, state is immutable, so we create a new array instead
-        this.accounts.push(toAdd);
-        */
         this.accounts = [...this.accounts, toAdd];
         return toAdd;
     }
-    removeAccount(name) {
-        if (this.accounts.length === 0) return "You have no accounts.";
-        // Removes only the first instance (multiple accounts could share the same name).
-        let index = this.accounts.findIndex(n => n.name === name);
-        if (index > 0) {
-            let [removed] = this.accounts.splice(index, 1);
-            return removed;
-        } else {
-            return "There is no account with that name.";
+    removeAccount(acc) {
+        let index = this.accounts.findIndex(n => n.UID === acc.UID);
+        if (index >= 0) {
+            this.accounts.splice(index, 1);
         }
+        return this.accounts; //"There is no account with that name.";
     }
     nameAccount(origName, newName) {
         if (typeof origName !== "string" || typeof newName !== "string") {

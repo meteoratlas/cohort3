@@ -10,7 +10,6 @@ class AccountCard extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
     }
-    componentDidMount() {}
     onDepositClicked = () => {
         let value = this.isValidInput(this.state.inputFieldValue);
         if (!value || value <= 0) {

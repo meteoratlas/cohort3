@@ -18,7 +18,11 @@ class AccountsApp extends Component {
         };
         this.cards = [];
     }
-    componentDidMount() {}
+    componentDidMount() {
+        this.addNewAccount("Test 1", 760);
+        this.forceUpdate();
+        this.addNewAccount("Tim", 800);
+    }
     addNewAccount = (name, balance) => {
         let newAcc = new Account(name, balance, this.state.maxID);
         let newAccounts = [...this.state.cntrl.accounts, newAcc];
@@ -27,7 +31,18 @@ class AccountsApp extends Component {
         this.setState({ cntrl: newObj, maxID: this.state.maxID + 1 });
         this.updateGlobalAccountValues();
     };
+    deleteAccount = accID => {
+        let newAccounts = this.state.cntrl.removeAccount(
+            this.state.cntrl.getAccount(accID)
+        );
+        let newObj = new AccountController();
+        newObj.accounts = newAccounts;
+        this.setState({ cntrl: newObj }, this.updateGlobalAccountValues);
+    };
     updateGlobalAccountValues = () => {
+        if (this.state.cntrl.accounts.length < 1) {
+            return;
+        }
         this.setState(state => {
             return {
                 highestValueAcc: state.cntrl.findHighestValueAccount(),
@@ -62,18 +77,15 @@ class AccountsApp extends Component {
         return null;
     }
     withdrawFunds = (accID, toWithdraw) => {
-        // on withdraw callback
+        this.state.cntrl.getAccount(accID).withdraw(toWithdraw);
         this.updateGlobalAccountValues();
     };
     depositFunds = (accID, toDeposit) => {
-        // on deposit callback
-        this.updateGlobalAccountValues();
-    };
-    deleteAccount = index => {
-        // on delete callback
+        this.state.cntrl.getAccount(accID).deposit(toDeposit);
         this.updateGlobalAccountValues();
     };
     render() {
+        console.log("len :", this.state.cntrl.accounts);
         const cards =
             this.state.cntrl.accounts.length > 0
                 ? this.populateCards(this.state.cntrl.accounts)
