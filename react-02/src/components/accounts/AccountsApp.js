@@ -4,27 +4,38 @@ import AccountManager from "./AccountManager";
 import AccountCard from "./AccountCard";
 import { Account, AccountController } from "./model/Account";
 import { AnimateOnChange } from "react-animation";
+import AccountReporter from "./AccountReporter";
 
 class AccountsApp extends Component {
     constructor(props) {
         super(props);
         this.state = {
             cntrl: new AccountController(),
-            maxID: 0
+            maxID: 0,
+            allAccountsSum: 0,
+            highestValueAcc: "",
+            lowestValueAcc: ""
         };
         this.cards = [];
     }
-    componentDidMount() {
-        //this.setState({ cntrl: new AccountController() });
-    }
+    componentDidMount() {}
     addNewAccount = (name, balance) => {
         let newAcc = new Account(name, balance, this.state.maxID);
         let newAccounts = [...this.state.cntrl.accounts, newAcc];
         let newObj = new AccountController();
         newObj.accounts = newAccounts;
         this.setState({ cntrl: newObj, maxID: this.state.maxID + 1 });
+        this.updateGlobalAccountValues();
     };
-    findHighestValueAccount = () => {};
+    updateGlobalAccountValues = () => {
+        this.setState(state => {
+            return {
+                highestValueAcc: state.cntrl.findHighestValueAccount(),
+                lowestValueAcc: state.cntrl.findLowestValueAccount(),
+                allAccountsSum: state.cntrl.totalAllAccountFunds()
+            };
+        });
+    };
     populateCards = arr => {
         return arr.map(a => {
             return (
@@ -39,11 +50,12 @@ class AccountsApp extends Component {
         });
     };
     getAccountByName(name) {
-        return this.state.accounts.filter(a => a.name === name)[0];
+        let [account] = this.state.cntrl.accounts.filter(a => a.name === name);
+        return account;
     }
     getAccount(ID) {
-        for (let i = 0; i < this.state.accounts.length; i++) {
-            if (this.state.accounts[i].UID === ID) {
+        for (let i = 0; i < this.state.cntrl.accounts.length; i++) {
+            if (this.state.cntrl.accounts[i].UID === ID) {
                 return i;
             }
         }
@@ -51,12 +63,15 @@ class AccountsApp extends Component {
     }
     withdrawFunds = (accID, toWithdraw) => {
         // on withdraw callback
+        this.updateGlobalAccountValues();
     };
     depositFunds = (accID, toDeposit) => {
         // on deposit callback
+        this.updateGlobalAccountValues();
     };
     deleteAccount = index => {
         // on delete callback
+        this.updateGlobalAccountValues();
     };
     render() {
         const cards =
@@ -69,6 +84,11 @@ class AccountsApp extends Component {
                 <AccountManager
                     controller={this.state.cntrl}
                     callback={this.addNewAccount}
+                />
+                <AccountReporter
+                    highestAccount={this.state.highestValueAcc}
+                    lowestAccount={this.state.lowestValueAcc}
+                    allFunds={this.state.allAccountsSum}
                 />
                 <AnimateOnChange>
                     <div id="card-holder">{cards}</div>

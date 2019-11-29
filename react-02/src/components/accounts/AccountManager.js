@@ -97,25 +97,6 @@ class AccountManager extends Component {
                     <p>{this.state.response}</p>
                 </AnimateOnChange>
                 <br />
-                {/* TODO: automatically update a textfield using state (no buttons) */}
-                {/*
-                <button onClick={() => this.findHighestOrLowest("highest")}>
-                    Find Highest Value Account
-                </button>
-                <button onClick={() => this.findHighestOrLowest("lowest")}>
-                    Find Lowest Value Account
-                </button>
-                <button onClick={this.sumAccounts}>
-                    Find Value of All Accounts
-                </button> */}
-                <h4>Highest Value Account:</h4>
-                <p>{this.props.highestAccount}</p>
-                <h4>Lowest Value Account:</h4>
-                <p>{this.props.lowestAccount}</p>
-                <h4>Sum of All Account Funds:</h4>
-                <p>{this.props.allFunds}</p>
-
-                <br />
                 <br />
             </div>
         );
