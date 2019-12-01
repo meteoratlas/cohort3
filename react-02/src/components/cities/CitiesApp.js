@@ -3,7 +3,6 @@ import CityCreatorForm from "./CityCreatorForm";
 import { Community } from "./model/community";
 import CityCard from "./CityCard";
 import CityReporter from "./CityReporter";
-import { City } from "./model/city";
 
 class CitiesApp extends Component {
     constructor(props) {
@@ -45,14 +44,6 @@ class CitiesApp extends Component {
         /*fetch(this.getURL("all"))
             .then(response => response.json())
             .then(data => this.setState({ cities: data }, this.findHighestKey));*/
-        // test
-        /*
-        this.addNewCity(new City("TEST", 23, 32, 213, 0));
-        this.addNewCity(new City("TEST2", 2, -6, 22334, 1));
-        this.addNewCity(new City("Calgary", 42, 23, 231234, 2));
-        */
-        const n = new City("TEST", 34, 14, 3423, 0);
-        this.addNewCity(n);
     }
     findHighestKey = () => {
         let highest = 0;
@@ -63,11 +54,13 @@ class CitiesApp extends Component {
     };
     addNewCity = async newCity => {
         //let request = await this.postData(this.getURL("add"), newCity);
+        let newCities = [...this.state.community.cities, newCity];
         let newCommunity = this.state.community.clone();
-        newCommunity.cities.push(newCity);
+        newCommunity.cities = newCities;
         this.setState(
             {
-                community: newCommunity
+                community: newCommunity,
+                maxKey: this.state.maxKey + 1
             },
             this.updateGlobalCityValues
         );
@@ -108,7 +101,7 @@ class CitiesApp extends Component {
         let cards = this.state.community.cities.map(a => {
             return (
                 <CityCard
-                    key={a.UID}
+                    key={a.key}
                     city={a}
                     addCitizensCallback={this.addCitizens}
                     removeCitizensCallback={this.removeCitizens}
@@ -119,10 +112,14 @@ class CitiesApp extends Component {
         return (
             <div id="cities-app">
                 <h2>Cities and Community</h2>
-                <CityCreatorForm />
+                <CityCreatorForm
+                    community={this.state.community}
+                    callback={this.addNewCity}
+                    nextKey={this.state.maxKey}
+                />
                 <CityReporter
                     northMost={this.state.northMostCity}
-                    southMost={this.props.southMost}
+                    southMost={this.state.southMostCity}
                     totalPop={this.state.totalPop}
                 />
                 {this.serverStatus()}

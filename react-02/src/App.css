@@ -44,12 +44,14 @@
 }
 
 /*
-Accounts
+Custom Apps
 */
-#account-app {
+#account-app,
+#cities-app {
     font-size: 1rem;
 }
-#account-reporter div {
+#account-reporter div,
+#city-reporter div {
     display: inline-block;
     margin: 0 2%;
 }
@@ -59,7 +61,8 @@ Accounts
     flex-wrap: wrap;
 }
 
-.account-card {
+.account-card,
+.city-card {
     box-sizing: border-box;
     margin: 2% 1% 1% 0;
     background: whitesmoke;
@@ -81,7 +84,7 @@ Accounts
  * animation heartbeat
  * ----------------------------------------
  */
-@-webkit-keyframes wobble-hor-botto {
+@keyframes wobble-hor-botto {
     from {
         -webkit-transform: scale(1);
         transform: scale(1);

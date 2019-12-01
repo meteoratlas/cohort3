@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import update from "immutability-helper";
+//import update from "immutability-helper";
 import AccountManager from "./AccountManager";
 import AccountCard from "./AccountCard";
 import { Account, AccountController } from "./model/Account";
-import { AnimateOnChange } from "react-animation";
+//import { AnimateOnChange } from "react-animation";
 import AccountReporter from "./AccountReporter";
 
 class AccountsApp extends Component {

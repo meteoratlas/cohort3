@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import { AnimateOnChange } from "react-animation";
+//import { AnimateOnChange } from "react-animation";
+import { City } from "./model/city";
 
 class CityCreatorForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            response: "",
             newCityName: "",
             newCityLat: "",
             newCityLong: "",
-            newCityPop: ""
+            newCityPop: "",
+            response: ""
         };
     }
     respond = msg => {
@@ -40,7 +41,37 @@ class CityCreatorForm extends Component {
             }
         }
 
+        const lat = parseFloat(this.state.newCityLat);
+        if (Math.abs(lat) > 90) {
+            this.setState({
+                response: `Please enter a valid latitude.`
+            });
+            return;
+        }
+        const long = parseFloat(this.state.newCityLong);
+        if (Math.abs(long) > 180) {
+            this.setState({
+                response: `Please enter a valid longitude.`
+            });
+            return;
+        }
+        const pop = parseInt(this.state.newCityPop);
+        if (pop < 0) {
+            this.setState({
+                response: `Please enter a valid population.`
+            });
+            return;
+        }
+
         // Check for name dup, key, write to server here
+        const newCity = new City(
+            this.state.newCityName,
+            lat,
+            long,
+            pop,
+            this.props.nextKey
+        );
+        this.props.callback(newCity);
 
         // creation successful, reset form
         this.setState({

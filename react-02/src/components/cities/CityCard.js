@@ -18,7 +18,7 @@ class CityCard extends Component {
         this.setState({ inputFieldValue: e.target.value });
     };
     render() {
-        let { name, funds } = this.props.city;
+        let { name } = this.props.city;
         return (
             <div className="city-card">
                 <h2>{name}</h2>

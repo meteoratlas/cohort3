@@ -3,7 +3,7 @@ import { City } from "./city.js";
 export class Community {
     constructor(cities = []) {
         this.currentKey = 0;
-        this.cities = [];
+        this.cities = cities;
     }
     clone() {
         return new Community(this.cities);
