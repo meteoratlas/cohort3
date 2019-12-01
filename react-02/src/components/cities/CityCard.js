@@ -17,6 +17,31 @@ class CityCard extends Component {
     handleChange = e => {
         this.setState({ inputFieldValue: e.target.value });
     };
+    onCitizensClicked = added => {
+        let value = this.isValidInput(this.state.inputFieldValue);
+        if (!value || value <= 0) {
+            this.setState({
+                resultText: "Please enter a valid number."
+            });
+            return;
+        }
+        let response;
+        if (added) {
+            response = "added";
+            this.props.addCitizensCallback(this.props.city.key, value);
+        } else {
+            response = "removed";
+            this.props.removeCitizensCallback(this.props.city.key, value);
+        }
+
+        this.setState({
+            inputFieldValue: "",
+            resultText: `Successfully ${response} ${value} new citizens.`
+        });
+    };
+    onDeleteClicked = () => {
+        this.props.deleteCallback(this.props.city.key);
+    };
     render() {
         let { name } = this.props.city;
         return (
@@ -29,8 +54,12 @@ class CityCard extends Component {
                     onChange={this.handleChange}
                 ></input>
                 <br />
-                <button onClick={this.onWithdrawClicked}>Add Citizens</button>
-                <button onClick={this.onDepositClicked}>Remove Citizens</button>
+                <button onClick={() => this.onCitizensClicked(true)}>
+                    Add Citizens
+                </button>
+                <button onClick={() => this.onCitizensClicked(false)}>
+                    Remove Citizens
+                </button>
                 <p>{this.state.resultText}</p>
                 <button onClick={this.onDeleteClicked}>Delete This City</button>
             </div>
