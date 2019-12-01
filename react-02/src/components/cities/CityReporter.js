@@ -13,7 +13,7 @@ const CityReporter = props => {
             </div>
             <div>
                 <h4>Total Population of All Cities:</h4>
-                <p>${props.totalPop}</p>
+                <p>{props.totalPop} citizens</p>
             </div>
         </div>
     );

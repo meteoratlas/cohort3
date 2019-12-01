@@ -51,12 +51,6 @@ class CityCreatorForm extends Component {
             newCityPop: ""
         });
     };
-    getNorthSouthMost = hemisphere => {
-        console.log(hemisphere);
-    };
-    getTotalPop = () => {
-        console.log("report pop");
-    };
     render() {
         return (
             <div id="city-creator">

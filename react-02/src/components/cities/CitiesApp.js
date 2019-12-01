@@ -3,6 +3,7 @@ import CityCreatorForm from "./CityCreatorForm";
 import { Community } from "./model/community";
 import CityCard from "./CityCard";
 import CityReporter from "./CityReporter";
+import { City } from "./model/city";
 
 class CitiesApp extends Component {
     constructor(props) {
@@ -50,10 +51,12 @@ class CitiesApp extends Component {
         this.addNewCity(new City("TEST2", 2, -6, 22334, 1));
         this.addNewCity(new City("Calgary", 42, 23, 231234, 2));
         */
+        const n = new City("TEST", 34, 14, 3423, 0);
+        this.addNewCity(n);
     }
     findHighestKey = () => {
         let highest = 0;
-        for (let c of this.state.community) {
+        for (let c of this.state.community.cities) {
             if (c.key > highest) highest = c.key;
         }
         this.setState({ maxKey: highest + 1 });
@@ -117,32 +120,15 @@ class CitiesApp extends Component {
             <div id="cities-app">
                 <h2>Cities and Community</h2>
                 <CityCreatorForm />
+                <CityReporter
+                    northMost={this.state.northMostCity}
+                    southMost={this.props.southMost}
+                    totalPop={this.state.totalPop}
+                />
                 {this.serverStatus()}
                 <div id="card-holder">{cards}</div>
             </div>
         );
-    }
-    getURL(operation) {
-        return "http://127.0.0.1:5000/" + operation;
-    }
-    async postData(url, data = {}) {
-        const response = await fetch(url, {
-            method: "POST",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            redirect: "follow",
-            referrer: "no-referrer",
-            body: JSON.stringify(data) // body data type must match "Content-Type" header
-        });
-
-        const json = await response.json(); // parses JSON response into native JavaScript objects
-        json.status = response.status;
-        json.statusText = response.statusText;
-        return json;
     }
 }
 
