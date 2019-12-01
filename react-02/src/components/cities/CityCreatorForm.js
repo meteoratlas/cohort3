@@ -114,24 +114,6 @@ class CityCreatorForm extends Component {
                         <p id="response">{this.state.response}</p>
                         {/* </AnimateOnChange> */}
                     </div>
-                    <div id="cc-buttons">
-                        <button
-                            id="northernMost"
-                            onClick={() => this.getNorthSouthMost("north")}
-                        >
-                            Get Northernmost City
-                        </button>
-                        <button
-                            id="southernMost"
-                            onClick={() => this.getNorthSouthMost("south")}
-                        >
-                            Get Southernmost City
-                        </button>
-                        <button id="population" onClick={this.getTotalPop}>
-                            Get Total Population
-                        </button>
-                        <p id="cc-response"></p>
-                    </div>
                 </div>
             </div>
         );

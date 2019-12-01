@@ -54,7 +54,7 @@ export class AccountController {
         if (index >= 0) {
             this.accounts.splice(index, 1);
         }
-        return this.accounts; //"There is no account with that name.";
+        return this.accounts;
     }
     nameAccount(origName, newName) {
         if (typeof origName !== "string" || typeof newName !== "string") {
