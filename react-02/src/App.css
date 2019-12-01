@@ -46,6 +46,13 @@
 /*
 Accounts
 */
+#account-app {
+    font-size: 1rem;
+}
+#account-reporter div {
+    display: inline-block;
+    margin: 0 2%;
+}
 #card-holder {
     display: flex;
     justify-content: space-evenly;

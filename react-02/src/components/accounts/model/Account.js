@@ -30,9 +30,8 @@ export class Account {
 }
 
 export class AccountController {
-    constructor() {
-        this.accounts = [];
-        this.currentAccount = null;
+    constructor(accounts = []) {
+        this.accounts = accounts;
     }
     getAccount(ID) {
         for (let i = 0; i < this.accounts.length; i++) {
@@ -42,12 +41,8 @@ export class AccountController {
         }
         return null;
     }
-    setCurrentAccount(acc) {
-        this.accounts.forEach(a => {
-            if (a.name === acc) {
-                this.currentAccount = a;
-            }
-        });
+    clone() {
+        return new AccountController(this.accounts);
     }
     addAccount(name, funds) {
         const toAdd = new Account(name, funds);

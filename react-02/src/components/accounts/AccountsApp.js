@@ -13,23 +13,20 @@ class AccountsApp extends Component {
             cntrl: new AccountController(),
             maxID: 0,
             allAccountsSum: 0,
-            highestValueAcc: "",
-            lowestValueAcc: ""
+            highestValueAcc: "N/A",
+            lowestValueAcc: "N/A"
         };
         this.cards = [];
-    }
-    componentDidMount() {
-        this.addNewAccount("Test 1", 760);
-        this.forceUpdate();
-        this.addNewAccount("Tim", 800);
     }
     addNewAccount = (name, balance) => {
         let newAcc = new Account(name, balance, this.state.maxID);
         let newAccounts = [...this.state.cntrl.accounts, newAcc];
         let newObj = new AccountController();
         newObj.accounts = newAccounts;
-        this.setState({ cntrl: newObj, maxID: this.state.maxID + 1 });
-        this.updateGlobalAccountValues();
+        this.setState(
+            { cntrl: newObj, maxID: this.state.maxID + 1 },
+            this.updateGlobalAccountValues
+        );
     };
     deleteAccount = accID => {
         let newAccounts = this.state.cntrl.removeAccount(
@@ -41,6 +38,7 @@ class AccountsApp extends Component {
     };
     updateGlobalAccountValues = () => {
         if (this.state.cntrl.accounts.length < 1) {
+            this.setState({ highestValueAcc: "N/A", lowestValueAcc: "N/A" });
             return;
         }
         this.setState(state => {
@@ -64,32 +62,28 @@ class AccountsApp extends Component {
             );
         });
     };
-    getAccountByName(name) {
-        let [account] = this.state.cntrl.accounts.filter(a => a.name === name);
-        return account;
-    }
-    getAccount(ID) {
-        for (let i = 0; i < this.state.cntrl.accounts.length; i++) {
-            if (this.state.cntrl.accounts[i].UID === ID) {
-                return i;
-            }
-        }
-        return null;
-    }
     withdrawFunds = (accID, toWithdraw) => {
-        this.state.cntrl.getAccount(accID).withdraw(toWithdraw);
-        this.updateGlobalAccountValues();
+        let newCntrl = this.state.cntrl.clone();
+        newCntrl.getAccount(accID).withdraw(toWithdraw);
+        this.setState(
+            {
+                cntrl: newCntrl
+            },
+            this.updateGlobalAccountValues
+        );
     };
     depositFunds = (accID, toDeposit) => {
-        this.state.cntrl.getAccount(accID).deposit(toDeposit);
-        this.updateGlobalAccountValues();
+        let newCntrl = this.state.cntrl.clone();
+        newCntrl.getAccount(accID).deposit(toDeposit);
+        this.setState(
+            {
+                cntrl: newCntrl
+            },
+            this.updateGlobalAccountValues
+        );
     };
     render() {
-        console.log("len :", this.state.cntrl.accounts);
-        const cards =
-            this.state.cntrl.accounts.length > 0
-                ? this.populateCards(this.state.cntrl.accounts)
-                : null;
+        const cards = this.populateCards(this.state.cntrl.accounts);
         return (
             <div id="account-app">
                 <h2>Accounts</h2>
@@ -102,9 +96,7 @@ class AccountsApp extends Component {
                     lowestAccount={this.state.lowestValueAcc}
                     allFunds={this.state.allAccountsSum}
                 />
-                <AnimateOnChange>
-                    <div id="card-holder">{cards}</div>
-                </AnimateOnChange>
+                <div id="card-holder">{cards}</div>
             </div>
         );
     }

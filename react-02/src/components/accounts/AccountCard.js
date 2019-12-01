@@ -21,7 +21,9 @@ class AccountCard extends Component {
         this.props.depositCallback(this.props.account.UID, value);
         this.setState({
             inputFieldValue: "",
-            resultText: `Successfully deposited $${value} into this account.`
+            resultText: `Successfully deposited $${value.toFixed(
+                2
+            )} into this account.`
         });
     };
     onWithdrawClicked = () => {
@@ -42,7 +44,9 @@ class AccountCard extends Component {
         this.props.withdrawCallback(this.props.account.UID, value);
         this.setState({
             inputFieldValue: "",
-            resultText: `Successfully withdrew $${value} from this account.`
+            resultText: `Successfully withdrew $${value.toFixed(
+                2
+            )} from this account.`
         });
     };
     onDeleteClicked = () => {
