@@ -1,4 +1,4 @@
-import { DoublyLinkedList } from "../Linked List/DoublyLinkedList";
+import { DoublyLinkedList } from "./DoublyLinkedList";
 
 test("testing DoublyLinkedList methods", () => {
     const dl = new DoublyLinkedList("math", 10);
@@ -12,4 +12,9 @@ test("testing DoublyLinkedList methods", () => {
     dl.addFront("gym", 4);
     dl.showNodes();
     expect(dl.sumAmount()).toBe(24);
+
+    const clone = dl.clone();
+    expect(clone.showNodes()).toBe(
+        "subject: gym amount: 4 <-> subject: math amount: 10 <-> subject: LA amount: 3 <-> subject: music amount: 7 <-> "
+    );
 });

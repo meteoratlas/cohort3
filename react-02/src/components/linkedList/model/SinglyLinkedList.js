@@ -84,5 +84,19 @@ export class SinglyLinkedList {
             p = p.next;
         }
         console.log(string);
+        return string;
+    }
+    clone() {
+        let newList = new SinglyLinkedList(this.head.subject, this.head.amount);
+        let currNode = this.head.next;
+        let writeNode = newList.head;
+
+        while (currNode) {
+            newList.insert(writeNode, currNode.subject, currNode.amount);
+            writeNode = writeNode.next;
+            currNode = currNode.next;
+        }
+
+        return newList;
     }
 }

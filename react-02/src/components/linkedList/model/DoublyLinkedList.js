@@ -70,11 +70,25 @@ export class DoublyLinkedList {
             p = p.next;
         }
         console.log(string);
+        return string;
     }
     addFront(subject, amount) {
         let newNode = new ListNode(subject, amount, this.head, null);
         this.head.prev = newNode;
         this.head = newNode;
         return this.head;
+    }
+    clone() {
+        let newList = new DoublyLinkedList(this.head.subject, this.head.amount);
+        let currNode = this.head.next;
+        let writeNode = newList.head;
+
+        while (currNode) {
+            newList.insert(writeNode, currNode.subject, currNode.amount);
+            writeNode = writeNode.next;
+            currNode = currNode.next;
+        }
+
+        return newList;
     }
 }
