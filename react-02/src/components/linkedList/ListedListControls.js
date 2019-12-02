@@ -1,19 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import useFormState from "./hooks/useInputState";
 
-const LinkedListControls = () => {
+const LinkedListControls = props => {
     const [subject, setSubject, resetSubject] = useFormState("");
     const [amount, setAmount, resetAmount] = useFormState("");
+    const [response, setResponse] = useState("");
     const handleSubmit = () => {
+        if (!subject || !amount) {
+            setResponse("Please ensure both fields are filled out.");
+            return;
+        }
+        props.insert(subject, amount);
         resetAmount();
         resetSubject();
+        setResponse("");
     };
     return (
         <div>
             <div id="ll-controls-nav">
                 <button>Go to First Node</button>
-                <button>Previous Node</button>
-                <button>Next Node</button>
+                <button onClick={props.prev}>Previous Node</button>
+                <button onClick={props.next}>Next Node</button>
                 <button>Go to Last Node</button>
             </div>
             <br />
@@ -32,6 +39,7 @@ const LinkedListControls = () => {
                 <button onClick={handleSubmit}>Insert New Node Here</button>
                 <button>Delete Current Node</button>
             </div>
+            <p>{response}</p>
         </div>
     );
 };
