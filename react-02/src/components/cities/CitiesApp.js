@@ -3,12 +3,13 @@ import CityCreatorForm from "./CityCreatorForm";
 import { Community } from "./model/community";
 import CityCard from "./CityCard";
 import CityReporter from "./CityReporter";
+import Fetcher from "./Fetcher";
 
 class CitiesApp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            serverOkay: true,
+            serverError: false,
             maxKey: 0,
             community: new Community(),
             northMostCity: "N/A",
@@ -17,15 +18,14 @@ class CitiesApp extends Component {
         };
     }
     serverStatus() {
-        if (this.state.serverOkay) {
-            return <div></div>;
+        if (this.state.serverError) {
+            return (
+                <p>
+                    A connection to the server could not be established. Please
+                    ensure the local server is running, and refresh.
+                </p>
+            );
         }
-        return (
-            <p>
-                A connection to the server could not be established. Please
-                ensure the local server is running, and try again.
-            </p>
-        );
     }
     updateGlobalCityValues = () => {
         if (this.state.community.cities.length < 1) {
@@ -41,9 +41,22 @@ class CitiesApp extends Component {
         });
     };
     componentDidMount() {
-        /*fetch(this.getURL("all"))
-            .then(response => response.json())
-            .then(data => this.setState({ cities: data }, this.findHighestKey));*/
+        fetch("http://127.0.0.1:5000/all")
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Server could not be contacted.");
+                }
+            })
+            .then(d => {
+                const c = Fetcher.populateCollection(d);
+                this.setState({ community: c }, () => {
+                    this.findHighestKey();
+                    this.updateGlobalCityValues();
+                });
+            })
+            .catch(error => this.setState({ error, serverError: true }));
     }
     findHighestKey = () => {
         let highest = 0;
@@ -53,7 +66,6 @@ class CitiesApp extends Component {
         this.setState({ maxKey: highest + 1 });
     };
     addNewCity = async newCity => {
-        //let request = await this.postData(this.getURL("add"), newCity);
         let newCities = [...this.state.community.cities, newCity];
         let newCommunity = this.state.community.clone();
         newCommunity.cities = newCities;
@@ -65,19 +77,21 @@ class CitiesApp extends Component {
             this.updateGlobalCityValues
         );
         // update server
+        Fetcher.addData(newCity);
     };
     deleteCity = cityID => {
-        let newCities = this.state.community.deleteCity(
-            this.state.community.getCity(cityID)
-        );
+        let city = this.state.community.getCity(cityID);
+        let newCities = this.state.community.deleteCity(city);
         let newCommunity = new Community();
         newCommunity.cities = newCities;
         this.setState({ community: newCommunity }, this.updateGlobalCityValues);
         // update server
+        Fetcher.delete(city);
     };
     addCitizens = async (cityID, toAdd) => {
         let newCommunity = this.state.community.clone();
-        newCommunity.getCity(cityID).movedIn(toAdd);
+        let city = newCommunity.getCity(cityID);
+        city.movedIn(toAdd);
         this.setState(
             {
                 community: newCommunity
@@ -85,10 +99,12 @@ class CitiesApp extends Component {
             this.updateGlobalCityValues
         );
         // update server
+        Fetcher.updatePop(city);
     };
     removeCitizens = async (cityID, toRemove) => {
         let newCommunity = this.state.community.clone();
-        newCommunity.getCity(cityID).movedOut(toRemove);
+        let city = newCommunity.getCity(cityID);
+        city.movedOut(toRemove);
         this.setState(
             {
                 community: newCommunity
@@ -96,6 +112,7 @@ class CitiesApp extends Component {
             this.updateGlobalCityValues
         );
         // update server
+        Fetcher.updatePop(city);
     };
     render() {
         let cards = this.state.community.cities.map(a => {
@@ -112,17 +129,22 @@ class CitiesApp extends Component {
         return (
             <div id="cities-app">
                 <h2>Cities and Community</h2>
-                <CityCreatorForm
-                    community={this.state.community}
-                    callback={this.addNewCity}
-                    nextKey={this.state.maxKey}
-                />
-                <CityReporter
-                    northMost={this.state.northMostCity}
-                    southMost={this.state.southMostCity}
-                    totalPop={this.state.totalPop}
-                />
-                {this.serverStatus()}
+                {this.state.serverError ? (
+                    this.serverStatus()
+                ) : (
+                    <React.Fragment>
+                        <CityCreatorForm
+                            community={this.state.community}
+                            callback={this.addNewCity}
+                            nextKey={this.state.maxKey}
+                        />
+                        <CityReporter
+                            northMost={this.state.northMostCity}
+                            southMost={this.state.southMostCity}
+                            totalPop={this.state.totalPop}
+                        />
+                    </React.Fragment>
+                )}
                 <div id="card-holder">{cards}</div>
             </div>
         );

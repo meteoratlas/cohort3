@@ -1,6 +1,7 @@
 import { Community } from "./model/community";
+import { City } from "./model/city";
 
-export class Fetcher {
+export default class Fetcher {
     static getURL(operation) {
         return "http://127.0.0.1:5000/" + operation;
     }
@@ -25,10 +26,8 @@ export class Fetcher {
         });
         return request;
     }
-    static async addData(dataObj) {
-        // object with a key
-        // use try/catch
-        let request = await this.postData(this.getURL("add"), dataObj);
+    static async addData(city) {
+        let request = await this.postData(this.getURL("add"), city);
         return request;
     }
     static populateCollection(collection) {
@@ -65,22 +64,22 @@ export class Fetcher {
         json.statusText = response.statusText;
         return json;
     }
-}
-
-async function initPage() {
-    let serverInit = await Fetcher.requestFromServer();
-    console.log(serverInit);
-    if (serverInit.length == 0) {
-        // server is empty
-    } else {
-        // server contains data, populate the state
-        Fetcher.populateCollection(serverInit);
-        // loop over data, set com.currentkey to highest key+1
-        let highest = 0;
-        for (let c of serverInit) {
-            if (c.key > highest) highest = c.key;
+    static async initPage() {
+        let serverInit = await Fetcher.requestFromServer();
+        console.log("server init", serverInit);
+        if (serverInit.length === 0) {
+            // server is empty
+            console.log("empty");
+        } else {
+            // server contains data, populate the state
+            const commune = Fetcher.populateCollection(serverInit);
+            // loop over data, set com.currentkey to highest key+1
+            let highest = 0;
+            for (let c of serverInit) {
+                if (c.key > highest) highest = c.key;
+            }
+            //com.currentKey = highest + 1;
+            return { com: commune, key: highest + 1 }; // add this to the app state
         }
-        //com.currentKey = highest + 1;
-        return highest + 1; // add this to the app state
     }
 }
