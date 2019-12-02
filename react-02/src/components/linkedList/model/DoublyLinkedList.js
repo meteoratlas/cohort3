@@ -23,6 +23,7 @@ export class DoublyLinkedList {
         let newNode = new ListNode(subject, amount, null, null);
         this.head = newNode;
         this.length = 1;
+        this.current = this.head;
     }
     first() {
         return this.head;
@@ -32,10 +33,12 @@ export class DoublyLinkedList {
     }
     next(position) {
         if (!position) return position;
+        this.current = this.next;
         return position.next;
     }
     previous(position) {
         if (!position) return position;
+        this.current = this.previous;
         return position.prev;
     }
     insert(position, subject, amount) {
@@ -43,6 +46,7 @@ export class DoublyLinkedList {
         if (position.next) position.next.prev = newNode;
         position.next = newNode;
         this.length += 1;
+        this.current = newNode;
         return newNode;
     }
     delete(position) {
@@ -51,7 +55,14 @@ export class DoublyLinkedList {
         position.next.prev = position.prev;
         this.length -= 1;
         // return node after position, if no node after position, return the last node
-        return position.next ? position.next : position.prev;
+        //return position.next ? position.next : position.prev;
+        if (position.next) {
+            this.current = position.next;
+            return position.next;
+        } else {
+            this.current = position.prev;
+            return position.prev;
+        }
     }
     sumAmount() {
         let currNode = this.head;
@@ -76,6 +87,7 @@ export class DoublyLinkedList {
         let newNode = new ListNode(subject, amount, this.head, null);
         this.head.prev = newNode;
         this.head = newNode;
+        this.current = newNode;
         return this.head;
     }
     clone() {
@@ -88,6 +100,9 @@ export class DoublyLinkedList {
             writeNode = writeNode.next;
             currNode = currNode.next;
         }
+        newList.head = this.head;
+        newList.length = this.length;
+        newList.current = this.current;
 
         return newList;
     }

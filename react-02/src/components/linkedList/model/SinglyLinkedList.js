@@ -96,6 +96,8 @@ export class SinglyLinkedList {
             writeNode = writeNode.next;
             currNode = currNode.next;
         }
+        newList.head = this.head;
+        newList.length = this.length;
 
         return newList;
     }
