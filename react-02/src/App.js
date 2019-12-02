@@ -5,6 +5,7 @@ import TicTacToeApp from "./components/tictactoe/TicTacToeApp";
 import DefaultApp from "./components/DefaultApp";
 import AccountsApp from "./components/accounts/AccountsApp";
 import CitiesApp from "./components/cities/CitiesApp";
+import LinkedListApp from "./components/linkedList/LinkedListApp";
 
 class App extends Component {
     constructor() {
@@ -14,12 +15,12 @@ class App extends Component {
             TICTACTOE: this.renderTicTacToe,
             ACCOUNTS: this.renderAccounts,
             CITY: this.renderCities,
-            LINKEDLIST: this.renderDefault,
+            LINKEDLIST: this.renderLinkedList,
             STACKQUEUE: this.renderDefault
         };
         this.state = {
             lastIcon: "nothing",
-            currentTab: "CITY"
+            currentTab: "LINKEDLIST"
         };
     }
     reportIconClicked = (name, tab) => {
@@ -39,6 +40,9 @@ class App extends Component {
     };
     renderCities = () => {
         return <CitiesApp />;
+    };
+    renderLinkedList = () => {
+        return <LinkedListApp />;
     };
     render() {
         return (
