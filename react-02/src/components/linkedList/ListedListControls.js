@@ -11,6 +11,7 @@ const LinkedListControls = props => {
             return;
         }
         props.insert(subject, amount);
+
         resetAmount();
         resetSubject();
         setResponse("");
@@ -18,10 +19,10 @@ const LinkedListControls = props => {
     return (
         <div>
             <div id="ll-controls-nav">
-                <button>Go to First Node</button>
+                <button onClick={props.first}>Go to First Node</button>
                 <button onClick={props.prev}>Previous Node</button>
                 <button onClick={props.next}>Next Node</button>
-                <button>Go to Last Node</button>
+                <button onClick={props.last}>Go to Last Node</button>
             </div>
             <br />
             <div id="ll-controls-mod">
@@ -37,7 +38,7 @@ const LinkedListControls = props => {
                 ></input>
                 <br />
                 <button onClick={handleSubmit}>Insert New Node Here</button>
-                <button>Delete Current Node</button>
+                <button onClick={props.delete}>Delete Current Node</button>
             </div>
             <p>{response}</p>
         </div>

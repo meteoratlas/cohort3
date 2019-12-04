@@ -29,16 +29,20 @@ export class DoublyLinkedList {
         return this.head;
     }
     last() {
-        return this.head.prev;
+        let last = this.head;
+        while (last.next) {
+            last = last.next;
+        }
+        return last;
     }
     next(position) {
-        if (!position) return position;
-        this.current = this.next;
+        if (!position.next) return position;
+        this.current = position.next;
         return position.next;
     }
     previous(position) {
-        if (!position) return position;
-        this.current = this.previous;
+        if (!position.prev) return position;
+        this.current = position.prev;
         return position.prev;
     }
     insert(position, subject, amount) {
@@ -50,6 +54,11 @@ export class DoublyLinkedList {
         return newNode;
     }
     delete(position) {
+        if (position === this.head) {
+            this.head = null;
+            this.length -= 1;
+            return;
+        }
         if (!position) return position;
         position.prev.next = position.next;
         position.next.prev = position.prev;
