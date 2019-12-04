@@ -120,4 +120,11 @@ export class DoublyLinkedList {
 
         return newList;
     }
+    map(func) {
+        let cur = this.head;
+        while (cur) {
+            func(cur);
+            cur = cur.next;
+        }
+    }
 }
