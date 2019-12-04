@@ -7,17 +7,14 @@ export default defaultList => {
 
     const firstNode = () => {
         setCurrentNode(list.first());
-        //console.log(list.first());
     };
     const lastNode = () => {
         setCurrentNode(list.last());
     };
     const nextNode = () => {
-        //if (currentNode.next) setCurrentNode(currentNode.next);
         setCurrentNode(list.next(currentNode));
     };
     const prevNode = () => {
-        //if (currentNode.prev) setCurrentNode(currentNode.prev);
         setCurrentNode(list.previous(currentNode));
     };
     const insert = (subject, amount) => {
@@ -30,6 +27,7 @@ export default defaultList => {
         let newList = list.clone();
         newList.delete(toDelete);
         setList(newList);
+        setCurrentNode(list.current);
     };
 
     return [

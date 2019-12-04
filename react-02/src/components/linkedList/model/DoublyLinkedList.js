@@ -55,14 +55,19 @@ export class DoublyLinkedList {
     }
     delete(position) {
         if (position === this.head) {
-            this.head = null;
-            this.length -= 1;
+            if (this.head.next) {
+                this.head.next.prev = null;
+                this.head = this.head.next;
+            } else {
+                this.head = null;
+            }
+            this.length--;
             return;
         }
         if (!position) return position;
-        position.prev.next = position.next;
-        position.next.prev = position.prev;
-        this.length -= 1;
+        if (position.prev) position.prev.next = position.next;
+        if (position.next) position.next.prev = position.prev;
+        this.length--;
         // return node after position, if no node after position, return the last node
         //return position.next ? position.next : position.prev;
         if (position.next) {

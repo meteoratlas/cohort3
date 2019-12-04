@@ -28,7 +28,6 @@ const LinkedListApp = () => {
             />
             <p>Subject: {currentNode ? currentNode.subject : null}</p>
             <p>Amount: {currentNode ? currentNode.amount : null}</p>
-            <p>{currentNode !== null ? "exists" : "no exist"}</p>
         </div>
     );
 };
