@@ -122,9 +122,11 @@ export class DoublyLinkedList {
     }
     map(func) {
         let cur = this.head;
+        let arr = [];
         while (cur) {
-            func(cur);
+            arr.push(func(cur));
             cur = cur.next;
         }
+        return arr;
     }
 }

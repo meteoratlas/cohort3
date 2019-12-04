@@ -15,6 +15,17 @@ const LinkedListApp = () => {
         lastNode
     ] = useLinkedList(new DoublyLinkedList("Test Head", 1));
     //
+    const renderNodes = () => {
+        return list.map(x => (
+            <React.Fragment>
+                <div class="ll-node-vis">
+                    <p>{x.subject}</p>
+                    <p>{x.amount}</p>
+                </div>
+                <h4 class="ll-arrow">⮂</h4>
+            </React.Fragment>
+        ));
+    };
     return (
         <div id="ll-app">
             <h2>Linked List</h2>
@@ -28,6 +39,7 @@ const LinkedListApp = () => {
             />
             <p>Subject: {currentNode ? currentNode.subject : null}</p>
             <p>Amount: {currentNode ? currentNode.amount : null}</p>
+            <div id="ll-display">{renderNodes()}</div>
         </div>
     );
 };

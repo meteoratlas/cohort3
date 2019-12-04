@@ -17,4 +17,7 @@ test("testing DoublyLinkedList methods", () => {
     expect(clone.showNodes()).toBe(
         "subject: gym amount: 4 <-> subject: math amount: 10 <-> subject: LA amount: 3 <-> subject: music amount: 7 <-> "
     );
+
+    let mapTest = dl.map(x => x.amount * 2);
+    expect(mapTest).toStrictEqual([8, 20, 6, 14]);
 });

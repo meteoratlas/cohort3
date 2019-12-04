@@ -73,6 +73,27 @@ Custom Apps
     box-shadow: 5px 5px;
 }
 
+#ll-display {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+.ll-node-vis,
+.ll-arrow {
+    display: inline-block;
+    margin: 0 0.5em;
+    background-color: #111;
+    padding: 2%;
+    min-width: 150px;
+}
+
+.ll-arrow {
+    min-width: 30px;
+    margin: 0 0.2em;
+}
+
 /**
  * ----------------------------------------
  * animation wobble-hor-bottom
