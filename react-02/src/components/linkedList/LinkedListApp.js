@@ -17,12 +17,12 @@ const LinkedListApp = () => {
     //
     const renderNodes = () => {
         return list.map(x => (
-            <React.Fragment>
-                <div class="ll-node-vis">
+            <React.Fragment key={Math.random()}>
+                <div className="ll-node-vis">
                     <p>{x.subject}</p>
                     <p>{x.amount}</p>
                 </div>
-                <h4 class="ll-arrow">⮂</h4>
+                <h4 className="ll-arrow">⮂</h4>
             </React.Fragment>
         ));
     };

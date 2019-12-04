@@ -14,6 +14,7 @@ class Icon extends Component {
         this.setState(prevState => ({
             mouseHovered: !prevState.mouseHovered
         }));
+        this.props.hover(this.props.name);
     };
     render() {
         return (
