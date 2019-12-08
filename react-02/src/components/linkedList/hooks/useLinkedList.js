@@ -1,9 +1,12 @@
-import { useState } from "react";
-import { DoublyLinkedList } from "../model/DoublyLinkedList";
+import { useState, useEffect } from "react";
 
 export default defaultList => {
     const [list, setList] = useState(defaultList);
     const [currentNode, setCurrentNode] = useState(list.current);
+
+    useEffect(() => {
+        setCurrentNode(list.current);
+    });
 
     const firstNode = () => {
         setCurrentNode(list.first());
@@ -18,16 +21,18 @@ export default defaultList => {
         setCurrentNode(list.previous(currentNode));
     };
     const insert = (subject, amount) => {
-        list.insert(currentNode, subject, amount);
-        setCurrentNode(currentNode.next);
+        console.log("1", currentNode);
         let newList = list.clone();
+        newList.insert(currentNode, subject, amount);
         setList(newList);
+        // setCurrentNode(currentNode.next);
+        console.log("2", currentNode);
     };
     const deleteNode = toDelete => {
         let newList = list.clone();
         newList.delete(toDelete);
         setList(newList);
-        setCurrentNode(list.current);
+        setCurrentNode(newList.current);
     };
 
     return [

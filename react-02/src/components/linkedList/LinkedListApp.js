@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React from "react";
 import LinkedListControls from "./ListedListControls";
 import { DoublyLinkedList } from "./model/DoublyLinkedList";
 import useLinkedList from "./hooks/useLinkedList";
@@ -13,7 +13,7 @@ const LinkedListApp = () => {
         deleteNode,
         firstNode,
         lastNode
-    ] = useLinkedList(new DoublyLinkedList("Test Head", 1));
+    ] = useLinkedList(new DoublyLinkedList("Apples", 1));
     //
     const renderNodes = () => {
         return list.map(x => (
@@ -26,6 +26,7 @@ const LinkedListApp = () => {
             </React.Fragment>
         ));
     };
+
     return (
         <div id="ll-app">
             <h2>Linked List</h2>
@@ -37,8 +38,10 @@ const LinkedListApp = () => {
                 insert={insert}
                 delete={() => deleteNode(currentNode)}
             />
-            <p>Subject: {currentNode ? currentNode.subject : null}</p>
-            <p>Amount: {currentNode ? currentNode.amount : null}</p>
+            <p>
+                Subject: {currentNode ? currentNode.subject : "List is empty"}
+            </p>
+            <p>Amount: {currentNode ? currentNode.amount : "List is empty"}</p>
             <div id="ll-display">{renderNodes()}</div>
         </div>
     );

@@ -26,6 +26,7 @@ export class DoublyLinkedList {
         this.current = this.head;
     }
     first() {
+        this.current = this.head;
         return this.head;
     }
     last() {
@@ -33,6 +34,7 @@ export class DoublyLinkedList {
         while (last.next) {
             last = last.next;
         }
+        this.current = last;
         return last;
     }
     next(position) {
@@ -46,6 +48,10 @@ export class DoublyLinkedList {
         return position.prev;
     }
     insert(position, subject, amount) {
+        if (!this.head) {
+            this.head = new ListNode(subject, amount);
+            return;
+        }
         let newNode = new ListNode(subject, amount, position.next, position);
         if (position.next) position.next.prev = newNode;
         position.next = newNode;
@@ -54,12 +60,15 @@ export class DoublyLinkedList {
         return newNode;
     }
     delete(position) {
+        // if (!this.head) return;
         if (position === this.head) {
             if (this.head.next) {
                 this.head.next.prev = null;
                 this.head = this.head.next;
+                this.current = this.head;
             } else {
                 this.head = null;
+                this.current = null;
             }
             this.length--;
             return;
@@ -105,6 +114,7 @@ export class DoublyLinkedList {
         return this.head;
     }
     clone() {
+        if (!this.head) return new DoublyLinkedList(null, null);
         let newList = new DoublyLinkedList(this.head.subject, this.head.amount);
         let currNode = this.head.next;
         let writeNode = newList.head;
