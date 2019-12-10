@@ -1,4 +1,3 @@
-// import { DoublyLinkedList } from "../../linkedList/model/DoublyLinkedList";
 import { DoublyLinkedList } from "../../linkedList/model/DoublyLinkedList";
 
 export default class Stack extends DoublyLinkedList {

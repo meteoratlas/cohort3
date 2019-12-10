@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useFormState from "./hooks/useInputState";
+import useFormState from "../hooks/useInputState";
 
 const LinkedListControls = props => {
     const [subject, setSubject, resetSubject] = useFormState("");
