@@ -60,7 +60,7 @@ export class DoublyLinkedList {
         return newNode;
     }
     delete(position) {
-        // if (!this.head) return;
+        if (!this.head.next) return null;
         if (position === this.head) {
             if (this.head.next) {
                 this.head.next.prev = null;
