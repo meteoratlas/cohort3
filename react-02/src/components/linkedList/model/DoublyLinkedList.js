@@ -1,7 +1,9 @@
+const uuidv4 = require("uuid/v4");
 class ListNode {
     constructor(subject, amount, next, prev) {
         this.subject = subject;
         this.amount = amount;
+        this.id = uuidv4();
         this.next = next;
         this.prev = prev;
     }
@@ -26,10 +28,12 @@ export class DoublyLinkedList {
         this.current = this.head;
     }
     first() {
+        if (!this.head) return;
         this.current = this.head;
         return this.head;
     }
     last() {
+        if (!this.head) return;
         let last = this.head;
         while (last.next) {
             last = last.next;
@@ -38,18 +42,19 @@ export class DoublyLinkedList {
         return last;
     }
     next(position) {
+        if (!this.head) return;
         if (!position.next) return position;
         this.current = position.next;
         return position.next;
     }
     previous(position) {
+        if (!this.head) return;
         if (!position.prev) return position;
         this.current = position.prev;
         return position.prev;
     }
     insert(position, subject, amount) {
         if (!this.head) {
-            console.log("in dll insert");
             this.head = new ListNode(subject, amount, null, null);
             return;
         }
@@ -62,21 +67,16 @@ export class DoublyLinkedList {
     }
     delete(position) {
         if (!this.head) return null;
-        //if (!this.head.next) return null;
         if (!position) {
-            console.log("no position");
             this.current = null;
             return null;
         }
         if (position === this.head) {
-            console.log("position head");
             if (this.head.next) {
-                console.log("node after head");
                 this.head.next.prev = null;
                 this.head = this.head.next;
                 this.current = this.head;
             } else {
-                console.log("no node after head");
                 this.head = null;
                 this.current = null;
             }
@@ -87,7 +87,6 @@ export class DoublyLinkedList {
         if (position.next) position.next.prev = position.prev;
         this.length--;
         // return node after position, if no node after position, return the last node
-        //return position.next ? position.next : position.prev;
         if (position.next) {
             this.current = position.next;
             return position.next;

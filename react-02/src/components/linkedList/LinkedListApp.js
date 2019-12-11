@@ -13,14 +13,14 @@ const LinkedListApp = () => {
         deleteNode,
         firstNode,
         lastNode
-    ] = useLinkedList(new DoublyLinkedList(null, null));
+    ] = useLinkedList(new DoublyLinkedList("Apples", 2));
     //
     const renderNodes = () => {
         return list.map(x => (
-            <React.Fragment key={Math.random()}>
+            <React.Fragment key={x.id}>
                 <div className="ll-node-vis">
-                    <p>{x.subject}</p>
-                    <p>{x.amount}</p>
+                    <p>{x.subject ? x.subject : "[Empty]"}</p>
+                    <p>{x.amount ? x.amount : "[Empty]"}</p>
                 </div>
                 <h4 className="ll-arrow">⮂</h4>
             </React.Fragment>
