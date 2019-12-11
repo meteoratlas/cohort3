@@ -141,7 +141,8 @@ Custom Apps
 }
 
 .ll-node-vis,
-.ll-arrow {
+.ll-arrow,
+.sq-node-vis {
     display: inline-block;
     margin: 0 0.5em;
     background-color: #111;
@@ -152,6 +153,24 @@ Custom Apps
 .ll-arrow {
     min-width: 30px;
     margin: 0 0.2em;
+}
+
+#sq-vis-container {
+    display: flex;
+    align-content: space-between;
+}
+
+#stack-vis,
+#queue-vis {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    white-space: nowrap;
+    min-width: 300px;
+    max-height: 600px;
+}
+
+.sq-node-vis {
+    display: block;
 }
 
 /**

@@ -5,6 +5,7 @@ import AccountCard from "./AccountCard";
 import { Account, AccountController } from "./model/Account";
 //import { AnimateOnChange } from "react-animation";
 import AccountReporter from "./AccountReporter";
+import { ThemeContextConsumer, Context } from "../../ThemeContextProvider";
 
 class AccountsApp extends Component {
     constructor(props) {
@@ -18,6 +19,7 @@ class AccountsApp extends Component {
         };
         this.cards = [];
     }
+    static contextType = Context;
     addNewAccount = (name, balance) => {
         let newAcc = new Account(name, balance, this.state.maxID);
         let newAccounts = [...this.state.cntrl.accounts, newAcc];
@@ -83,9 +85,10 @@ class AccountsApp extends Component {
         );
     };
     render() {
+        const theme = this.context;
         const cards = this.populateCards(this.state.cntrl.accounts);
         return (
-            <div id="account-app">
+            <div id="account-app" style={{ fontSize: theme.fontSize }}>
                 <h2>Accounts</h2>
                 <AccountManager
                     controller={this.state.cntrl}

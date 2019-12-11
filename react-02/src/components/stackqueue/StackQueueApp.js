@@ -3,11 +3,9 @@ import StackQueueForm from "./StackQueueForm";
 import StackQueueVis from "./StackQueueVis";
 import Stack from "./model/Stack";
 import Queue from "./model/Queue";
+import { ThemeContextConsumer } from "../../ThemeContextProvider";
 
 const StackQueueApp = () => {
-    //const [stack, addToStack, popStack] = useStack(new Stack("first", 1));
-    //const [queue, addToQueue, popQueue] = useStack(new Queue("first", 1));
-
     const [stack, setStack] = useState(new Stack("stack 1", 1));
     const [queue, setQueue] = useState(new Queue("queue 1", 1));
 
@@ -47,26 +45,28 @@ const StackQueueApp = () => {
                     <p>{x.subject ? x.subject : "[Empty]"}</p>
                     <p>{x.amount ? x.amount : "[Empty]"}</p>
                 </div>
-                {/* <h4 className="sq-arrow">⮂</h4> */}
             </React.Fragment>
         ));
     };
 
     return (
-        <div id="stack-queue-app">
-            <h2>Stacks and Queue</h2>
-            <StackQueueForm
-                addToStack={addToStack}
-                popFromStack={popFromStack}
-                addToQueue={addToQueue}
-                popFromQueue={popFromQueue}
-            />
-            <div id="sq-vis-container">{}</div>
-            <StackQueueVis
-                stackNodes={renderNodes(stack)}
-                queueNodes={renderNodes(queue)}
-            />
-        </div>
+        <ThemeContextConsumer>
+            {theme => (
+                <div id="stack-queue-app" style={{ fontSize: theme.fontSize }}>
+                    <h2>Stacks and Queue</h2>
+                    <StackQueueForm
+                        addToStack={addToStack}
+                        popFromStack={popFromStack}
+                        addToQueue={addToQueue}
+                        popFromQueue={popFromQueue}
+                    />
+                    <StackQueueVis
+                        stackNodes={renderNodes(stack)}
+                        queueNodes={renderNodes(queue)}
+                    />
+                </div>
+            )}
+        </ThemeContextConsumer>
     );
 };
 

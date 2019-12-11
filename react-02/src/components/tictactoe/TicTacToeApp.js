@@ -3,6 +3,7 @@ import "./index.css";
 import Board from "./Board";
 import NewGame from "./NewGame";
 import minimax from "./minimax";
+import { ThemeContextConsumer, Context } from "../../ThemeContextProvider";
 
 class TicTacToeApp extends Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class TicTacToeApp extends Component {
         };
         this.defaultState = this.state;
     }
+    static contextType = Context;
     startGame = (mode, playerFirst) => {
         this.setState(
             {
@@ -95,6 +97,7 @@ class TicTacToeApp extends Component {
         });
     }
     render() {
+        const theme = this.context;
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
@@ -139,14 +142,13 @@ class TicTacToeApp extends Component {
             </React.Fragment>
         );
         return (
-            <React.Fragment>
+            <div style={{ fontSize: theme.fontSize }}>
                 {newGame}
                 {this.state.gameStarted ? gameBoard : null}
-            </React.Fragment>
+            </div>
         );
     }
 }
-
 export default TicTacToeApp;
 
 function calculateWinner(squares) {

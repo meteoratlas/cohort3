@@ -2,6 +2,7 @@ import React from "react";
 import LinkedListControls from "./ListedListControls";
 import { DoublyLinkedList } from "./model/DoublyLinkedList";
 import useLinkedList from "../hooks/useLinkedList";
+import { ThemeContextConsumer } from "../../ThemeContextProvider";
 
 const LinkedListApp = () => {
     const [
@@ -28,22 +29,30 @@ const LinkedListApp = () => {
     };
 
     return (
-        <div id="ll-app">
-            <h2>Linked List</h2>
-            <LinkedListControls
-                first={firstNode}
-                next={nextNode}
-                prev={prevNode}
-                last={lastNode}
-                insert={insert}
-                delete={() => deleteNode(currentNode)}
-            />
-            <p>
-                Subject: {currentNode ? currentNode.subject : "List is empty"}
-            </p>
-            <p>Amount: {currentNode ? currentNode.amount : "List is empty"}</p>
-            <div id="ll-display">{renderNodes()}</div>
-        </div>
+        <ThemeContextConsumer>
+            {theme => (
+                <div id="ll-app" style={{ fontSize: theme.fontSize }}>
+                    <h2>Linked List</h2>
+                    <LinkedListControls
+                        first={firstNode}
+                        next={nextNode}
+                        prev={prevNode}
+                        last={lastNode}
+                        insert={insert}
+                        delete={() => deleteNode(currentNode)}
+                    />
+                    <p>
+                        Subject:{" "}
+                        {currentNode ? currentNode.subject : "List is empty"}
+                    </p>
+                    <p>
+                        Amount:{" "}
+                        {currentNode ? currentNode.amount : "List is empty"}
+                    </p>
+                    <div id="ll-display">{renderNodes()}</div>
+                </div>
+            )}
+        </ThemeContextConsumer>
     );
 };
 

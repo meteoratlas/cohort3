@@ -4,6 +4,7 @@ import { Community } from "./model/community";
 import CityCard from "./CityCard";
 import CityReporter from "./CityReporter";
 import Fetcher from "./Fetcher";
+import { ThemeContextConsumer, Context } from "../../ThemeContextProvider";
 
 class CitiesApp extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class CitiesApp extends Component {
             totalPop: 0
         };
     }
+    static contextType = Context;
     serverStatus() {
         if (this.state.serverError) {
             return (
@@ -115,6 +117,7 @@ class CitiesApp extends Component {
         Fetcher.updatePop(city);
     };
     render() {
+        const theme = this.context;
         let cards = this.state.community.cities.map(a => {
             return (
                 <CityCard
@@ -127,7 +130,7 @@ class CitiesApp extends Component {
             );
         });
         return (
-            <div id="cities-app">
+            <div id="cities-app" style={{ fontSize: theme.fontSize }}>
                 <h2>Cities and Community</h2>
                 {this.state.serverError ? (
                     this.serverStatus()

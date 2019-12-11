@@ -8,6 +8,7 @@ import CitiesApp from "./components/cities/CitiesApp";
 import LinkedListApp from "./components/linkedList/LinkedListApp";
 import StackQueueApp from "./components/stackqueue/StackQueueApp";
 import SettingsApp from "./components/settings/SettingsApp";
+import { ThemeContextProvider } from "./ThemeContextProvider";
 
 class App extends Component {
     constructor() {
@@ -23,7 +24,7 @@ class App extends Component {
         };
         this.state = {
             lastIcon: "nothing",
-            currentTab: "LINKEDLIST",
+            currentTab: "STACKQUEUE",
             hovered: ""
         };
     }
@@ -59,62 +60,64 @@ class App extends Component {
     };
     render() {
         return (
-            <div className="App .wobble-hor-bottom">
-                <header>
-                    <Icon
-                        pic="house.svg"
-                        name="home"
-                        tab="DEFAULT"
-                        callback={this.reportIconClicked}
-                        hover={this.reportIconHovered}
-                    />
-                    <Icon
-                        pic="tic.svg"
-                        name="tic-tac-toe"
-                        tab="TICTACTOE"
-                        callback={this.reportIconClicked}
-                        hover={this.reportIconHovered}
-                    />
-                    <Icon
-                        pic="coins.svg"
-                        name="accounts"
-                        tab="ACCOUNTS"
-                        callback={this.reportIconClicked}
-                        hover={this.reportIconHovered}
-                    />
-                    <Icon
-                        pic="city.svg"
-                        name="city"
-                        tab="CITY"
-                        callback={this.reportIconClicked}
-                        hover={this.reportIconHovered}
-                    />
-                    <Icon
-                        pic="chain.svg"
-                        name="linkedlist"
-                        tab="LINKEDLIST"
-                        callback={this.reportIconClicked}
-                        hover={this.reportIconHovered}
-                    />
-                    <Icon
-                        pic="stack.svg"
-                        name="stackqueue"
-                        tab="STACKQUEUE"
-                        callback={this.reportIconClicked}
-                        hover={this.reportIconHovered}
-                    />
-                    <Icon
-                        pic="settings-knobs.svg"
-                        name="settings"
-                        tab="SETTINGS"
-                        callback={this.reportIconClicked}
-                        hover={this.reportIconHovered}
-                    />
-                </header>
-                <div className="App-body">
-                    {this.tabs[this.state.currentTab]()}
+            <ThemeContextProvider>
+                <div className="App .wobble-hor-bottom">
+                    <header>
+                        <Icon
+                            pic="house.svg"
+                            name="home"
+                            tab="DEFAULT"
+                            callback={this.reportIconClicked}
+                            hover={this.reportIconHovered}
+                        />
+                        <Icon
+                            pic="tic.svg"
+                            name="tic-tac-toe"
+                            tab="TICTACTOE"
+                            callback={this.reportIconClicked}
+                            hover={this.reportIconHovered}
+                        />
+                        <Icon
+                            pic="coins.svg"
+                            name="accounts"
+                            tab="ACCOUNTS"
+                            callback={this.reportIconClicked}
+                            hover={this.reportIconHovered}
+                        />
+                        <Icon
+                            pic="city.svg"
+                            name="city"
+                            tab="CITY"
+                            callback={this.reportIconClicked}
+                            hover={this.reportIconHovered}
+                        />
+                        <Icon
+                            pic="chain.svg"
+                            name="linkedlist"
+                            tab="LINKEDLIST"
+                            callback={this.reportIconClicked}
+                            hover={this.reportIconHovered}
+                        />
+                        <Icon
+                            pic="stack.svg"
+                            name="stackqueue"
+                            tab="STACKQUEUE"
+                            callback={this.reportIconClicked}
+                            hover={this.reportIconHovered}
+                        />
+                        <Icon
+                            pic="settings-knobs.svg"
+                            name="settings"
+                            tab="SETTINGS"
+                            callback={this.reportIconClicked}
+                            hover={this.reportIconHovered}
+                        />
+                    </header>
+                    <div className="App-body">
+                        {this.tabs[this.state.currentTab]()}
+                    </div>
                 </div>
-            </div>
+            </ThemeContextProvider>
         );
     }
 }
