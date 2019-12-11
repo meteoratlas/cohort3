@@ -49,7 +49,8 @@ export class DoublyLinkedList {
     }
     insert(position, subject, amount) {
         if (!this.head) {
-            this.head = new ListNode(subject, amount);
+            console.log("in dll insert");
+            this.head = new ListNode(subject, amount, null, null);
             return;
         }
         let newNode = new ListNode(subject, amount, position.next, position);
@@ -60,20 +61,28 @@ export class DoublyLinkedList {
         return newNode;
     }
     delete(position) {
-        if (!this.head.next) return null;
+        if (!this.head) return null;
+        //if (!this.head.next) return null;
+        if (!position) {
+            console.log("no position");
+            this.current = null;
+            return null;
+        }
         if (position === this.head) {
+            console.log("position head");
             if (this.head.next) {
+                console.log("node after head");
                 this.head.next.prev = null;
                 this.head = this.head.next;
                 this.current = this.head;
             } else {
+                console.log("no node after head");
                 this.head = null;
                 this.current = null;
             }
             this.length--;
             return;
         }
-        if (!position) return position;
         if (position.prev) position.prev.next = position.next;
         if (position.next) position.next.prev = position.prev;
         this.length--;

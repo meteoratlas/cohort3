@@ -1,7 +1,7 @@
 import React from "react";
 import LinkedListControls from "./ListedListControls";
 import { DoublyLinkedList } from "./model/DoublyLinkedList";
-import useLinkedList from "./hooks/useLinkedList";
+import useLinkedList from "../hooks/useLinkedList";
 
 const LinkedListApp = () => {
     const [
@@ -13,7 +13,7 @@ const LinkedListApp = () => {
         deleteNode,
         firstNode,
         lastNode
-    ] = useLinkedList(new DoublyLinkedList("Apples", 1));
+    ] = useLinkedList(new DoublyLinkedList(null, null));
     //
     const renderNodes = () => {
         return list.map(x => (
