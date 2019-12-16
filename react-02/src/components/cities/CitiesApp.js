@@ -58,12 +58,21 @@ class CitiesApp extends Component {
             })
             .then(d => {
                 const c = Fetcher.populateCollection(d);
-                this.setState({ community: c }, () => {
-                    this.findHighestKey();
-                    this.updateGlobalCityValues();
-                });
+                if (this.componentMounted) {
+                    this.setState({ community: c }, () => {
+                        this.findHighestKey();
+                        this.updateGlobalCityValues();
+                    });
+                }
             })
-            .catch(error => this.setState({ error, serverError: true }));
+            .catch(error => {
+                if (this.componentMounted) {
+                    this.setState({
+                        error,
+                        serverError: true
+                    });
+                }
+            });
     }
     componentWillUnmount() {
         this.componentMounted = false;
