@@ -124,6 +124,7 @@ class TicTacToeApp extends Component {
         );
         let gameBoard = (
             <React.Fragment>
+                <h2>Tic - Tac - Toe</h2>
                 <div className="game">
                     <div className="game-board">
                         <Board
@@ -132,7 +133,7 @@ class TicTacToeApp extends Component {
                         />
                     </div>
                     <div className="game-info">
-                        <div>{status}</div>
+                        <h3>{status}</h3>
                         <ol>{moves}</ol>
                     </div>
                 </div>

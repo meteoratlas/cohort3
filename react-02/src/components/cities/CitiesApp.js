@@ -7,8 +7,10 @@ import Fetcher from "./Fetcher";
 import { ThemeContextConsumer, Context } from "../../ThemeContextProvider";
 
 class CitiesApp extends Component {
+    componentMounted = false;
     constructor(props) {
         super(props);
+
         this.state = {
             serverError: false,
             maxKey: 0,
@@ -43,12 +45,15 @@ class CitiesApp extends Component {
         });
     };
     componentDidMount() {
+        this.componentMounted = true;
         fetch("http://127.0.0.1:5000/all")
             .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Server could not be contacted.");
+                if (this.componentMounted) {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error("Server could not be contacted.");
+                    }
                 }
             })
             .then(d => {
@@ -59,6 +64,9 @@ class CitiesApp extends Component {
                 });
             })
             .catch(error => this.setState({ error, serverError: true }));
+    }
+    componentWillUnmount() {
+        this.componentMounted = false;
     }
     findHighestKey = () => {
         let highest = 0;

@@ -3,7 +3,6 @@ import { DoublyLinkedList } from "../../linkedList/model/DoublyLinkedList";
 export default class Queue extends DoublyLinkedList {
     pop() {
         let first = super.first();
-        console.log(first);
         super.delete(super.first());
         return first;
     }

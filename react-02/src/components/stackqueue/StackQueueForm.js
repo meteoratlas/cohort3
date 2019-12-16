@@ -7,7 +7,6 @@ const StackQueueForm = props => {
     const [response, setResponse] = useState("");
 
     const onFormSubmit = operation => {
-        console.log(operation);
         if (!subject || !amount) {
             setResponse("Please ensure both fields are filled out.");
             return;

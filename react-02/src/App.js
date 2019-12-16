@@ -25,7 +25,8 @@ class App extends Component {
         this.state = {
             lastIcon: "nothing",
             currentTab: "STACKQUEUE",
-            hovered: ""
+            hovered: "",
+            theme: {}
         };
     }
     reportIconClicked = (name, tab) => {

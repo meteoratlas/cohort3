@@ -7,6 +7,10 @@ ul {
     padding-left: 30px;
 }
 
+li button {
+    display: none;
+}
+
 .board-row:after {
     clear: both;
     content: "";
@@ -42,6 +46,7 @@ ul {
 }
 
 .game {
+    margin-top: 10%;
     display: flex;
     flex-direction: row;
 }

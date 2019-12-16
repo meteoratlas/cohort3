@@ -37,7 +37,6 @@ class NewGame extends Component {
 
         return (
             <div id="new-game-dialog">
-                <h2>Tic - Tac - Toe</h2>
                 <p>Start a new game with...</p>
                 <label>Player vs. Player</label>
                 <input
