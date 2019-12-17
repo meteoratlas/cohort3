@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import { ThemeContextConsumer, Context } from "../../ThemeContextProvider";
 
 const SettingsApp = () => {
+    const sizes = { "0.75rem": "small", "1rem": "normal", "1.25rem": "large" };
     const context = useContext(Context);
     const onFontSizeChange = e => {
-        //console.log(e.target.value);
         context.setFontSize(e.target.value);
     };
     return (
@@ -15,7 +15,7 @@ const SettingsApp = () => {
                     <div id="settings-form-elements">
                         <label>Select Text Size</label>
                         <select
-                            value={theme.onFontSizeChange}
+                            value={sizes[theme.fontSize]}
                             onChange={onFontSizeChange}
                             name="text-size"
                         >

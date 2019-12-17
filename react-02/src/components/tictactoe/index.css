@@ -51,6 +51,10 @@ li button {
     flex-direction: row;
 }
 
+input {
+    width: inherit;
+}
+
 .game-info {
     margin-left: 20px;
 }

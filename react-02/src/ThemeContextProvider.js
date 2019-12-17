@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 const Context = React.createContext();
-//const { Provider, Consumer } = React.createContext();
 const { Provider, Consumer } = Context;
 
 class ThemeContextProvider extends Component {
@@ -20,9 +19,7 @@ class ThemeContextProvider extends Component {
         if (size === "large") {
             s = "1.25rem";
         }
-        this.setState(state => {
-            this.setState({ fontSize: s });
-        });
+        this.setState({ fontSize: s });
     };
     toggleTheme = () => {
         this.setState(state => {
@@ -31,7 +28,10 @@ class ThemeContextProvider extends Component {
     };
     render() {
         return (
-            <Provider value={this.state} textSizeCallback={this.setFontSize}>
+            <Provider
+                value={this.state}
+                textSizeCallback={() => this.setFontSize}
+            >
                 {this.props.children}
             </Provider>
         );
