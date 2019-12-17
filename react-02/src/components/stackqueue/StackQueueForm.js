@@ -24,8 +24,20 @@ const StackQueueForm = props => {
     };
     return (
         <div id="sq-form">
-            <input name="subject" value={subject} onChange={setSubject}></input>
-            <input name="amount" value={amount} onChange={setAmount}></input>
+            <div id="sq-form-inputs">
+                <input
+                    name="subject"
+                    placeholder="Subject"
+                    value={subject}
+                    onChange={setSubject}
+                ></input>
+                <input
+                    name="amount"
+                    placeholder="Amount"
+                    value={amount}
+                    onChange={setAmount}
+                ></input>
+            </div>
             <div id="stack-buttons">
                 <button onClick={() => onFormSubmit("addToStack")}>
                     Add to Stack

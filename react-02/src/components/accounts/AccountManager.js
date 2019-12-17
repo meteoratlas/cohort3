@@ -76,20 +76,26 @@ class AccountManager extends Component {
         return (
             <div>
                 <label htmlFor="newAccountName">Name of New Account</label>
+                <br />
                 <input
                     name="newAccountName"
                     id="newAccountName"
+                    placeholder="Account Name"
                     value={this.state.newAccountName}
                     onChange={this.handleInputChange}
                 ></input>
+                <br />
                 <label htmlFor="newAccountBalance">Initial Balance</label>
+                <br />
                 <input
                     name="newAccountBalance"
                     id="newAccountBalance"
                     type="number"
+                    placeholder="Initial Account Balance"
                     value={this.state.newAccountBalance}
                     onChange={this.handleInputChange}
                 ></input>
+                <br />
                 <br />
                 <button onClick={this.createAccount}>Create Account</button>
                 <br />

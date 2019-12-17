@@ -152,7 +152,7 @@ class CitiesApp extends Component {
                 {this.state.serverError ? (
                     this.serverStatus()
                 ) : (
-                    <React.Fragment>
+                    <div id="city-interface">
                         <CityCreatorForm
                             community={this.state.community}
                             callback={this.addNewCity}
@@ -163,9 +163,9 @@ class CitiesApp extends Component {
                             southMost={this.state.southMostCity}
                             totalPop={this.state.totalPop}
                         />
-                    </React.Fragment>
+                    </div>
                 )}
-                <div id="card-holder">{cards}</div>
+                <div className="card-holder">{cards}</div>
             </div>
         );
     }

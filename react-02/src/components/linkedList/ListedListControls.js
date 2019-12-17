@@ -28,11 +28,13 @@ const LinkedListControls = props => {
             <div id="ll-controls-mod">
                 <input
                     name="subject"
+                    placeholder="Subject"
                     value={subject}
                     onChange={setSubject}
                 ></input>
                 <input
                     name="amount"
+                    placeholder="Amount"
                     value={amount}
                     onChange={setAmount}
                 ></input>

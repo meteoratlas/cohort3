@@ -6,12 +6,22 @@ const { Provider, Consumer } = Context;
 class ThemeContextProvider extends Component {
     constructor(props) {
         super(props);
-        this.state = { textSize: "12px", useDarkTheme: false };
+        this.state = {
+            fontSize: "1rem",
+            setFontSize: this.setFontSize,
+            useDarkTheme: false
+        };
     }
-    setTextSize = size => {
-        if (size < 0.2 || size > 2) return;
+    setFontSize = size => {
+        let s = "1rem";
+        if (size === "small") {
+            s = "0.75rem";
+        }
+        if (size === "large") {
+            s = "1.25rem";
+        }
         this.setState(state => {
-            this.setState({ textSize: size });
+            this.setState({ fontSize: s });
         });
     };
     toggleTheme = () => {
@@ -21,7 +31,7 @@ class ThemeContextProvider extends Component {
     };
     render() {
         return (
-            <Provider value={{ fontSize: "1rem" }}>
+            <Provider value={this.state} textSizeCallback={this.setFontSize}>
                 {this.props.children}
             </Provider>
         );

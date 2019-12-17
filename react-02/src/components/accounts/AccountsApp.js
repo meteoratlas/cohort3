@@ -90,16 +90,18 @@ class AccountsApp extends Component {
         return (
             <div id="account-app" style={{ fontSize: theme.fontSize }}>
                 <h2>Accounts</h2>
-                <AccountManager
-                    controller={this.state.cntrl}
-                    callback={this.addNewAccount}
-                />
-                <AccountReporter
-                    highestAccount={this.state.highestValueAcc}
-                    lowestAccount={this.state.lowestValueAcc}
-                    allFunds={this.state.allAccountsSum}
-                />
-                <div id="card-holder">{cards}</div>
+                <div id="account-interface">
+                    <AccountManager
+                        controller={this.state.cntrl}
+                        callback={this.addNewAccount}
+                    />
+                    <AccountReporter
+                        highestAccount={this.state.highestValueAcc}
+                        lowestAccount={this.state.lowestValueAcc}
+                        allFunds={this.state.allAccountsSum}
+                    />
+                </div>
+                <div className="card-holder">{cards}</div>
             </div>
         );
     }

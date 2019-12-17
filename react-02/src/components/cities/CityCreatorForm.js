@@ -88,20 +88,25 @@ class CityCreatorForm extends Component {
                 <div id="city-creator">
                     <div id="city-maker">
                         <label htmlFor="new-city-name">New City Name</label>
+                        <br />
                         <input
                             type="text"
                             id="new-city-name"
                             name="newCityName"
+                            placeholder="Name of New City"
                             value={this.state.newCityName}
                             onChange={this.handleInputChange}
                         />
+                        <br />
                         <label htmlFor="new-city-lat">New City Latitude</label>
+                        <br />
                         <input
                             type="number"
                             min="-90"
                             max="90"
                             id="new-city-lat"
                             name="newCityLat"
+                            placeholder="New City's Latitude"
                             value={this.state.newCityLat}
                             onChange={this.handleInputChange}
                         />
@@ -109,23 +114,28 @@ class CityCreatorForm extends Component {
                         <label htmlFor="new-city-long">
                             New City Longitude
                         </label>
+                        <br />
                         <input
                             type="number"
                             min="-180"
                             max="180"
                             id="new-city-long"
                             name="newCityLong"
+                            placeholder="New City's Longitude"
                             value={this.state.newCityLong}
                             onChange={this.handleInputChange}
                         />
+                        <br />
                         <label htmlFor="new-city-pop">
                             New City Population
                         </label>
+                        <br />
                         <input
                             type="number"
                             min="1"
                             id="new-city-pop"
                             name="newCityPop"
+                            placeholder="New City's Population"
                             value={this.state.newCityPop}
                             onChange={this.handleInputChange}
                         />
