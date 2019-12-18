@@ -4,7 +4,7 @@ import { Community } from "./model/community";
 import CityCard from "./CityCard";
 import CityReporter from "./CityReporter";
 import Fetcher from "./Fetcher";
-import { ThemeContextConsumer, Context } from "../../ThemeContextProvider";
+import { Context } from "../../ThemeContextProvider";
 
 class CitiesApp extends Component {
     componentMounted = false;

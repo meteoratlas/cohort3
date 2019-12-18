@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-//import update from "immutability-helper";
 import AccountManager from "./AccountManager";
 import AccountCard from "./AccountCard";
 import { Account, AccountController } from "./model/Account";
 //import { AnimateOnChange } from "react-animation";
 import AccountReporter from "./AccountReporter";
-import { ThemeContextConsumer, Context } from "../../ThemeContextProvider";
+import { Context } from "../../ThemeContextProvider";
 
 class AccountsApp extends Component {
     constructor(props) {

@@ -1,6 +1,5 @@
 import React from "react";
 import logo from "../logo.svg";
-import ThemeContext from "./ThemeContext";
 import { ThemeContextConsumer } from "../ThemeContextProvider";
 
 const DefaultApp = props => {

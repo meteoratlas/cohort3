@@ -3,7 +3,7 @@ import "./index.css";
 import Board from "./Board";
 import NewGame from "./NewGame";
 import minimax from "./minimax";
-import { ThemeContextConsumer, Context } from "../../ThemeContextProvider";
+import { Context } from "../../ThemeContextProvider";
 
 class TicTacToeApp extends Component {
     constructor(props) {

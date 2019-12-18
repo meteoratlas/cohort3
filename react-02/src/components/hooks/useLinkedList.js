@@ -7,7 +7,7 @@ export default defaultList => {
 
     useEffect(() => {
         setCurrentNode(list.current);
-    });
+    }, [list]);
 
     const firstNode = () => {
         setCurrentNode(list.first());
