@@ -10,14 +10,7 @@ const SettingsApp = () => {
     return (
         <ThemeContextConsumer>
             {theme => (
-                <div
-                    id="settings-app"
-                    style={{
-                        fontSize: theme.fontSize,
-                        color: theme.currentTheme.fg,
-                        backgroundColor: theme.currentTheme
-                    }}
-                >
+                <div id="settings-app">
                     <h2>Settings</h2>
                     <div id="settings-form-elements">
                         <label>Select Text Size</label>

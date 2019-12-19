@@ -8,7 +8,7 @@ import CitiesApp from "./components/cities/CitiesApp";
 import LinkedListApp from "./components/linkedList/LinkedListApp";
 import StackQueueApp from "./components/stackqueue/StackQueueApp";
 import SettingsApp from "./components/settings/SettingsApp";
-import { ThemeContextProvider, Context } from "./ThemeContextProvider";
+import { Context } from "./ThemeContextProvider";
 
 class App extends Component {
     constructor() {
@@ -67,7 +67,8 @@ class App extends Component {
                 style={{
                     fontSize: theme.fontSize,
                     color: theme.currentTheme.fg,
-                    backgroundColor: theme.currentTheme.bg
+                    backgroundColor: theme.currentTheme.bg,
+                    borderColor: theme.currentTheme.fg
                 }}
             >
                 <header>

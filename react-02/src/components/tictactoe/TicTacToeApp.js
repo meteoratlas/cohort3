@@ -30,8 +30,6 @@ class TicTacToeApp extends Component {
                 gameStarted: true,
                 computerPlayer: mode === "true" ? true : false,
                 compIsNext: playerFirst === "false" ? true : false
-                // this next line causes trouble
-                //xIsNext: !this.state.xIsNext
             },
             () => {
                 if (this.state.computerPlayer && this.state.compIsNext) {
@@ -84,7 +82,6 @@ class TicTacToeApp extends Component {
             this.state.xIsNext === this.state.compIsX
         );
         squares[choice] = this.state.xIsNext ? "X" : "O";
-        //this.state.xIsNext === this.state.compIsNext ? "X" : "O";
         this.setState({
             history: history.concat([
                 {
@@ -93,7 +90,6 @@ class TicTacToeApp extends Component {
             ]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext
-            //compIsNext: !this.state.compIsNext
         });
     }
     render() {
@@ -105,8 +101,8 @@ class TicTacToeApp extends Component {
         const moves = history.map((step, move) => {
             const desc = move ? "Go to move #" + move : "Go to game start";
             return (
-                <li key={move}>
-                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
+                <li key={move} onClick={() => this.jumpTo(move)}>
+                    <a>{desc}</a>
                 </li>
             );
         });
@@ -124,7 +120,6 @@ class TicTacToeApp extends Component {
         );
         let gameBoard = (
             <React.Fragment>
-                <h2>Tic - Tac - Toe</h2>
                 <div className="game">
                     <div className="game-board">
                         <Board
@@ -144,6 +139,7 @@ class TicTacToeApp extends Component {
         );
         return (
             <div style={{ fontSize: theme.fontSize }}>
+                <h2>Tic - Tac - Toe</h2>
                 {newGame}
                 {this.state.gameStarted ? gameBoard : null}
             </div>
