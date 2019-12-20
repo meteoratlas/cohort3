@@ -99,9 +99,7 @@ class AccountManager extends Component {
                 <br />
                 <button onClick={this.createAccount}>Create Account</button>
                 <br />
-                <AnimateOnChange>
-                    <p>{this.state.response}</p>
-                </AnimateOnChange>
+                <p>{this.state.response}</p>
                 <br />
                 <br />
             </div>

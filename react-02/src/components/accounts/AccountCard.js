@@ -61,6 +61,10 @@ class AccountCard extends Component {
     handleChange(e) {
         this.setState({ inputFieldValue: e.target.value });
     }
+    // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+    numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
     render() {
         // Use destructuring to get the relevant values
         // from the card's prop (an account object)
@@ -70,7 +74,7 @@ class AccountCard extends Component {
                 {/* Use the destructed variables to populate the associated
                 fields in the card's elements*/}
                 <h2>{name}</h2>
-                <p>Funds: ${funds}</p>
+                <p>Available Funds: ${this.numberWithCommas(funds)}</p>
                 <input
                     type="number"
                     value={this.state.inputFieldValue}
