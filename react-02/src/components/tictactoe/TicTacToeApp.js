@@ -102,7 +102,7 @@ class TicTacToeApp extends Component {
             const desc = move ? "Go to move #" + move : "Go to game start";
             return (
                 <li key={move} onClick={() => this.jumpTo(move)}>
-                    <a>{desc}</a>
+                    <a href="#prev-state">{desc}</a>
                 </li>
             );
         });

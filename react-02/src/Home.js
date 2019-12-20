@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeContextProvider, Context } from "./ThemeContextProvider";
+import { ThemeContextProvider } from "./ThemeContextProvider";
 import App from "./App";
 
 const Home = () => {

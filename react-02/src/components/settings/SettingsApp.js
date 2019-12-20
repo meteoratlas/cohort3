@@ -10,10 +10,17 @@ const SettingsApp = () => {
     return (
         <ThemeContextConsumer>
             {theme => (
-                <div id="settings-app">
+                <div
+                    id="settings-app"
+                    style={{
+                        fontSize: theme.fontSize,
+                        color: theme.currentTheme.fg,
+                        backgroundColor: theme.currentTheme
+                    }}
+                >
                     <h2>Settings</h2>
                     <div id="settings-form-elements">
-                        <label>Select Text Size</label>
+                        <label>Select Text Size </label>
                         <select
                             value={sizes[theme.fontSize]}
                             onChange={onFontSizeChange}
@@ -24,7 +31,8 @@ const SettingsApp = () => {
                             <option value="large">Large</option>
                         </select>
                         <br />
-                        <label>Use Dark Theme?</label>
+                        <br />
+                        <label>Use Dark Theme? </label>
                         <input
                             type="checkbox"
                             checked={theme.useDarkTheme}
