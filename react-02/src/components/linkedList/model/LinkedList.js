@@ -63,9 +63,54 @@ export class LinkedList {
         return string;
     }
     delete() {
-        this.current.prev.next = this.current.next;
-        this.current.next.prev = this.current.prev;
-        this.current = null;
-        this.current;
+        if (!this.sentinel.next) return null;
+        if (!this.current) {
+            this.current = null;
+            return null;
+        }
+        if (this.current === this.sentinel.next) {
+            if (this.sentinel.next) {
+                this.sentinel.next.prev = null;
+                this.sentinel.next = this.sentinel.next.next;
+                this.current = this.sentinel.next;
+            } else {
+                this.sentinel.next = null;
+                this.current = null;
+            }
+            return;
+        }
+        if (this.current.prev) this.current.prev.next = this.current.next;
+        if (this.current.next) this.current.next.prev = this.current.prev;
+        // return node after this.current, if no node after this.current, return the last node
+        if (this.current.next) {
+            this.current = this.current.next;
+            return this.current.next;
+        } else {
+            this.current = this.current.prev;
+            return this.current.prev;
+        }
+    }
+    clone() {
+        if (!this.sentinel.next) return new LinkedList();
+        let newList = new LinkedList();
+        let currNode = this.sentinel.next;
+        let writeNode = newList.sentinel.next;
+
+        while (currNode && currNode !== this.sentinel) {
+            newList.insert(currNode.subject, currNode.amount);
+            writeNode = writeNode.next;
+            currNode = currNode.next;
+        }
+
+        return newList;
+    }
+    map(func) {
+        let cur = this.sentinel.next;
+        let arr = [];
+        while (cur !== this.sentinel) {
+            arr.push(func(cur));
+            cur = cur.next;
+        }
+        return arr;
     }
 }

@@ -64,3 +64,24 @@ test("sum node amounts", () => {
     ll.insert("D", 8);
     expect(ll.sumAmount()).toBe(15);
 });
+
+test("clone function", () => {
+    let ll = new LinkedList();
+    ll.insert("A", 1);
+    ll.insert("B", 2);
+    ll.insert("C", 4);
+    const clone = ll.clone();
+    expect(clone.showNodes()).toBe(
+        "subject: A amount: 1 <-> subject: B amount: 2 <-> subject: C amount: 4 <-> "
+    );
+});
+
+test("map function", () => {
+    let ll = new LinkedList();
+    ll.insert("A", 1);
+    ll.insert("B", 2);
+    ll.insert("C", 4);
+    ll.insert("D", 8);
+    let mapTest = ll.map(x => x.amount * 2);
+    expect(mapTest).toStrictEqual([2, 4, 8, 16]);
+});
