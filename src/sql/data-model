@@ -1,0 +1,36 @@
+// music collection database
+
+CREATE TABLE inventory (
+    inventory_id serial PRIMARY KEY,
+    artist_id integer REFERENCES artist(artist_id),
+    album_id integer REFERENCES album(album_id),
+    date_added timestamp
+)
+
+CREATE TABLE album (
+    album_id serial PRIMARY KEY,
+    artist_id integer REFERENCES artist(artist_id),
+    title VARCHAR(1000) NOT NULL,
+    release_year smallint CHECK(release_year > 1900),
+    label_id integer REFERENCES label(label_id),
+    parental_advisory boolean,
+    genre integer REFERENCES genre(genre_id)
+)
+
+CREATE TABLE genre (
+    genre_id serial PRIMARY KEY,
+    name VARCHAR(100)
+)
+
+CREATE TABLE artist (
+    artist_id serial PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    active_since smallint CHECK(active_since > 1500),
+    last_update timestamp
+)
+
+CREATE TABLE label (
+    label_id serial PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    total_releases smallint
+)
