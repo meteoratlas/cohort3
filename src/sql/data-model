@@ -34,3 +34,58 @@ CREATE TABLE label (
     name VARCHAR(200) NOT NULL,
     total_releases smallint
 )
+
+// Insert Data
+
+INSERT INTO artist(name, active_since, last_update)
+VALUES 
+('Burial', 2005, '2019-12-20'),
+('Amon Tobin', 1996, '2019-12-20'),
+('Aphex Twin', 1992, '2019-12-20'),
+('Blur', 1989, '2016-06-14'),
+('Clark', 1992, '2019-12-20'),
+('Moderat', 2002, '2019-12-20'),
+('Apparat', 2001, '2019-12-20'),
+('Orbital', 1989, '2017-10-21'),
+('Four Tet', 1999, '2018-05-13'),
+('Valiska', 2010, '2018-10-18'),
+('Bicep', 2010, '2019-06-13'),
+('Boards of Canada', 1987, '2017-09-11')
+;
+
+INSERT INTO label(name, total_releases)
+VALUES 
+('Warp Records', 214),
+('Ninja Tune', 118),
+('Parlophone', 619),
+('EMI', 2073),
+('Domino', 205),
+('Text', 97),
+('Hyperdub', 130),
+('Internal', 201),
+('BPitch Control', 95),
+('Mute', 190)
+;
+
+INSERT INTO genre(name)
+VALUES 
+('Dubstep'),
+('Ambient'),
+('Britpop'),
+('Modern Classical'),
+('Electroacoustic'),
+('Microhouse'),
+('Folktronica'),
+('Electronic'),
+('Ambient Pop'),
+('EDM'),
+('IDM'),
+('Glitch'),
+('Jazz'),
+('Minimal'),
+('Techno'),
+('Progressive Electronic')
+;
+
+// Example Queries
+
