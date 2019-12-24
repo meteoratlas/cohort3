@@ -1,5 +1,52 @@
 // music collection database
 
+
+// *** Example Queries ***
+
+// Find all albums released between 2000 and 2010
+select title, release_year from album
+where release_year >= 2000 AND release_year <= 2010;
+
+// Find all albums in database by the musician "Clark"
+select artist.name, title, release_year from album
+INNER JOIN artist ON artist.artist_id = album.artist_id
+where artist.name = 'Clark';
+
+// Find the number of unique artists in the database
+select count(distinct artist_id) from inventory;
+
+// Find the average number of albums each record label has released, ignoring 
+// major record labels (g EMI) that have released more than 500 records.
+select AVG(total_releases) from label
+where total_releases < 500;
+
+// List the title and artist of every album, sorted by release year chronologically
+select title, artist.name, release_year from album
+INNER JOIN artist ON artist.artist_id = album.artist_id
+order by release_year asc;
+
+// Get all the information about artists whose first album was released after 2000 that has had their database entry updated within the past year
+select * from artist
+where last_update > '2019-01-01' AND active_since > '2000';
+
+// Find all album titles with the genre "IDM"
+select title from album
+INNER JOIN genre ON album.genre = genre.genre_id
+where genre.name = 'IDM';
+
+// Find all album titles where the genre contains the phrase "ambient"
+select title from album
+INNER JOIN genre ON album.genre = genre.genre_id
+where genre.name ilike '%ambient%';
+
+// Find the title of the album released on Warp Records that is NOT in the genre 'IDM'
+select title from album
+LEFT JOIN genre on album.genre = genre.genre_id
+LEFT JOIN label on album.label_id = label.label_id
+WHERE label.name = 'Warp Records' AND genre.name != 'IDM';
+
+// Create Tables
+
 CREATE TABLE inventory (
     inventory_id serial PRIMARY KEY,
     artist_id integer REFERENCES artist(artist_id),
@@ -34,10 +81,6 @@ CREATE TABLE label (
     name VARCHAR(200) NOT NULL,
     total_releases smallint
 )
-
-// Example Queries
-
-
 
 // Insert Data
 
