@@ -35,6 +35,10 @@ CREATE TABLE label (
     total_releases smallint
 )
 
+// Example Queries
+
+
+
 // Insert Data
 
 INSERT INTO artist(name, active_since, last_update)
@@ -87,5 +91,41 @@ VALUES
 ('Progressive Electronic')
 ;
 
-// Example Queries
+// There's probably a better way to go about this, but couldn't find anything terribly convincing. You'd just use python/java/etc. to do this normally anyway.
 
+INSERT INTO album(artist_id, title, release_year, label_id, parental_advisory, genre)
+VALUES
+((SELECT artist_id from artist WHERE name='Burial'), 'Untrue', 2007, (SELECT label_id from label WHERE name = 'Hyperdub'), false, (SELECT genre_id from genre WHERE name = 'Dubstep')),
+((SELECT artist_id from artist WHERE name='Clark'), 'Body Riddle', 2006, (SELECT label_id from label WHERE name = 'Warp Records'), false, (SELECT genre_id from genre WHERE name = 'IDM')),
+((SELECT artist_id from artist WHERE name='Clark'), 'Death Peak', 2017, (SELECT label_id from label WHERE name = 'Warp Records'), false, (SELECT genre_id from genre WHERE name = 'IDM')),
+((SELECT artist_id from artist WHERE name='Amon Tobin'), 'Bricolage', 1997, (SELECT label_id from label WHERE name = 'Ninja Tune'), false, (SELECT genre_id from genre WHERE name = 'Jazz')),
+((SELECT artist_id from artist WHERE name='Amon Tobin'), 'Permutation', 1998, (SELECT label_id from label WHERE name = 'Ninja Tune'), false, (SELECT genre_id from genre WHERE name = 'IDM')),
+((SELECT artist_id from artist WHERE name='Amon Tobin'), 'Foley Room', 2007, (SELECT label_id from label WHERE name = 'Ninja Tune'), false, (SELECT genre_id from genre WHERE name = 'Electronic')),
+((SELECT artist_id from artist WHERE name='Valiska'), 'On Pause', 2017, null, false, (SELECT genre_id from genre WHERE name = 'Ambient')),
+((SELECT artist_id from artist WHERE name='Orbital'), 'Orbital [Brown Album]', 1993, (SELECT label_id from label WHERE name = 'Internal'), false, (SELECT genre_id from genre WHERE name = 'Techno')),
+((SELECT artist_id from artist WHERE name='Blur'), 'The Magic Whip', 2015, (SELECT label_id from label WHERE name = 'Parlophone'), false, (SELECT genre_id from genre WHERE name = 'Britpop')),
+((SELECT artist_id from artist WHERE name='Blur'), '13', 1999, (SELECT label_id from label WHERE name = 'EMI'), false, (SELECT genre_id from genre WHERE name = 'Britpop')),
+((SELECT artist_id from artist WHERE name='Boards of Canada'), 'Geogaddi', 2002, (SELECT label_id from label WHERE name = 'Warp Records'), false, (SELECT genre_id from genre WHERE name = 'IDM')),
+((SELECT artist_id from artist WHERE name='Boards of Canada'), 'Music Has the Right to Children', 1998, (SELECT label_id from label WHERE name = 'Warp Records'), false, (SELECT genre_id from genre WHERE name = 'IDM')),
+((SELECT artist_id from artist WHERE name='Moderat'), 'Moderat', 2009, (SELECT label_id from label WHERE name = 'BPitch Control'), false, (SELECT genre_id from genre WHERE name = 'Electronic')),
+((SELECT artist_id from artist WHERE name='Apparat'), 'LP5', 2019, (SELECT label_id from label WHERE name = 'Mute'), false, (SELECT genre_id from genre WHERE name = 'Ambient Pop')),
+((SELECT artist_id from artist WHERE name='Bicep'), 'Bicep', 2017, (SELECT label_id from label WHERE name = 'Ninja Tune'), false, (SELECT genre_id from genre WHERE name = 'Electronic')),
+((SELECT artist_id from artist WHERE name='Aphex Twin'), 'Syro', 2014, (SELECT label_id from label WHERE name = 'Warp Records'), false, (SELECT genre_id from genre WHERE name = 'IDM')),
+((SELECT artist_id from artist WHERE name='Aphex Twin'), 'Selected Ambient Works Volume II', 1994, (SELECT label_id from label WHERE name = 'Warp Records'), false, (SELECT genre_id from genre WHERE name = 'Ambient'))
+;
+
+INSERT INTO inventory(artist_id, album_id, date_added)
+VALUES
+((SELECT artist_id from artist WHERE name='Burial'), (SELECT album_id from album WHERE title = 'Untrue'), now()::timestamp),
+((SELECT artist_id from artist WHERE name='Four Tet'), (SELECT album_id from album WHERE title = 'New Energy'), now()::timestamp),
+((SELECT artist_id from artist WHERE name='Valiska'), (SELECT album_id from album WHERE title = 'On Pause'), now()::timestamp),
+((SELECT artist_id from artist WHERE name='Aphex Twin'), (SELECT album_id from album WHERE title = 'Selected Ambient Works Volume II'), now()::timestamp),
+((SELECT artist_id from artist WHERE name='Aphex Twin'), (SELECT album_id from album WHERE title = 'Syro'), now()::timestamp),
+((SELECT artist_id from artist WHERE name='Bicep'), (SELECT album_id from album WHERE title = 'Bicep'), now()::timestamp),
+((SELECT artist_id from artist WHERE name='Moderat'), (SELECT album_id from album WHERE title = 'Moderat'), now()::timestamp),
+((SELECT artist_id from artist WHERE name='Boards of Canada'), (SELECT album_id from album WHERE title = 'Music Has the Right to Children'), now()::timestamp),
+((SELECT artist_id from artist WHERE name='Blur'), (SELECT album_id from album WHERE title = 'The Magic Whip'), now()::timestamp),
+((SELECT artist_id from artist WHERE name='Amon Tobin'), (SELECT album_id from album WHERE title = 'Bricolage'), now()::timestamp),
+((SELECT artist_id from artist WHERE name='Amon Tobin'), (SELECT album_id from album WHERE title = 'Foley Room'), now()::timestamp),
+((SELECT artist_id from artist WHERE name='Clark'), (SELECT album_id from album WHERE title = 'Body Riddle'), now()::timestamp),
+((SELECT artist_id from artist WHERE name='Clark'), (SELECT album_id from album WHERE title = 'Death Peak'), now()::timestamp)
