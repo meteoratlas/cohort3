@@ -27,6 +27,9 @@ export class DoublyLinkedList {
         this.length = 1;
         this.current = this.head;
     }
+    current() {
+        return this.current;
+    }
     first() {
         if (!this.head) return;
         this.current = this.head;
@@ -41,37 +44,42 @@ export class DoublyLinkedList {
         this.current = last;
         return last;
     }
-    next(position) {
+    next() {
         if (!this.head) return;
-        if (!position.next) return position;
-        this.current = position.next;
-        return position.next;
+        if (!this.current.next) return this.current;
+        this.current = this.current.next;
+        return this.current;
     }
-    previous(position) {
+    previous() {
         if (!this.head) return;
-        if (!position.prev) return position;
-        this.current = position.prev;
-        return position.prev;
+        if (!this.current.prev) return this.current;
+        this.current = this.current.prev;
+        return this.current;
     }
-    insert(position, subject, amount) {
+    insert(subject, amount) {
         if (!this.head) {
             this.head = new ListNode(subject, amount, null, null);
             return;
         }
-        let newNode = new ListNode(subject, amount, position.next, position);
-        if (position.next) position.next.prev = newNode;
-        position.next = newNode;
+        let newNode = new ListNode(
+            subject,
+            amount,
+            this.current.next,
+            this.current
+        );
+        if (this.current.next) this.current.next.prev = newNode;
+        this.current.next = newNode;
         this.length += 1;
         this.current = newNode;
         return newNode;
     }
-    delete(position) {
+    delete() {
         if (!this.head) return null;
-        if (!position) {
+        if (!this.current) {
             this.current = null;
             return null;
         }
-        if (position === this.head) {
+        if (this.current === this.head) {
             if (this.head.next) {
                 this.head.next.prev = null;
                 this.head = this.head.next;
@@ -83,16 +91,16 @@ export class DoublyLinkedList {
             this.length--;
             return;
         }
-        if (position.prev) position.prev.next = position.next;
-        if (position.next) position.next.prev = position.prev;
+        if (this.current.prev) this.current.prev.next = this.current.next;
+        if (this.current.next) this.current.next.prev = this.current.prev;
         this.length--;
         // return node after position, if no node after position, return the last node
-        if (position.next) {
-            this.current = position.next;
-            return position.next;
+        if (this.current.next) {
+            this.current = this.current.next;
+            return this.current.next;
         } else {
-            this.current = position.prev;
-            return position.prev;
+            this.current = this.current.prev;
+            return this.current.prev;
         }
     }
     sumAmount() {

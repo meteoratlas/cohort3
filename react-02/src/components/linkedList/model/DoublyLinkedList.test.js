@@ -1,23 +1,89 @@
-import { DoublyLinkedList } from "./DoublyLinkedList";
+import { ListNode, DoublyLinkedList } from "./DoublyLinkedList";
 
-test("testing DoublyLinkedList methods", () => {
-    const dl = new DoublyLinkedList("math", 10);
-    dl.insert(dl.head, "music", 7);
-    console.log(dl);
-    expect(dl.length).toBe(2);
-    expect(dl.sumAmount()).toBe(17);
-    dl.insert(dl.head, "LA", 3);
-    expect(dl.sumAmount()).toBe(20);
-    dl.showNodes();
-    dl.addFront("gym", 4);
-    dl.showNodes();
-    expect(dl.sumAmount()).toBe(24);
+// import { ListNode, LinkedList } from "./LinkedList";
 
-    const clone = dl.clone();
-    expect(clone.showNodes()).toBe(
-        "subject: gym amount: 4 <-> subject: math amount: 10 <-> subject: LA amount: 3 <-> subject: music amount: 7 <-> "
+// test("ListNode:show", () => {
+//     const ln = new ListNode("A", 1);
+//     expect(ln.show()).toBe(`subject: A amount: 1`);
+// });
+
+test("insert", () => {
+    let ll = new DoublyLinkedList();
+    ll.insert("A", 1);
+    expect(ll.showNodes()).toBe("subject: A amount: 1 <-> ");
+    ll.insert("B", 1);
+    expect(ll.showNodes()).toBe(
+        "subject: A amount: 1 <-> subject: B amount: 1 <-> "
     );
+    ll.prev();
+    ll.insert("C", 1);
+    expect(ll.showNodes()).toBe(
+        "subject: A amount: 1 <-> subject: C amount: 1 <-> subject: B amount: 1 <-> "
+    );
+    ll.prev();
+    ll.prev();
+    ll.prev();
+    ll.insert("D", 2);
+    expect(ll.showNodes()).toBe(
+        "subject: A amount: 1 <-> subject: C amount: 1 <-> subject: B amount: 1 <-> subject: D amount: 2 <-> "
+    );
+});
 
-    let mapTest = dl.map(x => x.amount * 2);
-    expect(mapTest).toStrictEqual([8, 20, 6, 14]);
+test("First and last", () => {
+    let ll = new DoublyLinkedList();
+    expect(ll.first()).toBe(null);
+    expect(ll.last()).toBe(null);
+    ll.insert("A", 1);
+    ll.insert("B", 2);
+    expect(ll.first().subject).toBe("A");
+    expect(ll.last().subject).toBe("B");
+});
+
+test("next and prev", () => {
+    let ll = new DoublyLinkedList();
+    ll.insert("A", 1);
+    ll.insert("B", 2);
+    expect(ll.prev().subject).toBe("A");
+    expect(ll.next().subject).toBe("B");
+});
+
+test("deletion", () => {
+    let ll = new DoublyLinkedList();
+    ll.insert("A", 1);
+    ll.insert("B", 2);
+    ll.prev();
+    ll.delete();
+    expect(ll.showNodes()).toBe("subject: B amount: 2 <-> ");
+    ll.delete();
+    expect(ll.showNodes()).toBe("");
+});
+
+test("sum node amounts", () => {
+    let ll = new DoublyLinkedList();
+    ll.insert("A", 1);
+    ll.insert("B", 2);
+    ll.insert("C", 4);
+    ll.insert("D", 8);
+    expect(ll.sumAmount()).toBe(15);
+});
+
+test("clone function", () => {
+    let ll = new DoublyLinkedList();
+    ll.insert("A", 1);
+    ll.insert("B", 2);
+    ll.insert("C", 4);
+    const clone = ll.clone();
+    expect(clone.showNodes()).toBe(
+        "subject: A amount: 1 <-> subject: B amount: 2 <-> subject: C amount: 4 <-> "
+    );
+});
+
+test("map function", () => {
+    let ll = new DoublyLinkedList();
+    ll.insert("A", 1);
+    ll.insert("B", 2);
+    ll.insert("C", 4);
+    ll.insert("D", 8);
+    let mapTest = ll.map(x => x.amount * 2);
+    expect(mapTest).toStrictEqual([2, 4, 8, 16]);
 });

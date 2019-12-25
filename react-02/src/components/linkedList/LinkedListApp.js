@@ -39,7 +39,7 @@ const LinkedListApp = () => {
                         prev={prevNode}
                         last={lastNode}
                         insert={insert}
-                        delete={() => deleteNode(currentNode)}
+                        delete={() => deleteNode()}
                     />
                     <p>
                         Subject:{" "}

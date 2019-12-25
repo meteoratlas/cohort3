@@ -16,10 +16,10 @@ export default defaultList => {
         setCurrentNode(list.last());
     };
     const nextNode = () => {
-        setCurrentNode(list.next(currentNode));
+        setCurrentNode(list.next());
     };
     const prevNode = () => {
-        setCurrentNode(list.previous(currentNode));
+        setCurrentNode(list.previous());
     };
     const insert = (subject, amount) => {
         if (!list.head) {
@@ -27,14 +27,14 @@ export default defaultList => {
             return;
         }
         let newList = list.clone();
-        newList.insert(currentNode, subject, amount);
+        newList.insert(subject, amount);
         setList(newList);
         // setCurrentNode(currentNode.next);
     };
     const deleteNode = toDelete => {
         if (!list.head) return;
         let newList = list.clone();
-        newList.delete(toDelete);
+        newList.delete();
         setList(newList);
         setCurrentNode(newList.current);
     };
