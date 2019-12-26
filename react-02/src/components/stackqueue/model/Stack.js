@@ -3,11 +3,12 @@ import { DoublyLinkedList } from "../../linkedList/model/DoublyLinkedList";
 export default class Stack extends DoublyLinkedList {
     pop() {
         let last = super.last();
-        super.delete(super.last());
+        super.delete();
         return last;
     }
     add(sub, amt) {
-        super.insert(super.last(), sub, amt);
+        super.last();
+        super.insert(sub, amt);
     }
     clone() {
         if (!this.head) return new Stack(null, null);
@@ -16,7 +17,7 @@ export default class Stack extends DoublyLinkedList {
         let writeNode = newList.head;
 
         while (currNode) {
-            newList.insert(writeNode, currNode.subject, currNode.amount);
+            newList.insert(currNode.subject, currNode.amount);
             writeNode = writeNode.next;
             currNode = currNode.next;
         }

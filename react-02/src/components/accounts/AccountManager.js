@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AnimateOnChange } from "react-animation";
+// import { AnimateOnChange } from "react-animation";
 
 class AccountManager extends Component {
     constructor(props) {

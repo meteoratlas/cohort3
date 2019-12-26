@@ -42,7 +42,7 @@ export class DoublyLinkedList {
             last = last.next;
         }
         this.current = last;
-        return last;
+        return this.current;
     }
     next() {
         if (!this.head) return;
@@ -136,7 +136,7 @@ export class DoublyLinkedList {
         let writeNode = newList.head;
 
         while (currNode) {
-            newList.insert(writeNode, currNode.subject, currNode.amount);
+            newList.insert(/*writeNode,*/ currNode.subject, currNode.amount);
             writeNode = writeNode.next;
             currNode = currNode.next;
         }

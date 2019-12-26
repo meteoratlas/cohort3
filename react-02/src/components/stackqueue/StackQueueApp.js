@@ -10,11 +10,19 @@ const StackQueueApp = () => {
     const [queue, setQueue] = useState(new Queue("queue 1", 1));
 
     const addToStack = (sub, amt) => {
+        if (!stack.head) {
+            setStack(new Stack(sub, amt));
+            return;
+        }
         const newStack = stack.clone();
         newStack.add(sub, amt);
         setStack(newStack);
     };
     const addToQueue = (sub, amt) => {
+        if (!queue.head) {
+            setQueue(new Queue(sub, amt));
+            return;
+        }
         const newQueue = queue.clone();
         newQueue.add(sub, amt);
         setQueue(newQueue);

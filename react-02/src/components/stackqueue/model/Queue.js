@@ -3,11 +3,12 @@ import { DoublyLinkedList } from "../../linkedList/model/DoublyLinkedList";
 export default class Queue extends DoublyLinkedList {
     pop() {
         let first = super.first();
-        super.delete(super.first());
+        super.delete();
         return first;
     }
     add(sub, amt) {
-        super.insert(super.last(), sub, amt);
+        super.last();
+        super.insert(sub, amt);
     }
     clone() {
         if (!this.head) return new Queue(null, null);
@@ -16,7 +17,7 @@ export default class Queue extends DoublyLinkedList {
         let writeNode = newList.head;
 
         while (currNode) {
-            newList.insert(writeNode, currNode.subject, currNode.amount);
+            newList.insert(currNode.subject, currNode.amount);
             writeNode = writeNode.next;
             currNode = currNode.next;
         }

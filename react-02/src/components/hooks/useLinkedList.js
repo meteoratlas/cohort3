@@ -31,7 +31,7 @@ export default defaultList => {
         setList(newList);
         // setCurrentNode(currentNode.next);
     };
-    const deleteNode = toDelete => {
+    const deleteNode = () => {
         if (!list.head) return;
         let newList = list.clone();
         newList.delete();
