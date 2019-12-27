@@ -1,7 +1,7 @@
 import simple_functions
 import unittest
 
-class TestSyntax(unittest.TestCase):
+class TestSimple(unittest.TestCase):
     def test_test(self):
         print("the test works correctly")
 
