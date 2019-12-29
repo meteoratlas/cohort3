@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { DoublyLinkedList } from "../linkedList/model/DoublyLinkedList";
+import { PLL } from "../linkedList/model/PLL";
 
 export default defaultList => {
     const [list, setList] = useState(defaultList);
@@ -21,13 +22,18 @@ export default defaultList => {
     const prevNode = () => {
         setCurrentNode(list.previous());
     };
-    const insert = (subject, amount) => {
+    const insert = (...vars) => {
         if (!list.head) {
-            setList(new DoublyLinkedList(subject, amount));
+            if (list instanceof DoublyLinkedList) {
+                setList(new DoublyLinkedList(vars[0], vars[1]));
+            }
+            if (list instanceof PLL) {
+                setList(new PLL(vars[0], vars[1], vars[2], vars[3]));
+            }
             return;
         }
         let newList = list.clone();
-        newList.insert(subject, amount);
+        newList.insert(vars[0], vars[1]);
         setList(newList);
         // setCurrentNode(currentNode.next);
     };
