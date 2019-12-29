@@ -77,7 +77,6 @@ const LinkedListApp = () => {
             {theme => (
                 <div id="ll-app" style={{ fontSize: theme.fontSize }}>
                     <h2>Linked List</h2>
-                    {popPainting()}
                     <LinkedListControls
                         first={firstNode}
                         //first={() => popPainting()}
@@ -85,7 +84,7 @@ const LinkedListApp = () => {
                         prev={prevNode}
                         last={lastNode}
                         insert={insert}
-                        delete={() => deleteNode()}
+                        delete={deleteNode}
                     />
                     <p>
                         Subject:{" "}
