@@ -5,7 +5,7 @@ const LinkedListControls = props => {
     const [response, setResponse] = useState("");
     const handleSubmit = () => {
         let result = props.addPainting();
-        if (!result) {
+        if (result === null) {
             setResponse("No more paintings are available.");
             return;
         }

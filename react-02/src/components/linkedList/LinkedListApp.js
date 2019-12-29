@@ -49,14 +49,16 @@ const LinkedListApp = () => {
         setPaintings(paintings);
         // return newArr[0];
         // return testPaint(newArr[0]);
-        let { title, artist, year, url, imgur } = newArr[0];
-        pll.insert(title, artist, year, imgur);
+        let { title, artist, year, imgur } = newArr[0];
+        let newPLL = pll.clone();
+        newPLL.insert(title, artist, year, imgur);
+        setpll(newPLL);
     };
     const renderPaintings = () => {
         return pll.map(obj => (
-            <React.Fragment key="obj.url">
+            <React.Fragment key="obj.id">
                 <div className="ll-node-vis">
-                    <img src={obj.imgur} alt="" height="150" />
+                    <img src={obj.url} alt={obj.title} height="150" />
                     <p>{obj.title}</p>
                     <p>{obj.artist}</p>
                 </div>
