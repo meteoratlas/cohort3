@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import useFormState from "../hooks/useInputState";
 
 const LinkedListControls = props => {
     const [response, setResponse] = useState("");

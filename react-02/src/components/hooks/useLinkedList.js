@@ -33,7 +33,7 @@ export default defaultList => {
             return;
         }
         let newList = list.clone();
-        newList.insert(vars[0], vars[1]);
+        newList.insert(vars[0], vars[1], vars[2], vars[3]);
         setList(newList);
         // setCurrentNode(currentNode.next);
     };

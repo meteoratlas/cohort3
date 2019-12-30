@@ -18,10 +18,18 @@ const LinkedListApp = () => {
         deleteNode,
         firstNode,
         lastNode
-    ] = useLinkedList(new DoublyLinkedList("Apples", 2));
+    ] = useLinkedList(
+        displayPaintings
+            ? new PLL(
+                  "American Gothic",
+                  "Grant Wood",
+                  1930,
+                  "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Grant_Wood_-_American_Gothic_-_Google_Art_Project.jpg/800px-Grant_Wood_-_American_Gothic_-_Google_Art_Project.jpg"
+              )
+            : new DoublyLinkedList("Apples", 2)
+    );
     const [paintings, setPaintings] = useState([]);
-    const [pll, setpll] = useState(new PLL());
-    //
+
     const renderNodes = () => {
         return list.map(x => (
             <React.Fragment key={x.id}>
@@ -47,20 +55,17 @@ const LinkedListApp = () => {
         const rand = Math.floor(paintings.length * Math.random());
         const newArr = paintings.splice(rand, 1);
         setPaintings(paintings);
-        // return newArr[0];
-        // return testPaint(newArr[0]);
         let { title, artist, year, imgur } = newArr[0];
-        let newPLL = pll.clone();
-        newPLL.insert(title, artist, year, imgur);
-        setpll(newPLL);
+        insert(title, artist, year, imgur);
     };
     const renderPaintings = () => {
-        return pll.map(obj => (
-            <React.Fragment key="obj.id">
+        return list.map(obj => (
+            <React.Fragment key={obj.id}>
                 <div className="ll-node-vis">
                     <img src={obj.url} alt={obj.title} height="150" />
                     <p>{obj.title}</p>
                     <p>{obj.artist}</p>
+                    <p>{obj.year}</p>
                 </div>
                 <h4 className="ll-arrow">⮂</h4>
             </React.Fragment>
