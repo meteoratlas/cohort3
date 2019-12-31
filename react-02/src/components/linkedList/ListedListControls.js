@@ -19,33 +19,34 @@ const LinkedListControls = props => {
     return (
         <div>
             <div id="ll-controls-nav">
-                <div className="form-column">
+                <div className="form-row">
                     <button onClick={props.prev}>Previous Node</button>
+                    <button onClick={props.next}>Next Node</button>
+                </div>
+                <div className="form-row">
                     <button onClick={props.first}>Go to First Node</button>
+                    <button onClick={props.last}>Go to Last Node</button>
+                </div>
+                <div className="form-row">
                     <input
                         name="subject"
                         placeholder="Subject"
                         value={subject}
                         onChange={setSubject}
                     ></input>
-                    <button onClick={handleSubmit}>Insert New Node</button>
-                </div>
-                <div className="form-column">
-                    <button onClick={props.next}>Next Node</button>
-                    <button onClick={props.last}>Go to Last Node</button>
                     <input
                         name="amount"
                         placeholder="Amount"
                         value={amount}
                         onChange={setAmount}
                     ></input>
+                </div>
+                <div className="form-row">
+                    <button onClick={handleSubmit}>Insert New Node</button>
                     <button onClick={props.delete}>Delete Current Node</button>
                 </div>
 
                 <br />
-                <div id="ll-controls-mod">
-                    <br />
-                </div>
             </div>
             <p>{response}</p>
         </div>

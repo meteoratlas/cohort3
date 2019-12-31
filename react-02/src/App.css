@@ -126,8 +126,8 @@ input {
 
 #sq-form-inputs {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
+    flex-flow: column wrap;
+    justify-content: center;
 }
 
 .App-link {
@@ -213,9 +213,9 @@ Custom Apps
 }
 
 #ll-controls-nav {
-    display: grid;
-    max-width: 50%;
-    grid-template-columns: 2fr 2fr;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
 }
 
 .ll-node-vis,
@@ -231,6 +231,18 @@ Custom Apps
 .ll-arrow {
     min-width: 30px;
     margin: 0 0.2em;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.form-row input {
+    width: 220px;
+    margin: 12px;
 }
 
 .form-column {

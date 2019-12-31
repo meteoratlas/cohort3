@@ -25,28 +25,31 @@ const StackQueueForm = props => {
     return (
         <div id="sq-form">
             <div id="sq-form-inputs">
-                <div className="form-column">
+                <div className="form-row">
                     <input
                         name="subject"
                         placeholder="Subject"
                         value={subject}
                         onChange={setSubject}
                     ></input>
-                    <button onClick={() => onFormSubmit("addToStack")}>
-                        Add to Stack
-                    </button>
-                    <button onClick={props.popFromStack}>Pop from Stack</button>
-                </div>
-                <div className="form-column">
                     <input
                         name="amount"
                         placeholder="Amount"
                         value={amount}
                         onChange={setAmount}
                     ></input>
+                </div>
+
+                <div className="form-row">
+                    <button onClick={() => onFormSubmit("addToStack")}>
+                        Add to Stack
+                    </button>
                     <button onClick={() => onFormSubmit("addToQueue")}>
                         Add to Queue
                     </button>
+                </div>
+                <div className="form-row">
+                    <button onClick={props.popFromStack}>Pop from Stack</button>
                     <button onClick={props.popFromQueue}>Pop from Queue</button>
                 </div>
             </div>
