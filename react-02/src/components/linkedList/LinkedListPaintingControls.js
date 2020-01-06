@@ -11,7 +11,7 @@ const LinkedListControls = props => {
         setResponse("");
     };
     return (
-        <div>
+        <>
             <div id="ll-controls-nav">
                 <div className="form-column">
                     <button onClick={props.prev}>Previous Node</button>
@@ -30,7 +30,7 @@ const LinkedListControls = props => {
                 </div>
             </div>
             <p>{response}</p>
-        </div>
+        </>
     );
 };
 

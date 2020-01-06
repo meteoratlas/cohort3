@@ -202,20 +202,27 @@ Custom Apps
 
 #ll-app {
     max-width: 55%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 #ll-display {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-    min-width: 400px;
-    max-width: 100%;
+    width: 100%;
 }
 
 #ll-controls-nav {
+    /* display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(2, 50%); */
+    /* grid-template-rows: repeat(3, auto); */
+    /* width: 460px; */
     display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
+    flex-flow: row;
+    justify-content: space-between;
 }
 
 .ll-node-vis,
@@ -225,7 +232,7 @@ Custom Apps
     margin-top: 8px;
     background-color: rgba(17, 17, 17, 0.5);
     padding: 2%;
-    min-width: 150px;
+    min-width: 20%;
 }
 
 .ll-arrow {

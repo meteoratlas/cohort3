@@ -71,6 +71,12 @@ const LinkedListApp = () => {
             </React.Fragment>
         ));
     };
+    const deletePainting = () => {
+        let { title, artist, year, url } = list.currentNode;
+        let recycled = { title: title, artist: artist, year: year, url: url };
+        setPaintings([...paintings, recycled]);
+        deleteNode();
+    };
     useEffect(() => {
         loadPaintings();
     }, []);
