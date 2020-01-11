@@ -20,7 +20,7 @@ const syntax = {
         }
     },
 
-    // If/else
+    // If / else
     ifElseExample: a => {
         if (a == 1) {
             return "A is one";
