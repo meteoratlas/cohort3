@@ -1,47 +1,38 @@
 import csv
+from collections import defaultdict
 
-total_lines = 0
-res_by_class = {}
-res_line_nums = {}
-res_by_sector = {}
-sector_line_nums = {}
-with open("Census_by_Community_2018.csv", "r") as f:
-    reader = csv.DictReader(f)
-    # by class
-    for row in reader:
-        try:
-            res_by_class[row["CLASS"]] += int(row["RES_CNT"])
-            res_line_nums[row["CLASS"]] += 1
-        except KeyError:
-            res_by_class[row["CLASS"]] = int(row["RES_CNT"])
-            res_line_nums[row["CLASS"]] = 1
-    # by sector
-        try:
-            res_by_sector[row["SECTOR"]] += int(row["RES_CNT"])
-            sector_line_nums[row["SECTOR"]] += 1
-        except KeyError:
-            res_by_sector[row["SECTOR"]] = int(row["RES_CNT"])
-            sector_line_nums[row["SECTOR"]] = 1
+def read_file(csv_file, columns):
+    with open(csv_file, "r") as f:
+        result = defaultdict(dict)
+        lines = {}
+        reader = csv.DictReader(f)
+        for row in reader:
+            for col in columns:
+                try:
+                    result[col][row[col]] += int(row["RES_CNT"])
+                    lines[row[col]] += 1
+                except KeyError:
+                    result[col][row[col]] = int(row["RES_CNT"])
+                    lines[row[col]] = 1
+    return result, lines
 
+def print_report(data):
     report =  "===========================================================\n"
     report += "================= RESIDENCY CENSUS REPORT =================\n"
-    report += "===========================================================\n\n"
-    report += "-----------------------------------------------------------\n"
-    report += "----------------- Residency by Class ----------------------\n"
-    report += "-----------------------------------------------------------\n"
-    report += "Class".ljust(25) + "Population".ljust(25) + "Line Numbers\n"
-    
-    for (k, v) in res_by_class.items():
-        report += (f"{str(k).ljust(25)}{str(v).ljust(25)}{res_line_nums[k]}\n")
+    report += "===========================================================\n"
 
-    report += "\n"
-    report += "-----------------------------------------------------------\n"
-    report += "----------------- Residency by Sector ---------------------\n"
-    report += "-----------------------------------------------------------\n"
-    report += "Sector".ljust(25) + "Population".ljust(25) + "Line Numbers\n"
+    for i in data[0]:
+        report += "\n"
+        report += "-----------------------------------------------------------\n"
+        report += f"----------------- Residency by {i} ---------------------\n"
+        report += "-----------------------------------------------------------\n"
+        report += f"{i}".ljust(25) + "Population".ljust(25) + "Lines\n\n"
 
-    for (k, v) in res_by_sector.items():
-        report += (f"{str(k).ljust(25)}{str(v).ljust(25)}{sector_line_nums[k]}\n")
-
+        for (k, v) in data[0][i].items():
+            report += (f"{str(k).ljust(25)}{str(v).ljust(25)}{data[1][k]}\n")
+            
     with open("Residency Report.txt", "w") as txt:
         txt.write(report)
+
+data = read_file("Census_by_Community_2018.csv", ["CLASS", "SECTOR"])
+print_report(data)

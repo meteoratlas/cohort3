@@ -3,18 +3,20 @@
 ===========================================================
 
 -----------------------------------------------------------
------------------ Residency by Class ----------------------
+----------------- Residency by CLASS ---------------------
 -----------------------------------------------------------
-Class                    Population               Line Numbers
+CLASS                    Population               Lines
+
 Residential              1263734                  208
 Industrial               922                      42
 Major Park               0                        4
 Residual Sub Area        0                        49
 
 -----------------------------------------------------------
------------------ Residency by Sector ---------------------
+----------------- Residency by SECTOR ---------------------
 -----------------------------------------------------------
-Sector                   Population               Line Numbers
+SECTOR                   Population               Lines
+
 CENTRE                   199977                   62
 SOUTH                    227345                   58
 NORTHEAST                185534                   44
