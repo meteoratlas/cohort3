@@ -2,11 +2,11 @@ from openpyxl import Workbook, load_workbook
 from openpyxl.worksheet.datavalidation import DataValidation
 
 isDate = DataValidation(type="date")
-# IDs must be an int greater than 0, quantities
+# IDs must be an int greater than 0, as must quantities
 isPositiveInt = DataValidation(type="whole", 
                            operator="greaterThanOrEqual", 
                            formula1=0)
-# For costs
+# For prices (floating points)
 isPositiveFloat = DataValidation(type="decimal", 
                                 operator="greaterThanOrEqual", 
                                 formula1=0)
@@ -33,10 +33,12 @@ isBool = DataValidation(type="whole",
 max_rows = 1048576
 
 def makeDuplicateCheck(column_letter, sheet):
-    # an excel function to check for duplicates, need to test it
+    # an excel function to check for duplicates
     # https://www.ablebits.com/office-addins-blog/2013/10/20/prevent-duplicates-in-excel-column/
 
-    formula = f"=COUNTIF(${column_letter}:${column_letter}, {column_letter}2) = 1"
+    formula = f"=(COUNTIF(${column_letter}:${column_letter}, {column_letter}2) = 1)"
+    # ensure ids are greater than zero
+    formula += f"AND(=${column_letter} > 0)"
     _range = f"{column_letter}2:{column_letter}{max_rows}"
     rule = DataValidation(type="custom", formula1=formula)
     rule.add(_range)
@@ -67,16 +69,17 @@ def validate_workbook(workbook):
     for sheet in workbook:
         column_titles = sheet[1]
         for title in column_titles:
+            # add unique ID cells to no duplicate & positive int validator
             if unique_id_per_sheet.get(sheet.title) == title.value: 
                 cells = sheet[title.coordinate[0]]
                 for i in cells:
-                    # add cells to no duplicate validator
                     makeDuplicateCheck(title.coordinate[0], sheet)
+            # otherwise add correct validator
             elif validators.get(title.value):
                 col = title.coordinate[0]
                 validators[title.value].add(f"{col}2:{col}{max_rows}")
                 sheet.add_data_validation(validators[title.value])
-    book.save(workbook)
 
 book = load_workbook("invalid_data.xlsx")
 validate_workbook(book)
+book.save("invalid_data2.xlsx")
