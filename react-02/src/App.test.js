@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { Context, ThemeContextProvider } from "./ThemeContextProvider";
+import { ThemeContextProvider } from "./ThemeContextProvider";
 
 it("renders without crashing", () => {
     const div = document.createElement("div");

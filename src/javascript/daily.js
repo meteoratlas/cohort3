@@ -4,8 +4,7 @@ const daily = {
     // ***
     sortFruitAlphabetical(a, b) {
         if (a.str > b.str) return 1;
-        else if (b.str > a.str) return -1;
-        return 0;
+        else return -1;
     },
 
     // ***
