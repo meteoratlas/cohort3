@@ -47,7 +47,7 @@ export class Community {
     }
     createCity(name, lat, long, pop) {
         let exists = this.cities.map(n => n.name).indexOf(name);
-        if (exists > 0) {
+        if (exists >= 0) {
             return "Please enter a unique city name.";
         }
         let newCity = new City(name, lat, long, pop, this.currentKey);
