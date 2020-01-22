@@ -106,12 +106,12 @@ const LinkedListApp = () => {
                     )}
 
                     <p>
-                        Subject:{" "}
-                        {currentNode ? currentNode.subject : "List is empty"}
+                        Artist:{" "}
+                        {currentNode ? currentNode.artist : "List is empty"}
                     </p>
                     <p>
-                        Amount:{" "}
-                        {currentNode ? currentNode.amount : "List is empty"}
+                        Title:{" "}
+                        {currentNode ? currentNode.title : "List is empty"}
                     </p>
                     <div id="ll-display">
                         {displayPaintings ? renderPaintings() : renderNodes()}
