@@ -7,6 +7,7 @@ class CityCard extends Component {
             inputFieldValue: "",
             resultText: ""
         };
+        console.log(this.props.styleObj);
     }
     isValidInput(input) {
         if (isNaN(input) || typeof input === "undefined" || input === "") {
@@ -26,10 +27,17 @@ class CityCard extends Component {
             return;
         }
         let response;
-        if (added) {
+        if (added === "add") {
             response = "added";
             this.props.addCitizensCallback(this.props.city.key, value);
-        } else {
+        } else if (added === "remove") {
+            if (this.props.city.population < value) {
+                this.setState({
+                    resultText:
+                        "Error: Citizens requested to remove is greater than the total population."
+                });
+                return;
+            }
             response = "removed";
             this.props.removeCitizensCallback(this.props.city.key, value);
         }
@@ -54,10 +62,10 @@ class CityCard extends Component {
                     onChange={this.handleChange}
                 ></input>
                 <br />
-                <button onClick={() => this.onCitizensClicked(true)}>
+                <button onClick={() => this.onCitizensClicked("add")}>
                     Add Citizens
                 </button>
-                <button onClick={() => this.onCitizensClicked(false)}>
+                <button onClick={() => this.onCitizensClicked("remove")}>
                     Remove Citizens
                 </button>
                 <p>{this.state.resultText}</p>

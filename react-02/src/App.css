@@ -176,18 +176,24 @@ Custom Apps
     float: left;
 }
 
+#city-maker input {
+    width: 220px;
+    margin: 12px;
+}
+
 .card-holder {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     min-width: 66%;
+    border-left: 2px white solid;
 }
 
 .account-card,
 .city-card {
     box-sizing: border-box;
     margin: 2% 1% 1% 0;
-    background: whitesmoke;
+    background: rgb(123, 160, 175);
     color: #223;
     min-width: 240px;
     max-width: 280px;

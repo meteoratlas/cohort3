@@ -106,7 +106,7 @@ class CityCreatorForm extends Component {
                             max="90"
                             id="new-city-lat"
                             name="newCityLat"
-                            placeholder="New City's Latitude"
+                            placeholder="New City Latitude"
                             value={this.state.newCityLat}
                             onChange={this.handleInputChange}
                         />
@@ -121,7 +121,7 @@ class CityCreatorForm extends Component {
                             max="180"
                             id="new-city-long"
                             name="newCityLong"
-                            placeholder="New City's Longitude"
+                            placeholder="New City Longitude"
                             value={this.state.newCityLong}
                             onChange={this.handleInputChange}
                         />
@@ -135,7 +135,7 @@ class CityCreatorForm extends Component {
                             min="1"
                             id="new-city-pop"
                             name="newCityPop"
-                            placeholder="New City's Population"
+                            placeholder="New City Population"
                             value={this.state.newCityPop}
                             onChange={this.handleInputChange}
                         />
