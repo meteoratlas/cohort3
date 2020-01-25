@@ -1,0 +1,11 @@
+++++++++++++++++++++++++++++++++
+-------- SORTING REPORT --------
+++++++++++++++++++++++++++++++++
+Bubble sort took 0.0022667999999999994 seconds to sort 100 integers.
+Bubble sort took 0.223431 seconds to sort 1000 integers.
+Bubble sort took 20.929241100000002 seconds to sort 10000 integers.
+Quick sort took 0.0004860999999998228 seconds to sort 100 integers.
+Quick sort took 0.006777400000000711 seconds to sort 1000 integers.
+Quick sort took 0.08950689999999994 seconds to sort 10000 integers.
+================================
+Test performed on AMD64 Family 21 Model 101 Stepping 1, AuthenticAMD.
