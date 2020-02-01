@@ -1,0 +1,262 @@
+{
+    "Customers": {
+        "0": {
+            "customer_id": 0,
+            "first_name": "Mindy",
+            "last_name": "Thorson",
+            "phone_number": "912-625-1582",
+            "email": "mindy.thorson@gmail.com"
+        },
+        "1": {
+            "customer_id": 1,
+            "first_name": "Chong",
+            "last_name": "Zartman",
+            "phone_number": "391-686-8250",
+            "email": "chong.zartman@face.book"
+        },
+        "2": {
+            "customer_id": 2,
+            "first_name": "Helena",
+            "last_name": "Treiber",
+            "phone_number": "811-252-8422",
+            "email": "helena.treiber@aol.ca"
+        },
+        "3": {
+            "customer_id": 3,
+            "first_name": "Lorenzo",
+            "last_name": "Beaton",
+            "phone_number": "384-926-8291",
+            "email": "lorenzo.beaton@gmail.com"
+        },
+        "4": {
+            "customer_id": 4,
+            "first_name": "Dorethea",
+            "last_name": "Clapper",
+            "phone_number": "973-903-9801",
+            "email": "dorethea.clapper@aol.ca"
+        },
+        "5": {
+            "customer_id": 5,
+            "first_name": "Stanford",
+            "last_name": "Woll",
+            "phone_number": "701-891-8126",
+            "email": "stanford.woll@face.book"
+        },
+        "6": {
+            "customer_id": 6,
+            "first_name": "Sandy",
+            "last_name": "Greenman",
+            "phone_number": "491-821-4345",
+            "email": "sandy.greenman@face.book"
+        },
+        "7": {
+            "customer_id": 7,
+            "first_name": "Aurora",
+            "last_name": "Rohlfing",
+            "phone_number": "649-860-1976",
+            "email": "aurora.rohlfing@face.book"
+        },
+        "8": {
+            "customer_id": 8,
+            "first_name": "Austin",
+            "last_name": "Audette",
+            "phone_number": "928-720-2349",
+            "email": "austin.audette@gmail.com"
+        },
+        "9": {
+            "customer_id": 9,
+            "first_name": "Delbert",
+            "last_name": "Hoey",
+            "phone_number": "868-367-8571",
+            "email": "delbert.hoey@face.book"
+        },
+        "10": {
+            "customer_id": 10,
+            "first_name": "Janie",
+            "last_name": "Valenzula",
+            "phone_number": "708-799-1298",
+            "email": "janie.valenzula@yahoo.org"
+        }
+    },
+    "Products": {
+        "0": {
+            "product_id": 0,
+            "name": "Tenor Saxophone",
+            "price": 1299.34
+        },
+        "1": {
+            "product_id": 1,
+            "name": "Electric Guitar",
+            "price": 1075.5
+        },
+        "2": {
+            "product_id": 2,
+            "name": "Banjo",
+            "price": 356
+        },
+        "3": {
+            "product_id": 3,
+            "name": "Clarinet",
+            "price": 595.99
+        },
+        "4": {
+            "product_id": 4,
+            "name": "MS-20",
+            "price": 650.3
+        },
+        "5": {
+            "product_id": 5,
+            "name": "Cello",
+            "price": 1495.5
+        },
+        "6": {
+            "product_id": 6,
+            "name": "Tuba",
+            "price": 3500.99
+        }
+    },
+    "Invoice Items": {
+        "0": {
+            "invoice_item_id": 0,
+            "product_id": 4,
+            "quantity": 3
+        },
+        "1": {
+            "invoice_item_id": 1,
+            "product_id": 6,
+            "quantity": 4
+        },
+        "2": {
+            "invoice_item_id": 2,
+            "product_id": 5,
+            "quantity": 1
+        },
+        "3": {
+            "invoice_item_id": 3,
+            "product_id": 1,
+            "quantity": 3
+        },
+        "4": {
+            "invoice_item_id": 4,
+            "product_id": 1,
+            "quantity": 2
+        },
+        "5": {
+            "invoice_item_id": 5,
+            "product_id": 5,
+            "quantity": 3
+        },
+        "6": {
+            "invoice_item_id": 6,
+            "product_id": 3,
+            "quantity": 1
+        },
+        "7": {
+            "invoice_item_id": 7,
+            "product_id": 4,
+            "quantity": 4
+        },
+        "8": {
+            "invoice_item_id": 8,
+            "product_id": 4,
+            "quantity": 1
+        },
+        "9": {
+            "invoice_item_id": 9,
+            "product_id": 6,
+            "quantity": 1
+        },
+        "10": {
+            "invoice_item_id": 10,
+            "product_id": 6,
+            "quantity": 3
+        },
+        "11": {
+            "invoice_item_id": 11,
+            "product_id": 4,
+            "quantity": 3
+        }
+    },
+    "Invoices": {
+        "0": {
+            "invoice_id": 0,
+            "invoice_item_id": 0,
+            "customer_id": 10,
+            "date": "2019-04-02 00:00:00",
+            "total_cost": 1950.9,
+            "paid": "=TRUE()"
+        },
+        "1": {
+            "invoice_id": 1,
+            "invoice_item_id": 1,
+            "customer_id": 0,
+            "date": "2019-10-18 00:00:00",
+            "total_cost": 14003.96,
+            "paid": "=FALSE()"
+        },
+        "2": {
+            "invoice_id": 2,
+            "invoice_item_id": 2,
+            "customer_id": 5,
+            "date": "2019-06-22 00:00:00",
+            "total_cost": 1495.5,
+            "paid": "=TRUE()"
+        },
+        "3": {
+            "invoice_id": 3,
+            "invoice_item_id": 3,
+            "customer_id": 0,
+            "date": "2019-09-14 00:00:00",
+            "total_cost": 3226.5,
+            "paid": "=FALSE()"
+        },
+        "4": {
+            "invoice_id": 4,
+            "invoice_item_id": 4,
+            "customer_id": 2,
+            "date": "2019-09-03 00:00:00",
+            "total_cost": 2151,
+            "paid": "=TRUE()"
+        },
+        "5": {
+            "invoice_id": 5,
+            "invoice_item_id": 5,
+            "customer_id": 5,
+            "date": "2019-11-26 00:00:00",
+            "total_cost": 4486.5,
+            "paid": "=FALSE()"
+        },
+        "6": {
+            "invoice_id": 6,
+            "invoice_item_id": 6,
+            "customer_id": 7,
+            "date": "2019-02-26 00:00:00",
+            "total_cost": 595.99,
+            "paid": "=TRUE()"
+        },
+        "7": {
+            "invoice_id": 7,
+            "invoice_item_id": 7,
+            "customer_id": 9,
+            "date": "2019-08-16 00:00:00",
+            "total_cost": 2601.2,
+            "paid": "=FALSE()"
+        },
+        "8": {
+            "invoice_id": 8,
+            "invoice_item_id": 8,
+            "customer_id": 2,
+            "date": "2019-10-14 00:00:00",
+            "total_cost": 650.3,
+            "paid": "=TRUE()"
+        },
+        "9": {
+            "invoice_id": 9,
+            "invoice_item_id": 9,
+            "customer_id": 8,
+            "date": "2019-07-17 00:00:00",
+            "total_cost": 3500.99,
+            "paid": "=TRUE()"
+        }
+    }
+}
