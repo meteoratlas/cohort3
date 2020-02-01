@@ -2,7 +2,13 @@ from openpyxl import Workbook, load_workbook
 import datetime
 import json
 
-def read_workbook(file):
+def read_workbook(file, flattenBools = True):
+    def flattenBool(b):
+        if flattenBools:
+            if b == "=TRUE()": return True
+            elif b == "=FALSE()": return False
+        return b
+        
     book = load_workbook(file)
     sheet_dicts = {}
     for sheet in book:
@@ -15,7 +21,7 @@ def read_workbook(file):
             row_data = {}
             for j, info in enumerate(row):
                 if (j == 0): continue # skip primary key
-                row_data[titles[j]] = info
+                row_data[titles[j]] = flattenBool(info)
             # uncomment the next line to include the primary key in the value dict, 
             # as well as the key:
             # data[row_data[titles[0]]] = row_data

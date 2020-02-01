@@ -153,70 +153,70 @@
             "customer_id": 10,
             "date": "2019-04-02 00:00:00",
             "total_cost": 1950.9,
-            "paid": "=TRUE()"
+            "paid": true
         },
         "1": {
             "invoice_item_id": 1,
             "customer_id": 0,
             "date": "2019-10-18 00:00:00",
             "total_cost": 14003.96,
-            "paid": "=FALSE()"
+            "paid": false
         },
         "2": {
             "invoice_item_id": 2,
             "customer_id": 5,
             "date": "2019-06-22 00:00:00",
             "total_cost": 1495.5,
-            "paid": "=TRUE()"
+            "paid": true
         },
         "3": {
             "invoice_item_id": 3,
             "customer_id": 0,
             "date": "2019-09-14 00:00:00",
             "total_cost": 3226.5,
-            "paid": "=FALSE()"
+            "paid": false
         },
         "4": {
             "invoice_item_id": 4,
             "customer_id": 2,
             "date": "2019-09-03 00:00:00",
             "total_cost": 2151,
-            "paid": "=TRUE()"
+            "paid": true
         },
         "5": {
             "invoice_item_id": 5,
             "customer_id": 5,
             "date": "2019-11-26 00:00:00",
             "total_cost": 4486.5,
-            "paid": "=FALSE()"
+            "paid": false
         },
         "6": {
             "invoice_item_id": 6,
             "customer_id": 7,
             "date": "2019-02-26 00:00:00",
             "total_cost": 595.99,
-            "paid": "=TRUE()"
+            "paid": true
         },
         "7": {
             "invoice_item_id": 7,
             "customer_id": 9,
             "date": "2019-08-16 00:00:00",
             "total_cost": 2601.2,
-            "paid": "=FALSE()"
+            "paid": false
         },
         "8": {
             "invoice_item_id": 8,
             "customer_id": 2,
             "date": "2019-10-14 00:00:00",
             "total_cost": 650.3,
-            "paid": "=TRUE()"
+            "paid": true
         },
         "9": {
             "invoice_item_id": 9,
             "customer_id": 8,
             "date": "2019-07-17 00:00:00",
             "total_cost": 3500.99,
-            "paid": "=TRUE()"
+            "paid": true
         }
     }
 }
