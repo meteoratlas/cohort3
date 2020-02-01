@@ -14,10 +14,13 @@ def read_workbook(file):
                 continue
             row_data = {}
             for j, info in enumerate(row):
-                if (j == 0): continue
-                # print(info)
+                if (j == 0): continue # skip primary key
                 row_data[titles[j]] = info
-            data[row_data[titles[0]]] = row_data
+            # uncomment the next line to include the primary key in the value dict, 
+            # as well as the key:
+            # data[row_data[titles[0]]] = row_data
+            # use the primary id as key only:
+            data[row[0]] = row_data
         sheet_dicts[sheet.title] = data
     return sheet_dicts
 
@@ -60,5 +63,5 @@ def makeJSON(data):
 
 if __name__ == "__main__":
     data = read_workbook("data.xlsx")
-    # makeJSON(data)
+    makeJSON(data)
     # create_invoice(data)
