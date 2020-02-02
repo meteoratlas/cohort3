@@ -9,6 +9,10 @@ stores = [
             {
             "name":"Item 1",
             "price":15.99
+            },
+            {
+            "name":"Item 2",
+            "price":8.99
             }   
         ]
     }
@@ -31,6 +35,11 @@ def create_store():
 @app.route("/json")
 def get_basic_json():
     return read_workbook("data.xlsx")
+
+@app.route("/loop")
+def loop_data():
+    data = read_workbook("data.xlsx")
+    return render_template("loop.html", data=data)
 
 @app.route("/store/")
 def get_stores():
