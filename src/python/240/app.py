@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, render_template
+from process_db import read_workbook, make_JSON
 
 app = Flask(__name__)
 stores = [
@@ -26,6 +27,10 @@ def create_store():
     }
     stores.append(new_store)
     return jsonify(new_store)
+
+@app.route("/json")
+def get_basic_json():
+    return read_workbook("data.xlsx")
 
 @app.route("/store/")
 def get_stores():
