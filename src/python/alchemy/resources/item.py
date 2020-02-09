@@ -24,39 +24,31 @@ class Item(Resource):
             return {"message": f'An item with the name {name} already exists.'}, 400
 
         data = Item.parser.parse_args()
-        item = ItemModel(name, data["price"])
+        item = ItemModel(name, **data)
 
         try:
-            item.insert()
+            item.save_to_db()
         except:
             return {"message":"An error occured when inserting the item."}, 500
-        
-        return {"message":"Item added."}
+        return item.json(), 201
+        # return {"message":"Item added."}
 
     def delete(self, name):
-        connection = sqlite3.connect("data.db")
-        cursor = connection.cursor()
-        query = "DELETE FROM items WHERE name=?"
-        result = cursor.execute(query, (name,))
-        connection.commit()
-        connection.close()
-        return {"message":"Item deleted."}
+        item = ItemModel.find_by_name(name)
+        if item:
+            item.delete_from_db()
+        return {"message":"Item deleted"}
 
     def put(self, name):
         data = Item.parser.parse_args()
         item = ItemModel.find_by_name(name)
-        updated_item = ItemModel(name, data["price"])
+
         if item is None:
-            try:
-                updated_item.insert()
-            except:
-                return {"message":"An error occured inserting the item."}, 500
+            item = ItemModel(name, data["price"])
         else:
-            try:
-                updated_item.update()
-            except:
-                return {"message":"An error occured while modifying the item."}, 500
-        return updated_item.json()
+            item.price = data["price"]
+        item.save_to_db()    
+        return item.json()
 
 
 class ItemList(Resource):
@@ -67,7 +59,7 @@ class ItemList(Resource):
         result = cursor.execute(query)
         items = []
         for row in result:
-            items.append({"name":row[0], "price":row[1]})
+            items.append({"id":row[0],"name":row[1], "price":row[2]})
 
         connection.close()
         return {"items":items}
