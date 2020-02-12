@@ -12,7 +12,8 @@ def read_workbook(file, flattenBools = True):
     book = load_workbook(file)
     sheet_dicts = {}
     for sheet in book:
-        data = {}
+        # data = {}
+        data = []
         titles = [t.value for t in sheet[1]]
         for i, row in enumerate(sheet.iter_rows(values_only=True)):
             # Skip column header row 
@@ -20,13 +21,14 @@ def read_workbook(file, flattenBools = True):
                 continue
             row_data = {}
             for j, info in enumerate(row):
-                if (j == 0): continue # skip primary key
+                # if (j == 0): continue # skip primary key
                 row_data[titles[j]] = flattenBool(info)
             # uncomment the next line to include the primary key in the value dict, 
             # as well as the key:
             # data[row_data[titles[0]]] = row_data
+            data.append(row_data)
             # use the primary id as key only:
-            data[row[0]] = row_data
+            #data[row[0]] = row_data
         sheet_dicts[sheet.title] = data
     return sheet_dicts
 
@@ -35,5 +37,8 @@ def make_JSON(data):
         if isinstance(date, datetime.datetime):
             return date.__str__()
 
-    with open("info.json", "w") as txt:
+    with open("info2.json", "w") as txt:
         txt.write(json.dumps(data, default = dateToString, indent=4, separators=(',', ': ')))
+
+#d = read_workbook("data.xlsx")
+#make_JSON(d)

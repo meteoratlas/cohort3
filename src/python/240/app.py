@@ -4,7 +4,7 @@ from process_db import read_workbook, make_JSON
 
 app = Flask(__name__)
 api = Api(app)
-stores = read_workbook("data.xlsx")
+data = read_workbook("data.xlsx")
 
 @app.route("/")
 def home():
@@ -12,11 +12,14 @@ def home():
 
 @app.route("/json")
 def get_basic_json():
-    return stores
+    return data
 
 @app.route("/loop")
 def loop_data():
-    return render_template("loop.html", data=stores)
+    return render_template("loop.html", data=data)
 
+def get_entry_by_key(key, dictionary):
+    collection = data[dictionary]
+    
 
 app.run(port=5000)
