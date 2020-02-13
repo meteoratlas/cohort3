@@ -25,19 +25,18 @@ def all():
 
 @app.route("/get", methods = ['POST'])
 def get():
-    # print(request)
     content = request.get_json()
     if 'key' not in content:
 	    return jsonify({"msg":"You must provide the 'key' attribute."}), 400
     if 'sheet' not in content:
 	    return jsonify({"msg":"You must provide the 'sheet' attribute."}), 400
+    item = get_entry_by_key(content["key"], content["keyval"], content["sheet"])
     return jsonify(item), 200  
 
 @app.route("/delete", methods = ['POST'])
 def delete():
     content = request.json()
     return jsonify(content), 200
-    # if get_entry_by_key
 
 def get_entry_by_key(keyname, key, sheet):
     collection = data[sheet]
@@ -45,5 +44,6 @@ def get_entry_by_key(keyname, key, sheet):
         item = next(filter(lambda x:x[keyname] == key, collection), None)
     except KeyError:
         return None
+    return item
 
 app.run(port=5000)

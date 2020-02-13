@@ -10,11 +10,21 @@ test("test server interactions", async () => {
 
     data = await postData(url + "get", {
         key: "customer_id",
-        keyval: 5,
+        keyval: 4,
         sheet: "Customers"
     });
     expect(data.status).toEqual(200);
-    data = await postData(url + "get", { sand: 1 });
+    expect(data.first_name).toEqual("Dorethea");
+
+    data = await postData(url + "get", {
+        key: "product_id",
+        keyval: 6,
+        sheet: "Products"
+    });
+    expect(data.status).toEqual(200);
+    expect(data.name).toEqual("Tuba");
+
+    data = await postData(url + "get", { baddata: 1 });
     expect(data.status).toEqual(400);
 });
 
