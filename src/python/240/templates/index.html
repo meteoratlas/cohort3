@@ -1,8 +1,63 @@
 <html>
-    <head> </head>
+    <head>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{{ url_for('static', filename='style.css') }}"
+        />
+    </head>
     <body>
-        <div id="myElement">
-            Hello, world!
-        </div>
+        <header><h1>Music Store - REST API</h1></header>
+        <main>
+            <div id="inputs">
+                <h2>Inputs</h2>
+                <p>Select data to access/modify.</p>
+                <form>
+                    <select name="sheets" id="sheet-select">
+                        <option value="">--Please choose an option--</option>
+                        <option value="Customers">Customers</option>
+                        <option value="Products">Products</option>
+                        <option value="Invoice_Items">Invoice Items</option>
+                        <option value="Invoices">Invoices</option>
+                    </select>
+                </form>
+            </div>
+            <div id="directions">
+                <h2>Directions</h2>
+                <p>Use the following commands to access the API:</p>
+                <ul>
+                    <li>
+                        <span class="bold">/json - </span>receive a dump of all
+                        information on the server in JSON format.
+                    </li>
+                    <li>
+                        <span class="bold">/loop - </span>prints a collection of
+                        the data collated using a loop in the template.
+                    </li>
+                    <li>
+                        <span class="bold">/getall - </span>returns all the data
+                        on the server.
+                    </li>
+                    <li>
+                        <span class="bold">/get - </span>returns the item
+                        matching the provided inputs.
+                    </li>
+                    <li>
+                        <span class="bold">/add - </span>takes the user input
+                        and converts it to a new object to add to the server.
+                        Returns the new object if it was created successfully.
+                    </li>
+                    <li>
+                        <span class="bold">/update - </span>takes the user input
+                        and updates the selected object's values, if it exists.
+                        Returns the new object if it was updated successfully.
+                    </li>
+                    <li>
+                        <span class="bold">/delete - </span>deletes the selected
+                        object from the server.
+                    </li>
+                </ul>
+            </div>
+        </main>
     </body>
 </html>
