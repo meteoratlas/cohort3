@@ -26,6 +26,16 @@ test("test server interactions", async () => {
 
     data = await postData(url + "get", { baddata: 1 });
     expect(data.status).toEqual(400);
+
+    // Test add
+    data = await postData(url + "add", {
+        sheet: "Products",
+        key: 1,
+        product_id: 20,
+        name: "Ukelele",
+        price: 111.23
+    });
+    expect(data.status).toEqual(400);
 });
 
 async function postData(url = "", data = {}) {

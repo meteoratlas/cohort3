@@ -21,17 +21,34 @@ def loop_data():
 # application AIP
 @app.route("/getall", methods = ['POST','GET'])
 def all():
-	return jsonify(data), 200 
+    return jsonify(data), 200 
 
 @app.route("/get", methods = ['POST'])
 def get():
     content = request.get_json()
     if 'key' not in content:
-	    return jsonify({"msg":"You must provide the 'key' attribute."}), 400
+        return jsonify({"msg":"You must provide the 'key' attribute."}),400
     if 'sheet' not in content:
-	    return jsonify({"msg":"You must provide the 'sheet' attribute."}), 400
+        return jsonify({"msg":"You must provide the 'sheet' attribute."}),400
     item = get_entry_by_key(content["key"], content["keyval"], content["sheet"])
     return jsonify(item), 200  
+
+@app.route("/add", methods = ["POST"])
+def add():
+    key_list = {"Customers":"customer_id", "Products":"product_id","Invoice Items":"invoice_item_id", "Invoices":"invoice_id"}
+    content = request.get_json()
+    if 'key' not in content:
+        return jsonify({"msg":"You must provide the 'key' attribute."}), 400
+    if 'sheet' not in content:
+        return jsonify({"msg":"You must provide a sheet name to add to."}), 400
+    sheet = content.sheet
+    key = content.key
+    
+    if key in data:
+        return jsonify({"msg":"An object matching the provided key already exists."}), 400
+    data[key] = content
+
+    return jsonify({}), 200
 
 @app.route("/delete", methods = ['POST'])
 def delete():
@@ -46,4 +63,4 @@ def get_entry_by_key(keyname, key, sheet):
         return None
     return item
 
-app.run(port=5000)
+app.run(port=5000, debug=True)
