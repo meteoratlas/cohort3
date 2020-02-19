@@ -11,6 +11,7 @@ openpyxl = "*"
 flask-restful = "*"
 flask-jwt = "*"
 flask = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.8"

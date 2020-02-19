@@ -1,9 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import ReactJson from "react-json-view";
 import "./App.css";
 
 function App() {
+    const [data, setData] = useState({});
     useEffect(() => {
-        console.log("on mount");
+        fetch("http://127.0.0.1:5000/getall")
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Server could not be contacted.");
+                }
+            })
+            .then(d => {
+                setData(d);
+            })
+            .catch(error => {});
     }, []);
     return (
         <div className="App">
@@ -12,6 +25,7 @@ function App() {
             </header>
             <main>
                 <h2>Returned JSON</h2>
+                <ReactJson src={data} theme="ocean" enableClipboard={false} />
             </main>
         </div>
     );
