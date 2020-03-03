@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Button from "react-bootstrap/Button";
+import PostEditor from "./components/PostEditor";
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
             </header>
             <main>
                 <h1>Main</h1>
+                <PostEditor />
             </main>
             <footer>
                 <h1>Footer</h1>
